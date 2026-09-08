@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://emmanuelpeccoux.github.io/EP-Coaching/sitemap.xml
+Sitemap: https://santamariasanchez.github.io/EPCoaching/sitemap.xml

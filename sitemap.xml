@@ -2,12 +2,12 @@
 <!-- TODO: mettre à jour les URLs si un domaine personnalisé est configuré (CNAME) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://emmanuelpeccoux.github.io/EP-Coaching/</loc>
+    <loc>https://santamariasanchez.github.io/EPCoaching/</loc>
   </url>
   <url>
-    <loc>https://emmanuelpeccoux.github.io/EP-Coaching/physique/</loc>
+    <loc>https://santamariasanchez.github.io/EPCoaching/physique/</loc>
   </url>
   <url>
-    <loc>https://emmanuelpeccoux.github.io/EP-Coaching/business/</loc>
+    <loc>https://santamariasanchez.github.io/EPCoaching/business/</loc>
   </url>
 </urlset>

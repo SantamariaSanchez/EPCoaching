@@ -4,8 +4,8 @@ Site vitrine (vente indirecte, pousse au contact) reconstruit à partir de
 zéro le 2026-08-20, en 15 prompts découpés par phase technique. **Le
 site est en production.**
 
-- **Site en ligne** : https://emmanuelpeccoux.github.io/EP-Coaching/
-- **Repo** : github.com/EmmanuelPeccoux/EP-Coaching, déploiement
+- **Site en ligne** : https://santamariasanchez.github.io/EPCoaching/
+- **Repo** : github.com/SantamariaSanchez/EPCoaching, déploiement
   automatique sur push vers `main` (GitHub Pages)
 - **Formulaires** (repo séparé) : https://ep-coaching-formulaires.vercel.app,
   github.com/EmmanuelPeccoux/ep-coaching-formulaires
@@ -135,8 +135,10 @@ ci-dessous.
   Le nom à afficher est **Santamaria Sànchez** (accent grave sur le à,
   jamais "Sánchez" avec un accent aigu). "Emmanuel Peccoux" reste correct
   uniquement pour ce qui est légal/administratif (les pages CGU/CGV/
-  confidentialité pointent vers l'app, pas ce repo) et les identifiants
-  techniques (URL de repo GitHub, auteur des commits).
+  confidentialité pointent vers l'app, pas ce repo) et l'auteur des
+  commits git. Depuis le 2026-09-08, le compte GitHub et le repo
+  eux-mêmes sont sous SantamariaSanchez (voir URL ci-dessus) : ce ne sont
+  donc plus des identifiants "Emmanuel Peccoux".
 - **Handle Instagram** : `@santamariasanchez_` uniquement, jamais
   `@emmanuelpeccoux`.
 - **Aucun témoignage, résultat client, chiffre d'audience ou preuve
@@ -189,7 +191,7 @@ un projet Next.js séparé, avec sa propre stack, voir son README.
 
 GitHub Pages, déploiement automatique sur push vers `main` (aucune
 action manuelle à faire). Servi sous
-`https://emmanuelpeccoux.github.io/EP-Coaching/`, HTTPS actif (géré par
+`https://santamariasanchez.github.io/EPCoaching/`, HTTPS actif (géré par
 GitHub Pages, rien à configurer). Aucun domaine personnalisé configuré
 (aucun fichier `CNAME` dans le repo) : si un domaine est acheté un jour,
 y déposer un fichier `CNAME` contenant le nom de domaine et mettre à
@@ -265,11 +267,14 @@ est maintenant nommée dans l'intro de la section "La méthode" de
 /physique/, et le pendant côté coach (savoir quoi changer en premier
 plutôt qu'une liste de cinquante choses) dans celle de /business/.
 
-**Point non résolu, qui ne dépend pas du code** : l'URL du site
-(`emmanuelpeccoux.github.io/EP-Coaching/`) contient le nom légal, alors
-que l'identité publique unique doit être Santamaria Sànchez. Un domaine
-personnalisé (CNAME) est la seule vraie correction, voir les TODO
-`og:url` dans les 3 pages et dans 404.html.
+**Résolu le 2026-09-08** : l'URL du site contenait le nom légal
+(`emmanuelpeccoux.github.io/EP-Coaching/`) alors que l'identité publique
+unique doit être Santamaria Sànchez. Le compte GitHub a été renommé en
+`SantamariaSanchez` et le repo en `EPCoaching`, l'URL est désormais
+`santamariasanchez.github.io/EPCoaching/` (mise à jour dans `og:url`,
+`sitemap.xml`, `robots.txt` et 404.html). Un domaine personnalisé
+(CNAME) resterait une amélioration possible mais n'est plus nécessaire
+pour retirer le nom légal de l'URL.
 
 ## QA complète et mise en production (prompt 15/15)
 
