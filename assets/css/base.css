@@ -724,6 +724,35 @@ footer {
   pointer-events: none;
 }
 
+/* Cadre à coins ("viewfinder"), au-dessus de la photo ET du voile
+   ci-dessus (z-index explicite, voir plus bas) : 8 dégradés linéaires
+   (2 segments par coin, jamais d'image externe) composent 4 équerres,
+   comme un cadre de visée plutôt qu'une bordure pleine. Rejoint le
+   traitement "cadre technique" déjà présent ailleurs sur le site (VSL,
+   cards) sans ajouter de nouvelle couleur ni de nouvelle police. */
+.portrait::before {
+  content: "";
+  position: absolute;
+  inset: 0.75rem;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--rouge-principal), var(--rouge-principal)) top left / 1.25rem 1px no-repeat,
+    linear-gradient(var(--rouge-principal), var(--rouge-principal)) top left / 1px 1.25rem no-repeat,
+    linear-gradient(var(--rouge-principal), var(--rouge-principal)) top right / 1.25rem 1px no-repeat,
+    linear-gradient(var(--rouge-principal), var(--rouge-principal)) top right / 1px 1.25rem no-repeat,
+    linear-gradient(var(--rouge-principal), var(--rouge-principal)) bottom left / 1.25rem 1px no-repeat,
+    linear-gradient(var(--rouge-principal), var(--rouge-principal)) bottom left / 1px 1.25rem no-repeat,
+    linear-gradient(var(--rouge-principal), var(--rouge-principal)) bottom right / 1.25rem 1px no-repeat,
+    linear-gradient(var(--rouge-principal), var(--rouge-principal)) bottom right / 1px 1.25rem no-repeat;
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+}
+
+.portrait:hover::before {
+  opacity: 0.85;
+}
+
 .portrait-placeholder {
   width: 100%;
   height: 100%;
@@ -754,7 +783,12 @@ footer {
 .diamond-list--lg li.diamond-item::before {
   width: 0.55rem;
   height: 0.55rem;
-  top: 0.35em;
+  /* 0.35em + le padding-top ajouté plus bas (passe "manifeste",
+     accomplissements) : top:0 d'un enfant absolu s'aligne sur le bord de
+     la padding-box, PAS sur le contenu, il ignore donc tout padding-top
+     porté par le <li> lui-même. Sans ce calc(), le losange resterait collé
+     en haut du <li> pendant que le texte, lui, descend avec le padding. */
+  top: calc(var(--space-sm) + 0.35em);
 }
 
 .diamond-list strong {
@@ -762,6 +796,28 @@ footer {
   color: var(--blanc-casse);
   font-weight: 700;
   margin-bottom: 0.2em;
+}
+
+/* Accomplissements ("ce que tu vas pouvoir accomplir") : seule section de
+   contenu qui n'est pas construite en cards, traitée jusqu'ici comme une
+   liste ordinaire un peu plus grande. Échelle "manifeste" : le <strong>
+   de chaque accomplissement monte au poids d'un vrai sous-titre, une
+   ligne fine sépare chaque item du suivant (rythme de lecture, pas de
+   fond ni de bordure ajoutés pour rester une liste, pas des cards
+   déguisées). */
+.diamond-list--lg li.diamond-item {
+  padding-top: var(--space-sm);
+  padding-bottom: var(--space-sm);
+}
+
+.diamond-list--lg li.diamond-item:not(:first-child) {
+  border-top: 1px solid color-mix(in srgb, var(--rouge-principal) 12%, transparent);
+}
+
+.diamond-list--lg strong {
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.3em;
 }
 
 /* ── Sections de contenu (bio / critères / accompagnement / piliers /
@@ -774,9 +830,63 @@ footer {
 .accompagnement,
 .piliers,
 .accomplissements {
+  position: relative;
   padding: var(--space-2xl) var(--space-md);
   max-width: 1200px;
   margin-inline: auto;
+}
+
+/* ── Ambiance propre à chaque section (passe de profondeur, 2/2026-09) ───
+   Avant cette passe, tout l'intérieur de page (bio → accomplissements)
+   reposait uniquement sur le fond global de body::before : cinq sections
+   de contenu différent, un seul et même arrière-plan partout, jamais de
+   respiration ni de repère visuel pour savoir "où" on est en scrollant.
+   Chaque section reçoit ici sa propre brume, en plus (jamais à la place)
+   du fond global, réglée assez bas en opacité pour rester une nuance et
+   jamais un aplat qui romprait la continuité du fond de marque.
+   z-index -1 : même raisonnement documenté sur body::before plus haut,
+   ces sections contiennent aussi du texte simple non positionné (h2, p),
+   un z-index positif peindrait la brume par-dessus au lieu de dessous. */
+.bio::before,
+.criteres::before,
+.accompagnement::before,
+.piliers::before,
+.accomplissements::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Bio : la brume vient du côté du portrait (gauche en desktop), comme si
+   la lumière de la photo N&B éclairait discrètement cette moitié. */
+.bio::before {
+  background: radial-gradient(ellipse 55% 55% at 12% 45%, rgba(137,4,4,0.16) 0%, transparent 62%);
+}
+
+/* Critères : un halo centré, haut de section, en filigrane derrière le
+   titre "est-ce fait pour toi" — un point de lecture, pas un décor. */
+.criteres::before {
+  background: radial-gradient(ellipse 65% 45% at 30% 8%, rgba(200,5,5,0.11) 0%, transparent 55%);
+}
+
+/* Accompagnement : bande large côté cards (droite en desktop), la méthode
+   est le coeur de l'offre, elle mérite la brume la plus présente des cinq. */
+.accompagnement::before {
+  background: radial-gradient(ellipse 85% 45% at 72% 50%, rgba(224,30,30,0.12) 0%, transparent 62%);
+}
+
+/* Piliers : ambiance large et haute, toute la grille en profite (section
+   la plus riche en contenu de la page). */
+.piliers::before {
+  background: radial-gradient(ellipse 100% 42% at 50% 0%, rgba(176,2,2,0.15) 0%, transparent 65%);
+}
+
+/* Accomplissements : glow bas-droite, prépare l'arrivée sur le CTA final
+   qui suit immédiatement (transition de "scène" plutôt qu'une coupure nette). */
+.accomplissements::before {
+  background: radial-gradient(ellipse 70% 55% at 88% 100%, rgba(137,4,4,0.15) 0%, transparent 60%);
 }
 
 .criteres .cards,
@@ -784,6 +894,41 @@ footer {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+}
+
+/* Critères : un diamant plein devant chaque titre de card, comme une puce
+   de check plutôt qu'un simple <h3> nu — les critères sont un vrai
+   "coché/pas coché" dans la tête du visiteur, la puce l'appuie. */
+.criteres .cards .card .critere-mark {
+  margin-bottom: var(--space-xs);
+}
+
+/* Accompagnement : 3 vraies étapes numérotées (on fait le point → on
+   construit ton plan → on ajuste), pas juste 3 cards côte à côte. Un grand
+   chiffre fantôme (contour seul, jamais un aplat qui concurrencerait le
+   titre de la card) rogné par le overflow:hidden existant de .card, comme
+   s'il "sortait" du cadre au coin haut-droit. counter-reset/increment :
+   aucune modification du HTML nécessaire, les 3 cards existantes suffisent. */
+.accompagnement .cards {
+  counter-reset: step;
+}
+
+.accompagnement .cards .card {
+  counter-increment: step;
+}
+
+.accompagnement .cards .card::after {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  top: -0.6rem;
+  right: -0.35rem;
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 4.25rem;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--rouge-principal) 22%, transparent);
+  pointer-events: none;
 }
 
 .accompagnement .cta-slot {
@@ -817,6 +962,13 @@ footer {
     0 0 40px rgba(224,30,30,0.10),
     inset 0 1px 0 rgba(224,30,30,0.15),
     0 4px 32px rgba(0,0,0,0.45);
+}
+
+/* Étiquette "pilier prioritaire" : réutilise .eyebrow tel quel (même
+   composant que les kickers de section), juste resserrée en haut de card
+   plutôt qu'au-dessus d'un titre de section. */
+.pilier-card--emphasis .eyebrow {
+  margin-bottom: var(--space-xs);
 }
 
 @media (min-width: 900px) {
@@ -875,9 +1027,39 @@ footer {
 }
 
 .cta-final .form-slot {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Halo tournant derrière le CTA final : contrairement à une pulsation
+   d'échelle (jugée "cheap" et déjà écartée pour ce même bouton, voir le
+   commentaire d'initCtaFinalReveal dans main.js), une rotation lente d'un
+   dégradé conique lu comme un projecteur qui balaie plutôt qu'un battement
+   qui clignote. z-index -1 : même raisonnement que les brumes de section
+   plus haut, .btn-cta-primary et .btn-subtext sont du contenu simple non
+   positionné à l'intérieur de .form-slot. Neutralisé par la règle
+   prefers-reduced-motion globale du fichier (l'anneau reste visible, figé). */
+.cta-final .form-slot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24rem;
+  height: 24rem;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(from 0deg, transparent 0%, rgba(224,30,30,0.30) 12%, transparent 28%);
+  filter: blur(45px);
+  z-index: -1;
+  pointer-events: none;
+  animation: cta-glow-rotate 16s linear infinite;
+}
+
+@keyframes cta-glow-rotate {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 .btn-cta-primary--lg {

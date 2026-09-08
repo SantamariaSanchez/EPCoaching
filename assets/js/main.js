@@ -226,7 +226,19 @@ function initSectionEntrance() {
   const listItems = bio.querySelectorAll(".diamond-list .diamond-item");
 
   const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
-  if (portrait) tl.from(portrait, { opacity: 0, y: 24, duration: 0.6 });
+  // Passe de profondeur (2026-09) : un simple fade+y ne distinguait pas ce
+  // portrait des dizaines d'autres éléments qui font exactement la même
+  // chose sur ce site (voir le reveal générique [data-reveal] plus haut).
+  // Un clip-path (matérialise, ne fait pas juste apparaître, cf. le
+  // "materialize don't just fade" déjà appliqué au verre dépoli des cards)
+  // fait entrer la photo comme un rideau qui se lève plutôt qu'un fondu :
+  // le SEUL portrait du site mérite un traitement qu'on ne voit nulle part
+  // ailleurs sur la page. .portrait garde déjà overflow:hidden (base.css),
+  // rien à ajouter côté CSS pour que le clip reste propre.
+  if (portrait) {
+    gsap.set(portrait, { clipPath: "inset(0% 0% 100% 0%)" });
+    tl.to(portrait, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "power3.out" });
+  }
 
   const textUnits = [eyebrow, heading, ...bodyParagraphs].filter(Boolean);
   if (textUnits.length) {
@@ -267,6 +279,59 @@ function initPortraitParallax() {
       },
     }
   );
+}
+
+/* ── Parallaxe souris, diamant géant du hero (passe de profondeur, 2026-09) */
+/* Le diamant fantôme derrière le hero (voir .hero-diamond-ghost, home.css)
+   restait un aplat totalement statique jusqu'ici, seul élément immobile
+   d'une page par ailleurs animée. Discret par nature (max ~20px de
+   déplacement total, jamais un vertige), réservé aux pointeurs fins avec
+   vrai hover (même garde-fou que le hover des blocs de bifurcation en CSS
+   : sur tactile, un mouvement lié au doigt qui vient de scroller la page
+   ferait n'importe quoi). Lerp manuel (pas de lib de spring supplémentaire
+   pour un seul élément décoratif) : suffit largement pour un mouvement
+   amorti, jamais collé 1:1 à la souris (jamais "une attraction", même
+   principe déjà tenu pour la parallaxe du portrait plus haut). */
+
+function initHeroDiamondParallax() {
+  if (prefersReducedMotion) return;
+  const ghost = document.querySelector(".hero-diamond-ghost");
+  const hero = document.querySelector(".hero-vsl");
+  if (!ghost || !hero) return; // pas la homepage
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  const MAX_SHIFT = 10; // px, par axe, à l'amplitude maximale (bord du hero)
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+
+  hero.addEventListener("mousemove", (e) => {
+    const rect = hero.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width - 0.5; // -0.5..0.5
+    const relY = (e.clientY - rect.top) / rect.height - 0.5;
+    targetX = relX * MAX_SHIFT * 2;
+    targetY = relY * MAX_SHIFT * 2;
+  });
+
+  hero.addEventListener("mouseleave", () => {
+    targetX = 0;
+    targetY = 0;
+  });
+
+  function tick() {
+    // Amortissement simple : rattrape 6% de l'écart restant à chaque
+    // frame, converge vite sans jamais "claquer" sur la position cible.
+    currentX += (targetX - currentX) * 0.06;
+    currentY += (targetY - currentY) * 0.06;
+    // translate(-50%,-50%) recentre l'élément (voir .hero-diamond-ghost,
+    // home.css), rotate(45deg) conserve la forme losange du motif : les
+    // deux doivent rester présents à chaque frame, pas seulement le décalage.
+    ghost.style.transform =
+      `translate(calc(-50% + ${currentX.toFixed(2)}px), calc(-50% + ${currentY.toFixed(2)}px)) rotate(45deg)`;
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 }
 
 /* ── CTA final, traitement le plus marqué de la page ─────────────────── */
@@ -582,6 +647,7 @@ initSectionEntrance();
 initTitleReveals();
 initReveals();
 initPortraitParallax();
+initHeroDiamondParallax();
 initCtaFinalReveal();
 initHeaderScroll();
 initVslFacade();

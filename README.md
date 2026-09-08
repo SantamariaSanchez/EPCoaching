@@ -873,3 +873,79 @@ valeurs de flou/ombre restent dans les mêmes ordres de grandeur que
 l'app (14 à 20px de flou, jamais plus, même raisonnement que le
 commentaire `--blur-card`/`--blur-nav` de `app/globals.css` sur le
 compositing WebKit).
+
+## Passe de profondeur visuelle, round 2 (2026-09-09, suite directe)
+
+Retour explicite sur le round 1 ci-dessus : "on est à 10%", il fallait
+continuer sérieusement jusqu'à un style "masterclass", en autonomie.
+Le round 1 avait porté le langage visuel de l'app (glow/grain/verre
+dépoli) sur le site, mais de façon uniforme : une seule recette de card
+réutilisée partout, cinq sections de contenu qui partagent toutes
+exactement le même fond. Correct dans la direction, insuffisant dans la
+variété et l'audace, exactement le reproche formulé. Ce round ajoute des
+moments distincts par section plutôt que de refaire "plus fort" la même
+recette, en respectant scrupuleusement les mêmes contraintes verrouillées
+(7 couleurs, polices, jamais de tiret cadratin, jamais de prix).
+
+- **Brume par section** (`.bio`, `.criteres`, `.accompagnement`,
+  `.piliers`, `.accomplissements`, toutes dans `base.css`) : avant ce
+  round, ces cinq sections reposaient uniquement sur le fond global de
+  `body::before`, zéro identité propre. Chacune reçoit maintenant sa
+  propre brume radiale en plus (jamais à la place) de ce fond global,
+  positionnée et dosée différemment selon le rôle de la section (ex.
+  brume côté portrait sur `.bio`, halo large en tête de grille sur
+  `.piliers`), à une opacité assez faible pour rester une nuance. Même
+  raisonnement `z-index: -1` que `body::before` : ces sections contiennent
+  aussi du texte simple non positionné, un z-index positif peindrait la
+  brume par-dessus au lieu de dessous.
+- **Étapes numérotées** (`.accompagnement .cards`) : les 3 cards
+  "on fait le point / on construit ton plan / on ajuste en continu"
+  sont une vraie séquence, pas une liste, elles ne l'affichaient pas.
+  Chiffre fantôme (contour seul via `counter()` CSS, aucune modification
+  du HTML) qui déborde du coin haut-droit de chaque card, rogné par
+  l'`overflow:hidden` déjà en place, comme si l'étape "sortait" du cadre.
+- **Cadre du portrait** (`.portrait::before`) : 4 équerres en coin façon
+  viseur/cadre technique, 8 dégradés linéaires composés (jamais d'image),
+  au-dessus de la photo et du voile existant. Combiné à un reveal en
+  `clip-path` au scroll (`initSectionEntrance`, `main.js`) plutôt qu'un
+  simple fondu : LE portrait du site (élément unique, pas répété)
+  mérite un traitement qu'aucun autre élément de la page ne partage.
+- **Diamant du hero, parallaxe souris** (`initHeroDiamondParallax`,
+  `main.js`) : le seul élément entièrement statique d'une page par
+  ailleurs animée. Déplacement lerpé (amorti, jamais collé 1:1 à la
+  souris), plafonné à 10px par axe, réservé aux pointeurs fins avec vrai
+  hover (`hover:hover` et `pointer:fine`, même garde-fou que le hover de
+  `.bifurcation .bloc` en CSS) : jamais sur tactile, jamais "une
+  attraction" qui capterait l'oeil en continu.
+- **Halo tournant du CTA final** (`.cta-final .form-slot::before`) :
+  un dégradé conique qui tourne lentement (16s, linéaire) derrière le
+  bouton, plutôt qu'une pulsation d'échelle déjà écartée pour ce même
+  bouton (voir le commentaire d'`initCtaFinalReveal`, jugée "cheap").
+  Une rotation lente se lit comme un projecteur qui balaie, pas comme un
+  clignotement.
+- **Critères en check** (`.criteres .cards .card`) : un diamant plein en
+  tête de chaque card, pour appuyer visuellement le "coché / pas coché"
+  déjà implicite dans le contenu ("est-ce que c'est fait pour toi").
+- **Piliers prioritaires** (`.pilier-card--emphasis`) : réutilise
+  `.eyebrow` (même composant que les kickers de section) comme étiquette
+  "◆ Pilier prioritaire" en tête des cards déjà mises en avant par bordure,
+  au lieu de ne compter que sur la couleur de bordure pour signaler la
+  priorité.
+- **Accomplissements, échelle manifeste** (`.diamond-list--lg`) : les 3
+  `<strong>` montent au poids d'un vrai sous-titre (`clamp(1.125rem,
+  1.6vw, 1.375rem)`), une ligne fine sépare chaque item du suivant. La
+  seule section de contenu qui n'est pas construite en cards se lit
+  maintenant comme une liste de fin d'argumentaire plutôt qu'une liste
+  ordinaire agrandie.
+
+Fichiers touchés : `base.css` (l'essentiel), `main.js` (portrait +
+parallaxe hero), `physique/index.html` et `business/index.html` (ajout
+mécanique de spans décoratifs `aria-hidden`, aucun texte nouveau à
+traduire/vérifier ailleurs que "◆ Pilier prioritaire", répété tel quel
+sur les 4 cards concernées). Toujours aucune nouvelle dépendance : le
+chiffre fantôme utilise `counter()` CSS natif, le halo tournant un
+`@keyframes` CSS natif, la parallaxe un `requestAnimationFrame` simple.
+`prefers-reduced-motion` (règle globale déjà en place, `base.css`) gèle
+le halo tournant sur une position figée et n'affecte pas le clip-path du
+portrait au-delà de sa durée réduite à 0.01ms par cette même règle
+globale (l'élément finit toujours visible, jamais bloqué à mi-reveal).
