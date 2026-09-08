@@ -59,6 +59,52 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden; /* le diamant fantôme du hero déborde volontairement du viewport */
+  position: relative;
+}
+
+/* ── Atmosphère de marque : noir profond + brume rouge ────────────────────
+   Reprend telle quelle la formule de fond de l'appli EP Coaching (5
+   dégradés radiaux superposés) pour que le site vitrine partage exactement
+   la même identité que l'appli, jamais une approximation. z-index négatif
+   (pas 0) : contrairement à l'appli où quasi tout élément visible est déjà
+   `position: relative` (donc au-dessus par construction), ce site a du
+   texte simple hors carte (h1, p de section) qui n'a aucune position
+   propre — un z-index 0 le peindrait au-dessus de cette brume au lieu de
+   dessous, diluant le contraste déjà calé au ratio WCAG dans tout ce
+   fichier. -1 garantit qu'elle reste toujours un fond, jamais un voile. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -8%,  rgba(200,5,5,0.30) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 45% at -5% 20%,  rgba(176,2,2,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 108% 88%, rgba(200,5,5,0.18) 0%, transparent 52%),
+    radial-gradient(ellipse 70% 35% at 50% 55%,  rgba(50,2,2,0.35)  0%, transparent 68%),
+    radial-gradient(ellipse 40% 30% at 10% 92%,  rgba(137,4,4,0.10) 0%, transparent 50%);
+}
+
+/* ── Grain film : la texture qui empêche le noir profond de paraître plat
+   à l'écran, identique à l'appli. Au-dessus de tout (y compris les cards),
+   comme un vrai grain de pellicule. */
+@keyframes grain {
+  0%,100% { transform: translate(0,0) scale(1.06); }
+  25%      { transform: translate(-2%,-1%) scale(1.06); }
+  50%      { transform: translate(1%,2%) scale(1.06); }
+  75%      { transform: translate(-1%,1%) scale(1.06); }
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  animation: grain 0.65s steps(2) infinite;
 }
 
 img,
@@ -155,11 +201,24 @@ p {
 }
 
 .logo {
+  position: relative;
+  display: inline-block;
   font-family: "Playfair Display", serif;
   font-style: italic;
   font-weight: 700;
   font-size: 1.375rem;
   letter-spacing: 0.01em;
+}
+
+/* Même halo que le logo de l'appli (.ep-logo-glow) : une brume rouge
+   discrète juste derrière le mot, jamais un contour qui l'alourdirait. */
+.logo::before {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(224,30,30,0.18) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* Mot ou groupe de mots clé mis en valeur dans un H1/H2 (phase contenu,
@@ -280,9 +339,14 @@ header.header--scrolled {
   background: color-mix(in srgb, var(--noir-profond) 88%, transparent);
   /* -webkit- necessaire pour Safari/iOS (QA finale, prompt 15/15) : sans
      ce prefixe, le flou echoue silencieusement sur Safari et le header
-     compacte affiche juste le fond semi-transparent sans le blur. */
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+     compacte affiche juste le fond semi-transparent sans le blur. 20px
+     comme la nav de l'appli (--blur-nav) : une bande aussi fine que le
+     header mérite un flou plus dense qu'une simple card pour bien lire
+     comme une couche de verre posée sur le contenu qui défile dessous. */
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid color-mix(in srgb, var(--rouge-principal) 10%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 8px 32px rgba(0,0,0,0.4);
 }
 
 .header-switch a {
@@ -461,13 +525,22 @@ footer {
   font-size: 0.9375rem;
   letter-spacing: 0.02em;
   border-radius: var(--radius-md);
-  box-shadow: 0 0 0 rgba(224, 30, 30, 0);
+  /* Reliefs internes (haut clair, bas sombre) qui donnent au bouton une
+     vraie épaisseur, plus un halo rouge au repos déjà visible sans
+     attendre le hover, comme .ep-btn-primary dans l'appli. */
+  box-shadow:
+    0 4px 24px rgba(224, 30, 30, 0.30),
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    inset 0 -1px 0 rgba(0,0,0,0.2);
   transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
 }
 
 .btn-cta-primary:hover {
   background: var(--rouge-fonce);
-  box-shadow: 0 0 32px rgba(224, 30, 30, 0.35);
+  box-shadow:
+    0 8px 32px rgba(224, 30, 30, 0.45),
+    inset 0 1px 0 rgba(255,255,255,0.14);
+  transform: translateY(-2px);
 }
 
 .btn-cta-primary:active {
@@ -512,16 +585,40 @@ footer {
    présence qu'une card de contenu plus bas dans une page. */
 
 .card {
-  background: var(--rouge-tres-fonce);
+  /* Verre dépoli plutôt qu'un aplat : laisse deviner la brume de fond au
+     travers, comme .ep-card dans l'appli. */
+  background: color-mix(in srgb, var(--rouge-tres-fonce) 55%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid color-mix(in srgb, var(--rouge-principal) 15%, transparent);
   border-radius: var(--radius-md);
   padding: var(--space-md);
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    inset 0 0 0 1px rgba(224,30,30,0.06),
+    0 4px 32px rgba(0,0,0,0.45);
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Reflet : un fin trait rouge en haut de carte, comme si la lumière de la
+   brume ambiante accrochait le bord supérieur du verre. */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(224,30,30,0.4), transparent);
+  pointer-events: none;
 }
 
 .card:hover {
   border-color: color-mix(in srgb, var(--rouge-principal) 50%, transparent);
-  box-shadow: 0 0 40px rgba(224, 30, 30, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 16px 48px rgba(0,0,0,0.55),
+    0 0 40px rgba(137,4,4,0.12);
   transform: translateY(-2px);
 }
 
@@ -714,6 +811,12 @@ footer {
    propre et symétrique tout en signalant clairement l'importance. */
 .pilier-card--emphasis {
   border-color: var(--rouge-principal);
+  /* Léger halo ambiant en plus du .card:hover normal : ce pilier est
+     prioritaire même au repos, pas seulement au survol. */
+  box-shadow:
+    0 0 40px rgba(224,30,30,0.10),
+    inset 0 1px 0 rgba(224,30,30,0.15),
+    0 4px 32px rgba(0,0,0,0.45);
 }
 
 @media (min-width: 900px) {
@@ -736,6 +839,19 @@ footer {
     color-mix(in srgb, var(--rouge-fonce) 55%, transparent) 0%,
     var(--noir-profond) 70%
   );
+  box-shadow: inset 0 1px 0 rgba(224,30,30,0.15);
+}
+
+/* Trait de lumière en tête de section, même signature que le hairline de
+   .ep-card-hero dans l'appli : la section la plus importante de la page
+   (la conversion) mérite ce détail que les cards de contenu n'ont pas. */
+.cta-final::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 15%; right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(224,30,30,0.6), transparent);
+  pointer-events: none;
 }
 
 .cta-final-inner {

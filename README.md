@@ -824,3 +824,52 @@ texte descriptif réel à l'intégration de chaque image en phase design/contenu
 - Vente indirecte uniquement : l'objectif de chaque page est de pousser
   vers le formulaire de préqualification / Calendly, jamais de vendre une
   offre en direct sur la page.
+
+## Passe de profondeur visuelle (2026-09-09, hors série de 15 prompts)
+
+Demande directe : le site avait l'air "fade" comparé à l'application
+(qui a déjà son propre langage visuel très abouti, glow/grain/reflets/
+ombres en couches), champ libre donné sur les couleurs, ombres,
+animations et police pour combler cet écart.
+
+Contrainte respectée : la palette officielle de 7 couleurs (`base.css`,
+tout en haut) n'a pas bougé, ni les polices (Montserrat 900 titres,
+Playfair Display Italic uniquement pour le logo) — l'écart n'était pas
+une question de couleurs ou de police, mais d'atmosphère et de matière.
+Repris tel quel depuis `app/globals.css` de l'application (mêmes valeurs,
+pas une approximation) :
+
+- **Atmosphère de fond** (`body::before`) : les 5 dégradés radiaux
+  superposés qui donnent son identité "noir profond + brume rouge" à
+  l'app, en `position: fixed` pour rester stable au scroll. `z-index: -1`
+  plutôt que `0` (comme dans l'app) : ce site a du texte hors carte
+  (h1, p de section) qui n'est pas `position: relative` comme l'est
+  quasi tout dans l'app, un z-index 0 l'aurait peint par-dessus la brume
+  au lieu de dessous.
+- **Grain de pellicule** (`body::after`) : la texture SVG animée qui
+  empêche le noir de paraître plat à l'écran, au-dessus de tout,
+  identique à l'app.
+- **Cards en verre dépoli** (`.card`, `.bifurcation .bloc`,
+  `.vsl-placeholder`, `.pilier-card--emphasis`) : `backdrop-filter`,
+  fond semi-transparent au lieu d'un aplat, reflet en trait fin en tête
+  de carte, ombres en couches (highlight interne + glow rouge + ombre
+  noire profonde), au lieu d'un simple fond plein + bordure + un seul
+  box-shadow au hover.
+- **Boutons CTA** (`.btn-cta-primary`) : reliefs internes (haut clair,
+  bas sombre) qui donnent une vraie épaisseur au lieu d'un aplat plat,
+  glow déjà visible au repos (pas seulement au hover).
+- **En-tête au scroll** : flou 20px au lieu de 12px (comme la nav de
+  l'app), bordure et ombre ajoutées pour mieux lire comme une couche de
+  verre posée sur le contenu qui défile dessous.
+- **CTA final** : trait de lumière en tête de section (même signature
+  que `.ep-card-hero` dans l'app), glow interne ajouté.
+- **Logo** : halo rouge discret derrière le mot (`.ep-logo-glow` dans
+  l'app), jamais un contour qui l'alourdirait.
+
+Deux fichiers touchés (`base.css`, partagé par les 3 pages + 404, et
+`home.css` pour le hero/bifurcation propres à la homepage), aucun
+changement structurel HTML, aucune nouvelle dépendance. Toutes les
+valeurs de flou/ombre restent dans les mêmes ordres de grandeur que
+l'app (14 à 20px de flou, jamais plus, même raisonnement que le
+commentaire `--blur-card`/`--blur-nav` de `app/globals.css` sur le
+compositing WebKit).
