@@ -128,8 +128,9 @@ ci-dessous.
 - **Jamais de prix affiché**, sous aucune forme, nulle part (page, code,
   commentaire). Le site pousse vers un appel, jamais vers un achat direct.
 - **Jamais le prénom "Emmanuel"** dans un texte visible par un visiteur.
-  Le nom à afficher est **Santamaria Sànchez** (accent grave sur le à,
-  jamais "Sánchez" avec un accent aigu). "Emmanuel Peccoux" reste correct
+  Le nom à afficher est **Santamaria Sanchéz** (accent aigu sur le é,
+  jamais sur le a — ni "Sánchez" ni "Sànchez", corrigé le 2026-09-10 après
+  une deuxième fois où l'accent avait été mal placé). "Emmanuel Peccoux" reste correct
   uniquement pour ce qui est légal/administratif (les pages CGU/CGV/
   confidentialité pointent vers l'app, pas ce repo) et l'auteur des
   commits git. Depuis le 2026-09-08, le compte GitHub et le repo
@@ -268,7 +269,7 @@ plutôt qu'une liste de cinquante choses) dans celle de /business/.
 
 **Résolu le 2026-09-08** : l'URL du site contenait le nom légal
 (`emmanuelpeccoux.github.io/EP-Coaching/`) alors que l'identité publique
-unique doit être Santamaria Sànchez. Le compte GitHub a été renommé en
+unique doit être Santamaria Sanchéz. Le compte GitHub a été renommé en
 `SantamariaSanchez` et le repo en `EPCoaching`, l'URL est désormais
 `santamariasanchez.github.io/EPCoaching/` (mise à jour dans `og:url`,
 `sitemap.xml`, `robots.txt` et 404.html). Un domaine personnalisé
@@ -569,7 +570,7 @@ la bio (bloc commun aux deux pages) n'a donc été mise à jour que sur
 titre maximum) : `plus vite` (H1 hero), `ton chemin` (H2 bifurcation),
 `fait pour toi`, `1-to-1`, `6 piliers`, `accomplir`, `commencer` sur
 `/physique/`. Exception délibérée : le H1 de la bio (`Santamaria
-Sànchez`) n'a pas d'accent, un prénom/nom n'a pas de "mot clé" à mettre
+Sanchéz`) n'a pas d'accent [de mise en avant `<span class="accent">`], un prénom/nom n'a pas de "mot clé" à mettre
 en avant sans que ça ait l'air arbitraire. Vérifié avec `splitText()` sur
 le vrai HTML (jsdom) : le span survit intact à la découpe en mots, y
 compris sur un accent de 3 mots ("fait pour toi") au milieu d'un H2 de 7
