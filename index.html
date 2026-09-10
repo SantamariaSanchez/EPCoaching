@@ -19,7 +19,7 @@
 
   <meta name="theme-color" content="#E01E1E" />
 
-  <!-- Favicon, placeholder carré rouge + "EP" en attendant le vrai logo -->
+  <!-- Favicon, généré depuis le vrai logo (mark "EP" seul, sur fond --noir-profond, 2026-09-10) -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -48,19 +48,14 @@
        1. HEADER, logo EP Coaching
        ═══════════════════════════════════════════════════════════════ -->
   <header>
-    <!-- LOGO (prompt 12/15) : cherché dans le repo et son historique git
-         (toutes branches), introuvable, jamais commité nulle part. Pas
-         fabriqué en CSS/SVG (règle ferme du projet, un logo se fournit,
-         ne se recrée pas). Fichier attendu : assets/images/logo.png (PNG,
-         fond transparent), au moins 640×200px source pour rester net en
-         retina affiché à ~40px de haut dans ce header. Une fois déposé,
-         remplacer le <a class="logo"> ci-dessous par
-         <img src="assets/images/logo.png" alt="EP Coaching" height="40" />
-         (chemin relatif adapté à la profondeur de chaque page), pareil
-         dans le footer (.footer-brand) et pour le favicon (voir prompt 3). -->
-    <a href="./" class="logo">EP COACHING</a>
-    <!-- Diamant signature sous le wordmark, comme sur l'ancien logo EP. -->
-    <span class="diamond logo-mark" aria-hidden="true"></span>
+    <!-- LOGO fourni par Santamaria le 2026-09-10 (voir README, "Déposer
+         le logo") : PNG fond transparent réel, recadré sur son contenu
+         visible (496×394px source, sous les 640×200px recommandés mais
+         c'est la résolution fournie). Le mark comporte déjà son propre
+         losange rouge entre "EP" et "COACHING" : le <span class="diamond
+         logo-mark"> séparé qui l'imitait en CSS est donc retiré, il
+         ferait doublon. -->
+    <a href="./" class="logo"><img src="assets/images/logo.png" alt="EP Coaching" height="40" /></a>
   </header>
 
   <main>
@@ -122,7 +117,7 @@
        FOOTER, commun aux 3 pages
        ═══════════════════════════════════════════════════════════════ -->
   <footer>
-    <p class="footer-brand">EP Coaching</p>
+    <p class="footer-brand"><img src="assets/images/logo.png" alt="EP Coaching" height="32" /></p>
 
     <div class="footer-newsletter">
       <p class="footer-newsletter-label">Un mail par jour : entraînement, nutrition, mindset</p>

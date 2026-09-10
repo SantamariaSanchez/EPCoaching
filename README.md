@@ -22,17 +22,16 @@ consulter seulement si cette section ne répond pas à la question.
 
 ## Ce qu'il manque encore pour que le site soit complet
 
-Deux éléments, et deux seulement, ne dépendent pas de moi (jamais
-fournis, jamais fabriqués, conformément à la règle ferme du projet) :
+Un seul élément ne dépend pas de moi (jamais fabriqué, conformément à
+la règle ferme du projet) :
 
 1. **La vidéo VSL.** Voir juste en dessous, "Mettre en ligne la vidéo
-   VSL", c'est le point le plus important de cette section. Annoncée
-   par Santamaria le 2026-09-10 ("je t'enverrai la vsl bientot") —
-   toujours en attente du fichier/lien réel.
-2. **Le logo.** Voir "Déposer le logo".
+   VSL". Annoncée par Santamaria le 2026-09-10 ("je t'enverrai la vsl
+   bientot") — toujours en attente du fichier/lien réel.
 
-La photo portrait, fournie et choisie par Santamaria le 2026-09-10, est
-réglée (voir "Photo portrait" plus bas).
+Le logo et la photo portrait, fournis et choisis par Santamaria le
+2026-09-10, sont réglés (voir "Déposer le logo" et "Photo portrait"
+plus bas).
 
 Tout le reste (texte, design, animations, formulaires, Calendly,
 déploiement) est fini et vérifié en production.
@@ -57,27 +56,23 @@ le mécanisme en détail.
 
 ## Déposer le logo
 
-Fichier attendu : **`assets/images/logo.png`** (PNG, fond transparent,
-au moins 640×200px source pour rester net en retina). Une fois déposé,
-dans les 3 fichiers `index.html` / `physique/index.html` /
-`business/index.html`, remplace :
+Fait le 2026-09-10 : Santamaria a fourni le vrai logo (PNG fond
+transparent). Recadré sur son contenu visible (496×394px, sous les
+640×200px recommandés mais c'est la résolution fournie) et posé dans
+`assets/images/logo.png`, remplace le texte `EP COACHING` dans les 3
+headers et les 3 footers (`.footer-brand`) des 3 pages. Le
+`<span class="diamond logo-mark">` qui imitait le losange en CSS sur la
+homepage a été retiré (le logo réel a déjà son propre losange entre
+« EP » et « COACHING », il aurait fait doublon).
 
-```html
-<a href="..." class="logo">EP COACHING</a>
-```
-
-par :
-
-```html
-<a href="..." class="logo"><img src="assets/images/logo.png" alt="EP Coaching" height="40" /></a>
-```
-
-(adapter le chemin `assets/images/logo.png` selon la profondeur du
-fichier : `assets/images/...` à la racine, `../assets/images/...` dans
-`physique/` et `business/`). Fais la même chose dans le footer
-(`.footer-brand`) et régénère un favicon à partir du logo pour remplacer
-le placeholder carré rouge actuel (`favicon.svg`, `favicon.ico`,
-`apple-touch-icon.png`).
+Favicon régénéré à partir du logo (juste le mark « EP », sans
+« COACHING » — illisible à 16-32px), posé sur fond `--noir-profond`
+(#0D0000, la couleur de fond du site) plutôt que le rouge plein de
+l'ancien placeholder : `favicon.ico` (16/32/48/64px), `apple-touch-icon.png`
+(180×180px), et `favicon.svg` (le PNG encodé en base64 dans un wrapper
+SVG minimal — la source fournie est une image, pas un vecteur, donc pas
+de vraie vectorisation possible ; le lien `type="image/svg+xml"` reste
+fonctionnel).
 
 ## Photo portrait
 
@@ -172,7 +167,7 @@ un projet Next.js séparé, avec sa propre stack, voir son README.
 ├── business/index.html   → Parcours "scaler son business de coach"
 ├── 404.html              → Page d'erreur (lien retour en URL absolue, voir commentaire dans le fichier)
 ├── robots.txt / sitemap.xml
-├── favicon.svg / favicon.ico / apple-touch-icon.png → placeholder carré rouge + "EP", à remplacer avec le vrai logo
+├── favicon.svg / favicon.ico / apple-touch-icon.png → générés depuis le vrai logo (mark "EP" seul, sur fond --noir-profond)
 └── assets/
     ├── css/
     │   ├── base.css        → tokens (couleurs/espacements/typo), reset, tous les composants partagés (boutons, cards, motif diamant)
@@ -184,6 +179,9 @@ un projet Next.js séparé, avec sa propre stack, voir son README.
     │   └── main.js          → tout le reste : animations, façade VSL, scroll d'ancre, découpe de texte
     └── images/
         ├── og-image.png     → image de partage (Open Graph), générée avec l'identité visuelle du site
+        ├── logo.png         → vrai logo EP Coaching (fourni par Santamaria, 2026-09-10), header + footer des 3 pages + favicons
+        ├── portrait_physique.jpg → portrait de /physique/ (fourni par Santamaria, 2026-09-10)
+        ├── portrait_business.jpg → portrait de /business/ (fourni par Santamaria, 2026-09-10)
         └── (25 fichiers .jpg) → photothèque de l'ancienne version du site, aucun <img>
                                   ne les utilise actuellement, réservée à un usage futur
 ```
@@ -418,6 +416,10 @@ fond transparent, au moins 640×200px source pour rester net en retina
 affiché à ~40px de haut. Une fois déposé, il suffit de suivre le
 commentaire pour remplacer `<a class="logo">` par un vrai `<img>` (header
 des 3 pages + footer + favicon, voir prompt 3).
+
+**Suite, 2026-09-10** : Santamaria a fourni le vrai logo. Intégré
+partout (header, footer, favicons), voir "Déposer le logo" plus haut
+pour le détail.
 
 **VSL** : façade complète implémentée (`initVslFacade()` dans `main.js`).
 Rien n'est chargé au chargement de la page : l'attribut
