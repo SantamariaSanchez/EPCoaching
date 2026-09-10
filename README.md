@@ -22,13 +22,17 @@ consulter seulement si cette section ne répond pas à la question.
 
 ## Ce qu'il manque encore pour que le site soit complet
 
-Trois éléments, et trois seulement, ne dépendent pas de moi (jamais
+Deux éléments, et deux seulement, ne dépendent pas de moi (jamais
 fournis, jamais fabriqués, conformément à la règle ferme du projet) :
 
 1. **La vidéo VSL.** Voir juste en dessous, "Mettre en ligne la vidéo
-   VSL", c'est le point le plus important de cette section.
+   VSL", c'est le point le plus important de cette section. Annoncée
+   par Santamaria le 2026-09-10 ("je t'enverrai la vsl bientot") —
+   toujours en attente du fichier/lien réel.
 2. **Le logo.** Voir "Déposer le logo".
-3. **La photo portrait.** Voir "Déposer la photo portrait".
+
+La photo portrait, fournie et choisie par Santamaria le 2026-09-10, est
+réglée (voir "Photo portrait" plus bas).
 
 Tout le reste (texte, design, animations, formulaires, Calendly,
 déploiement) est fini et vérifié en production.
@@ -75,29 +79,26 @@ fichier : `assets/images/...` à la racine, `../assets/images/...` dans
 le placeholder carré rouge actuel (`favicon.svg`, `favicon.ico`,
 `apple-touch-icon.png`).
 
-## Déposer la photo portrait
+## Photo portrait
 
-Fichier attendu : **`assets/images/portrait.jpg`** (+ `.webp` en
-complément si fourni dans les deux formats), ratio 4:5, au moins
-1000×1250px source. Bandes noires à rogner, tout logo/watermark tiers à
-retirer avant intégration. Une fois déposé, dans `physique/index.html`
-ET `business/index.html` (bloc bio identique sur les deux), remplace :
+Fait le 2026-09-10 : Santamaria a fourni lui-même deux photos et choisi
+explicitement de les utiliser (condition posée depuis le prompt 12/15
+vu qu'il est mineur — le choix devait venir de lui, pas d'une sélection
+unilatérale parmi les photos personnelles déjà présentes dans
+`assets/images/`). Deux fichiers, un par page (plus de fichier unique
+`portrait.jpg` partagé) :
 
-```html
-<div class="portrait-placeholder">
-  <span class="diamond diamond--outline diamond--lg" aria-hidden="true"></span>
-</div>
-```
+- `assets/images/portrait_physique.jpg` → `physique/index.html`, photo
+  physique (public coaching musculation).
+- `assets/images/portrait_business.jpg` → `business/index.html`, photo
+  lifestyle plus posée (public coachs/business).
 
-par :
-
-```html
-<img src="../assets/images/portrait.jpg" alt="Santamaria Sànchez" width="1000" height="1250" loading="lazy" />
-```
-
-Le traitement visuel (noir & blanc qui repasse en couleur au survol,
-vignettage rouge) est déjà en place dans `base.css` (`.portrait img`),
-rien à ajouter côté style.
+Les deux sont recadrées 4:5 (bandes noires du cadrage vidéo d'origine
+rognées sur la première). Résolution source sous les 1000×1250px
+recommandés pour un rendu retina parfait — à remplacer si Santamaria
+fournit une version plus définie plus tard. Le traitement visuel (noir &
+blanc qui repasse en couleur au survol, vignettage rouge) est déjà en
+place dans `base.css` (`.portrait img`), rien à ajouter côté style.
 
 ## Comment modifier le contenu texte des pages
 
@@ -444,6 +445,11 @@ parmi des photos personnelles existantes. Placeholder conservé. Fichier
 attendu : **`assets/images/portrait.jpg`** (+ `.webp` en complément si
 fourni), ratio 4:5, au moins 1000×1250px source. Bandes noires à rogner
 et tout logo/watermark tiers à retirer avant intégration, comme demandé.
+
+**Suite, 2026-09-10** : Santamaria a fourni deux photos et choisi
+lui-même de les utiliser, exactement la condition posée ci-dessus.
+Placeholder retiré des deux pages, voir "Photo portrait" plus haut pour
+le détail (fichiers, recadrage, page par photo).
 
 **Icônes** : audit de cohérence fait sur les 18 SVG des 2 pages (9 par
 page), un seul jeu d'attributs partout
