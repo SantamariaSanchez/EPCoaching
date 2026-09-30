@@ -9,7 +9,7 @@
    gardé "au cas où" (voir le skew de vélocité plus bas, périmètre
    volontairement pas fait dans cette passe).
 
-   Garde-fou non négociable sur tout ce fichier : si prefersReducedMotion
+   Garde-fou non négociable sur tout ce fichier : si reduceMotion
    est vrai, aucun élément ne doit jamais rester cloué à opacity:0. Soit
    on ne touche pas du tout l'état initial, soit on l'affiche directement
    dans son état final sans animation. Jamais d'invisible qui dépend d'une
@@ -34,7 +34,7 @@
 // suivi d'un `ScrollTrigger.create()` qui échoue (un seul des deux CDN en
 // panne) laisserait cet élément invisible pour de bon.
 const animationsAvailable = typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined";
-const prefersReducedMotion = window.prefersReducedMotion === true || !animationsAvailable;
+const reduceMotion = window.prefersReducedMotion === true || !animationsAvailable;
 
 // Note pour le prompt 9 (WebGL/Three.js) : ne jamais combiner un
 // rotateY CSS avec la synchronisation d'un plan WebGL sur le même
@@ -77,7 +77,7 @@ function revealTitleWords(words, overrides = {}) {
 }
 
 function initTitleReveals() {
-  if (prefersReducedMotion) return;
+  if (reduceMotion) return;
   const titles = document.querySelectorAll("h2");
   titles.forEach((h2) => {
     // Le H2 de la bifurcation homepage est géré dans initHomeEntrance
@@ -113,7 +113,7 @@ function initTitleReveals() {
    les mélanger aux deux systèmes ferait doublon sur le même élément. */
 
 function initReveals() {
-  if (prefersReducedMotion) return;
+  if (reduceMotion) return;
 
   const REVEAL_Y = 28;
   const REVEAL_DURATION = 0.8;
@@ -166,7 +166,7 @@ function initReveals() {
 function initHomeEntrance() {
   const heroVsl = document.querySelector(".hero-vsl");
   if (!heroVsl) return; // pas la homepage
-  if (prefersReducedMotion) return;
+  if (reduceMotion) return;
 
   const logo = document.querySelector("header .logo");
   const h1 = heroVsl.querySelector("h1");
@@ -213,7 +213,7 @@ function initHomeEntrance() {
 function initSectionEntrance() {
   const bio = document.querySelector(".bio");
   if (!bio || document.querySelector(".hero-vsl")) return; // homepage exclue
-  if (prefersReducedMotion) return;
+  if (reduceMotion) return;
 
   const portrait = bio.querySelector(".portrait");
   const eyebrow = bio.querySelector(".split-content .eyebrow");
@@ -260,7 +260,7 @@ function initSectionEntrance() {
    contenu glisse dans un cadre fixe, effet de profondeur classique. */
 
 function initPortraitParallax() {
-  if (prefersReducedMotion) return;
+  if (reduceMotion) return;
   const target = document.querySelector(".portrait img, .portrait-placeholder");
   const portrait = document.querySelector(".portrait");
   if (!target || !portrait) return;
@@ -294,7 +294,7 @@ function initPortraitParallax() {
    principe déjà tenu pour la parallaxe du portrait plus haut). */
 
 function initHeroDiamondParallax() {
-  if (prefersReducedMotion) return;
+  if (reduceMotion) return;
   const ghost = document.querySelector(".hero-diamond-ghost");
   const hero = document.querySelector(".hero-vsl");
   if (!ghost || !hero) return; // pas la homepage
@@ -346,7 +346,7 @@ function initHeroDiamondParallax() {
 
 function initCtaFinalReveal() {
   const inner = document.querySelector(".cta-final-inner");
-  if (!inner || prefersReducedMotion) return;
+  if (!inner || reduceMotion) return;
 
   const diamond = inner.querySelector(".diamond");
   // Le H2 n'est PAS repris ici : initTitleReveals() s'en charge déjà,
@@ -396,7 +396,7 @@ function initCtaFinalReveal() {
    uniquement, pas de tween GSAP : reste correct même sous reduced-motion
    (la transition CSS est déjà neutralisée globalement dans ce cas, voir
    base.css) et ne cache jamais aucun contenu, donc pas besoin du
-   garde-fou prefersReducedMotion ici. */
+   garde-fou reduceMotion ici. */
 
 function initHeaderScroll() {
   if (!animationsAvailable) return;
@@ -493,7 +493,7 @@ function initVslFacade() {
    clic standard. */
 
 function initAnchorScroll() {
-  if (prefersReducedMotion || !window.lenis) return; // saut natif instantané prend le relais, jamais bloqué
+  if (reduceMotion || !window.lenis) return; // saut natif instantané prend le relais, jamais bloqué
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (e) => {
       const id = link.getAttribute("href").slice(1);

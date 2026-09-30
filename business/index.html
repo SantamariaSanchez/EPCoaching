@@ -58,20 +58,26 @@
     "image": "https://santamariasanchez.github.io/EPCoaching/assets/images/portrait_business.jpg",
     "description": "Fondateur d'EP Coaching, accompagne des coachs qui veulent structurer leur activité.",
     "sameAs": [
-      "https://instagram.com/santamariasanchez_"
+      "https://instagram.com/santamariasanchezep"
     ]
   }
   </script>
+  <link rel="stylesheet" href="../assets/css/site.css" />
 </head>
 <body>
 
-  <header>
-    <!-- LOGO : voir le commentaire détaillé dans index.html (fourni par
-         Santamaria le 2026-09-10). -->
+  <header class="site-header">
     <a href="../" class="logo"><img src="../assets/images/logo.png" alt="EP Coaching" width="50" height="40" /></a>
-    <nav class="header-switch" aria-label="Changer de parcours">
-      <a href="../physique/">Voir l&rsquo;autre accompagnement</a>
+    <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+      <ul class="site-nav-links"><li><a href="../appli/">L'appli</a></li><li><a href="../solutions/coachs/">Coachs</a></li><li><a href="../physique/">Coaching physique</a></li><li><a href="../ressources/">Ressources</a></li><li><a href="../actus/">Actus</a></li><li><a href="../aide/">Aide</a></li></ul>
+      <div class="site-nav-actions">
+        <a href="https://ep-coaching.vercel.app/auth/client?mode=login" class="site-nav-login">Se connecter</a>
+        <a href="https://ep-coaching.vercel.app/auth/client" class="btn-cta-primary btn-cta-primary--sm">Essayer gratuitement</a>
+      </div>
     </nav>
+    <button type="button" class="site-nav-toggle" aria-controls="site-nav" aria-expanded="false">
+      <span class="sr-only">Ouvrir le menu</span><span class="site-nav-toggle-bar" aria-hidden="true"></span>
+    </button>
   </header>
 
   <main>
@@ -319,29 +325,33 @@
 
   </main>
 
-  <footer>
-    <p class="footer-brand"><img src="../assets/images/logo.png" alt="EP Coaching" width="40" height="32" /></p>
-
-    <div class="footer-newsletter">
-      <p class="footer-newsletter-label">Un mail par jour : entraînement, nutrition, mindset</p>
-      <form id="newsletter-form" class="newsletter-form" novalidate>
-        <label for="newsletter-email" class="sr-only">Ton email</label>
-        <input type="text" name="website" class="newsletter-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
-        <input type="email" id="newsletter-email" name="email" required placeholder="ton@email.com" class="newsletter-input" />
-        <button type="submit" class="newsletter-submit">Je m'inscris</button>
-      </form>
-      <p class="newsletter-feedback" role="status" hidden></p>
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand-block">
+        <a href="../" class="footer-brand"><img src="../assets/images/logo.png" alt="EP Coaching" width="40" height="32" /></a>
+        <p class="footer-tagline">L'appli et le coaching pour progresser, que tu t'entraînes ou que tu coaches.</p>
+        <div class="footer-newsletter">
+          <p class="footer-newsletter-label">Un mail par jour : entraînement, nutrition, mental</p>
+          <form id="newsletter-form" class="newsletter-form" novalidate>
+            <label for="newsletter-email" class="sr-only">Ton email</label>
+            <input type="text" name="website" class="newsletter-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input type="email" id="newsletter-email" name="email" required placeholder="ton@email.com" class="newsletter-input" />
+            <button type="submit" class="newsletter-submit">Je m'inscris</button>
+          </form>
+          <p class="newsletter-feedback" role="status" hidden></p>
+        </div>
+      </div>
+      <nav class="footer-cols" aria-label="Plan du site"><div class="footer-col"><p class="footer-col-title">L'appli</p><ul><li><a href="../appli/">Vue d'ensemble</a></li><li><a href="../appli/aujourdhui/">Aujourd'hui</a></li><li><a href="../appli/entrainement/">Entraînement</a></li><li><a href="../appli/nutrition/">Nutrition</a></li><li><a href="../appli/bilan/">Bilan du jour</a></li><li><a href="../appli/agenda/">Agenda</a></li><li><a href="../appli/notes/">Notes</a></li><li><a href="../appli/#fonctionnalites">Toutes les fonctionnalités</a></li></ul></div><div class="footer-col"><p class="footer-col-title">Pour les coachs</p><ul><li><a href="../solutions/coachs/">La plateforme coach</a></li><li><a href="../appli/clients/">Gestion des clients</a></li><li><a href="../appli/studio/">Studio créatif</a></li><li><a href="../appli/stats-reseaux/">Stats réseaux</a></li><li><a href="../appli/formations/">Formations</a></li><li><a href="../appli/equipe/">Équipe et paie</a></li><li><a href="../business/">Accompagnement business</a></li></ul></div><div class="footer-col"><p class="footer-col-title">Solutions</p><ul><li><a href="../solutions/membres/">Pour te suivre toi-même</a></li><li><a href="../solutions/coachs/">Pour les coachs</a></li><li><a href="../solutions/equipes/">Pour les équipes</a></li><li><a href="../physique/">Coaching physique 1-to-1</a></li></ul></div><div class="footer-col"><p class="footer-col-title">Ressources</p><ul><li><a href="../ressources/">Guides gratuits</a></li><li><a href="https://ep-coaching.vercel.app/outils">Calculateur de macros</a></li><li><a href="../actus/">Actus et nouveautés</a></li><li><a href="https://ep-coaching.vercel.app/coachs">Trouver un coach</a></li></ul></div><div class="footer-col"><p class="footer-col-title">Aide</p><ul><li><a href="../aide/">Centre d'aide</a></li><li><a href="../faq/">Questions fréquentes</a></li><li><a href="../aide/installer-lappli/">Installer l'appli</a></li><li><a href="../contact/">Nous écrire</a></li></ul></div><div class="footer-col"><p class="footer-col-title">EP Coaching</p><ul><li><a href="../a-propos/">À propos</a></li><li><a href="https://ep-coaching.vercel.app/carrieres">Carrières</a></li><li><a href="../securite/">Sécurité et données</a></li><li><a href="../contact/">Contact</a></li></ul></div></nav>
     </div>
-
-    <nav class="footer-legal" aria-label="Liens légaux">
-      <a href="https://ep-coaching.vercel.app/legal/cgu" target="_blank" rel="noopener noreferrer">CGU</a>
-      <a href="https://ep-coaching.vercel.app/legal/cgv" target="_blank" rel="noopener noreferrer">CGV</a>
-      <a href="https://ep-coaching.vercel.app/legal/confidentialite" target="_blank" rel="noopener noreferrer">Confidentialité</a>
-    </nav>
-    <a href="https://instagram.com/santamariasanchez_" target="_blank" rel="noopener noreferrer" class="footer-instagram">Instagram</a>
+    <div class="footer-bar">
+      <nav class="footer-bar-links" aria-label="Liens utiles et légaux"><a href="../a-propos/">À propos</a><a href="../aide/">Aide</a><a href="../faq/">FAQ</a><a href="../actus/">Actus</a><a href="https://ep-coaching.vercel.app/carrieres">Carrières</a><a href="https://ep-coaching.vercel.app/legal/confidentialite">Confidentialité</a><a href="https://ep-coaching.vercel.app/legal/cgu">Conditions</a><a href="https://ep-coaching.vercel.app/legal/cgv">CGV</a><a href="../legal/mentions-legales/">Mentions légales</a><a href="../legal/cookies/">Cookies</a><a href="../plan-du-site/">Plan du site</a><a href="../contact/">Contact</a></nav>
+      <nav class="footer-bar-socials" aria-label="Réseaux sociaux"><a href="https://instagram.com/santamariasanchezep" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.threads.net/@santamariasanchezep" target="_blank" rel="noopener noreferrer">Threads</a><a href="https://www.tiktok.com/@santamariasanchez_" target="_blank" rel="noopener noreferrer">TikTok</a><a href="https://www.youtube.com/@santamaria_sanchez" target="_blank" rel="noopener noreferrer">YouTube</a></nav>
+      <p class="footer-copy"><span>Français</span><span>© 2026 EP Coaching</span></p>
+    </div>
   </footer>
 
   <script src="../assets/js/lenis-init.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/site.js" defer></script>
 </body>
 </html>
