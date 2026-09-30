@@ -10,8 +10,10 @@ import { fileURLToPath } from "node:url";
 import { BASE, APP, LINKS, BUILD_DATE, SOCIALS } from "./config.mjs";
 import {
   esc, resolve, link, icon, pageHtml, hero, section, cardGrid, steps, faqList, faqJsonLd, ctaBand,
-  headerHtml, footerHtml, canonical, ORG_JSONLD,
+  headerHtml, footerHtml, canonical, ORG_JSONLD, phone, logoMarquee,
 } from "./render.mjs";
+import { buildHome, quizBlock } from "./home.mjs";
+import { readdirSync } from "node:fs";
 import { FEATURES, FEATURE_GROUPS, FEATURE_BY_SLUG } from "./content/features.mjs";
 import { HELP_CATEGORIES, HELP_ARTICLES, HELP_BY_SLUG } from "./content/help.mjs";
 import { FAQ_GROUPS, FAQ_ALL } from "./content/faq.mjs";
@@ -20,6 +22,37 @@ import { NEWS_SORTED, NEWS_CATEGORIES } from "./content/news.mjs";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const GUIDES = JSON.parse(readFileSync(join(ROOT, "tools/data/guides.json"), "utf8"));
 const written = [];
+
+// Logos d'outils (Simple Icons) : titre retiré, masqués aux lecteurs d'écran
+// (le nom est écrit à côté).
+const SVGS = Object.fromEntries(
+  readdirSync(join(ROOT, "assets/images/logos"))
+    .filter((f) => f.endsWith(".svg"))
+    .map((f) => [f.replace(".svg", ""), readFileSync(join(ROOT, "assets/images/logos", f), "utf8").replace(/<title>[^<]*<\/title>/, "").replace("<svg ", '<svg aria-hidden="true" focusable="false" ')])
+);
+
+// Capture d'écran réelle de l'appli montrée pour chaque rubrique.
+const SHOT = {
+  aujourdhui: "aujourdhui", entrainement: "entrainement", nutrition: "nutrition", bilan: "bilan", progression: "progression",
+  "road-map": "road-map", semaine: "semaine", messages: "messages", communaute: "communaute", formations: "formations",
+  bibliotheque: "bibliotheque", agenda: "agenda", notes: "notes", recherche: "recherche", "claude-notion": "notes",
+  personnalisation: "personnalisation", "appli-mobile": "aujourdhui", clients: "clients", live: "live", studio: "coach-agenda",
+  "stats-reseaux": "stats-reseaux", pilotage: "coach-accueil", mailing: "mailing", equipe: "equipe",
+};
+
+function fxHero({ eyebrow, title, lead, ctas, path, shot, alt }) {
+  const buttons = ctas.map((c, i) => `<a href="${esc(resolve(c.href, path))}" class="${i === 0 ? "btn-cta-primary" : "btn-ghost"}">${esc(c.label)}</a>`).join("");
+  return `<section class="fx-hero">
+    <div class="hx-copy">
+      <p class="eyebrow">◆ ${esc(eyebrow)}</p>
+      <h1>${title}</h1>
+      <p class="page-lead">${lead}</p>
+      <div class="cta-row">${buttons}</div>
+      <p class="hx-proof"><span>${icon("shield")} Gratuit, sans carte bancaire</span><span>${icon("phone")} Sur ton téléphone et ton ordinateur</span></p>
+    </div>
+    <div class="fx-hero-visual">${phone(shot, alt, path, "", "", true)}</div>
+  </section>`;
+}
 
 function write(path, html) {
   const file = join(ROOT, path === "/" ? "index.html" : path.replace(/^\//, "") + "index.html");
@@ -97,7 +130,7 @@ for (const f of FEATURES) {
   const coach = isCoachFeature(f);
   const primary = coach ? { label: "Créer mon espace coach", href: "LINK:signupCoach" } : { label: "Essayer gratuitement", href: "LINK:signupMember" };
   const body = [
-    hero({ eyebrow: f.name, title: f.title, lead: esc(f.lead), path, ctas: [primary, { label: "Voir toute l'appli", href: "/appli/" }] }),
+    fxHero({ eyebrow: f.name, title: f.title, lead: esc(f.lead), path, ctas: [primary, { label: "Voir toute l'appli", href: "/appli/" }], shot: SHOT[f.slug] || "aujourdhui", alt: `Écran ${f.name} de l'appli EP Coaching` }),
     `<div class="meta-strip"><span class="chip">${icon("users", "icon icon--xs")} ${esc(f.for)}</span><span class="chip">${esc(group.title)}</span></div>`,
     section({ eyebrow: "Ce que tu peux faire", title: `${esc(f.name)}, <span class="accent">concrètement</span>`, content: cardGrid(f.points.map((p) => ({ icon: p.icon, title: p.t, text: esc(p.d) })), path) }),
     f.steps ? section({ eyebrow: "Pas à pas", title: esc(f.stepsTitle || "Comment ça marche"), content: steps(f.steps.map((s) => ({ t: s.t, d: esc(s.d) }))), narrow: true }) : "",
@@ -137,13 +170,18 @@ for (const f of FEATURES) {
     })
   ).join("\n");
   const body = [
-    hero({
-      eyebrow: "L'appli EP Coaching",
-      title: `Tout ton suivi. Tout ton coaching. <span class="accent">Une seule appli.</span>`,
-      lead: "Entraînement, nutrition, bilan, progression, agenda, notes : pour te suivre toi-même. Clients, contenu, formations, ventes, équipe : pour faire grandir ton activité de coach. Le tout dans ta poche.",
-      path,
-      ctas: [{ label: "Essayer gratuitement", href: "LINK:signupMember" }, { label: "Je suis coach", href: "/solutions/coachs/" }],
-    }),
+    `<section class="hx">
+      <div class="hx-aura" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="hx-copy">
+        <p class="eyebrow">◆ L'appli EP Coaching</p>
+        <h1>Tout ton suivi. Tout ton coaching. <span class="accent">Une seule appli.</span></h1>
+        <p class="page-lead">Entraînement, nutrition, bilan, progression, agenda, notes : pour te suivre toi-même. Clients, contenu, formations, ventes, équipe : pour faire grandir ton activité de coach.</p>
+        <div class="cta-row"><a class="btn-cta-primary btn-cta-primary--lg" href="${LINKS.signupMember}">Essayer gratuitement</a><a class="btn-ghost" href="${resolve("/solutions/coachs/", path)}">Je suis coach</a></div>
+        <p class="hx-proof"><span>${icon("shield")} Gratuit, sans carte bancaire</span><span>${icon("map")} Données hébergées en Europe</span></p>
+      </div>
+      <div class="phones">${phone("entrainement", "Écran Programme", path, "p-left", "", true)}${phone("aujourdhui", "Écran Aujourd'hui", path, "p-center", "", true)}${phone("clients", "Écran Clients côté coach", path, "p-right", "", true)}</div>
+    </section>`,
+    logoMarquee(SVGS),
     section({
       eyebrow: "Trois espaces",
       title: `Une appli, <span class="accent">trois façons</span> de l'utiliser`,
@@ -207,6 +245,7 @@ const SOLUTIONS = [
       { icon: "chart", title: "La balance te démotive", text: "Tendance du poids, photos guidées et mensurations : tu vois la vraie progression." },
       { icon: "calendar", title: "Tes journées partent dans tous les sens", text: "Ta semaine type dans l'agenda, et un retard se rattrape en un geste." },
     ],
+    shot: "aujourdhui",
     features: ["aujourdhui", "entrainement", "nutrition", "bilan", "progression", "agenda", "semaine", "communaute"],
     faq: ["Est-ce que l'appli est gratuite ?", "L'appli propose-t-elle des programmes d'entraînement ?", "Faut-il peser tous ses aliments ?", "Comment être accompagné par un coach ?"],
   },
@@ -225,6 +264,7 @@ const SOLUTIONS = [
       { icon: "chart", title: "Tu ne sais pas ce qui te ramène des clients", text: "Stats réseaux et leads par publication : tu doubles ce qui marche." },
       { icon: "briefcase", title: "Ton business tient dans ta tête", text: "Pilotage, appels de vente, pipeline de leads, publicité, compta : tes chiffres, enfin clairs." },
     ],
+    shot: "coach-accueil",
     features: ["clients", "live", "studio", "stats-reseaux", "formations", "pilotage", "mailing", "equipe"],
     faq: ["Que peut faire un coach dans EP Coaching ?", "Mes clients doivent-ils payer l'appli ?", "Comment inviter mes clients ?", "Les autres coachs peuvent-ils voir mes clients ?", "Je débute comme coach, c'est pour moi ?"],
     extra: { title: `Tu veux être <span class="accent">accompagné</span> sur ton business ?`, text: "En plus de l'appli, Santamaria Sanchéz accompagne en 1-to-1 les coachs qui veulent structurer et faire grandir leur activité.", link: { label: "Découvrir l'accompagnement business", href: "/business/" } },
@@ -244,6 +284,7 @@ const SOLUTIONS = [
       { icon: "chart", title: "La paie, un casse-tête", text: "Fixe, commissions, paiement à la pièce : le mois se calcule à partir des ventes réelles." },
       { icon: "lock", title: "Les accès, un risque", text: "Chaque coach ne voit que ses clients, chaque métier ne voit que ce dont il a besoin." },
     ],
+    shot: "equipe",
     features: ["equipe", "clients", "pilotage", "recherche"],
     faq: ["Je travaille avec un setter et un closer, c'est géré ?", "Les autres coachs peuvent-ils voir mes clients ?"],
   },
@@ -253,7 +294,8 @@ for (const s of SOLUTIONS) {
   const path = `/solutions/${s.slug}/`;
   const faq = s.faq.map((q) => FAQ_ALL.find((f) => f.q === q)).filter(Boolean);
   const body = [
-    hero({ eyebrow: s.eyebrow, title: s.title, lead: esc(s.lead), path, ctas: [s.primary, { label: "Voir toute l'appli", href: "/appli/" }] }),
+    fxHero({ eyebrow: s.eyebrow, title: s.title, lead: esc(s.lead), path, ctas: [s.primary, { label: "Voir toute l'appli", href: "/appli/" }], shot: s.shot, alt: `Aperçu de l'appli EP Coaching pour ${s.name.toLowerCase()}` }),
+    logoMarquee(SVGS),
     section({ eyebrow: "Tu te reconnais ?", title: `Ce qu'on <span class="accent">règle pour toi</span>`, content: cardGrid(s.pains.map((p) => ({ icon: p.icon, title: p.title, text: esc(p.text) })), path, { cols: "2" }) }),
     section({ eyebrow: "Les outils", title: "Ce que tu as dans l'appli", content: featureCards(s.features, path) }),
     s.extra ? section({ content: `<aside class="callout callout--big"><div><h2>${s.extra.title}</h2><p>${esc(s.extra.text)}</p><p>${link(s.extra.link.href, esc(s.extra.link.label), path, "btn-ghost")}</p></div></aside>`, narrow: true }) : "",
@@ -307,6 +349,7 @@ for (const c of GUIDE_CATS) {
   const body = [
     hero({ eyebrow: "Ressources", title: `${GUIDES.length} guides gratuits pour <span class="accent">progresser plus vite</span>`, lead: "Entraînement, nutrition, récupération, mental, activité quotidienne, business de coach : des guides courts qui répondent à une vraie question, sans blabla.", path, ctas: [{ label: "Calculer mes calories", href: "LINK:calculator" }] }),
     section({ eyebrow: "Par thème", title: "Choisis ton sujet", content: cats }),
+    `<section class="section">${quizBlock(GUIDES, path, { title: `Pas le temps de chercher ? <span class="accent">On choisit pour toi.</span>` })}</section>`,
     section({ eyebrow: "Outils gratuits", title: `Calcule tes besoins <span class="accent">en 1 minute</span>`, intro: "Le calculateur EP Coaching estime ta dépense du jour et tes macros selon ton objectif.", content: `<p class="center">${link("LINK:calculator", "Ouvrir le calculateur de macros", path, "btn-cta-primary")}</p>`, narrow: true }),
     section({ eyebrow: "À lire en premier", title: "Une sélection pour commencer", content: `<div class="picks">${picks}</div>` }),
     ctaBand({ title: `Tout ça, <span class="accent">appliqué à toi</span>`, text: "L'appli transforme ces conseils en plan : programme, repas, bilan et suivi.", primary: { label: "Essayer gratuitement", href: "LINK:signupMember" }, path }),
@@ -654,6 +697,8 @@ function patchBlock(html, startTag, endTag, replacement) {
 function ensureHead(html, path) {
   const css = `<link rel="stylesheet" href="${resolve("/assets/css/site.css", path)}" />`;
   if (!html.includes("assets/css/site.css")) html = html.replace("</head>", `  ${css}\n</head>`);
+  const exp = `<link rel="stylesheet" href="${resolve("/assets/css/experience.css", path)}" />`;
+  if (!html.includes("assets/css/experience.css")) html = html.replace("</head>", `  ${exp}\n</head>`);
   const js = `<script src="${resolve("/assets/js/site.js", path)}" defer></script>`;
   if (!html.includes("assets/js/site.js")) html = html.replace("</body>", `  ${js}\n</body>`);
   html = html.replace(/https:\/\/instagram\.com\/santamariasanchez_/g, "https://instagram.com/santamariasanchezep");
@@ -695,7 +740,7 @@ function patchLegacy(file, path, { home = false } = {}) {
   writeFileSync(full, html);
 }
 
-patchLegacy("index.html", "/", { home: true });
+emit(buildHome({ path: "/", guides: GUIDES, features: FEATURES, news: NEWS_SORTED, faqAll: FAQ_ALL, svgs: SVGS, newsCard }));
 patchLegacy("physique/index.html", "/physique/");
 patchLegacy("business/index.html", "/business/");
 
@@ -711,4 +756,4 @@ ${[...new Set(all)].map((p) => `  <url><loc>${canonical(p)}</loc><lastmod>${BUIL
   writeFileSync(join(ROOT, "sitemap.xml"), xml);
 }
 
-console.log(`${written.length} pages générées, 3 pages mises à jour, sitemap : ${written.length + 3} URL.`);
+console.log(`${written.length} pages générées, 2 pages mises à jour (physique, business), sitemap : ${written.length + 2} URL.`);

@@ -115,12 +115,12 @@ export function footerHtml(path) {
         <a href="${resolve("/", path)}" class="footer-brand"><img src="${resolve("/assets/images/logo.png", path)}" alt="EP Coaching" width="40" height="32" /></a>
         <p class="footer-tagline">L'appli et le coaching pour progresser, que tu t'entraînes ou que tu coaches.</p>
         <div class="footer-newsletter">
-          <p class="footer-newsletter-label">Un mail par jour : entraînement, nutrition, mental</p>
+          <p class="footer-newsletter-label"><strong>Le mail de 10h.</strong> Chaque matin, une seule chose concrète à appliquer le jour même pour ton physique. Deux minutes de lecture, désinscription en un clic.</p>
           <form id="newsletter-form" class="newsletter-form" novalidate>
             <label for="newsletter-email" class="sr-only">Ton email</label>
             <input type="text" name="website" class="newsletter-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <input type="email" id="newsletter-email" name="email" required placeholder="ton@email.com" class="newsletter-input" />
-            <button type="submit" class="newsletter-submit">Je m'inscris</button>
+            <button type="submit" class="newsletter-submit">Je le reçois</button>
           </form>
           <p class="newsletter-feedback" role="status" hidden></p>
         </div>
@@ -210,6 +210,8 @@ export function pageHtml({ path, title, description, body, crumbs = [], jsonld =
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Playfair+Display:ital,wght@1,700&display=swap" />
   <link rel="stylesheet" href="${r("/assets/css/base.css")}" />
   <link rel="stylesheet" href="${r("/assets/css/site.css")}" />
+  <link rel="stylesheet" href="${r("/assets/css/experience.css")}" />
+  <script>document.documentElement.classList.add("js")</script>
   ${ld}
 </head>
 <body class="page-content ${bodyClass}">
@@ -238,6 +240,7 @@ export function hero({ eyebrow, title, lead, ctas = [], path, compact = false })
     )
     .join("");
   return `<section class="page-hero${compact ? " page-hero--compact" : ""}">
+    <div class="hx-aura" aria-hidden="true"><i></i><i></i></div>
     ${eyebrow ? `<p class="eyebrow">◆ ${esc(eyebrow)}</p>` : ""}
     <h1>${title}</h1>
     ${lead ? `<p class="page-lead">${lead}</p>` : ""}
@@ -254,11 +257,11 @@ export function section({ id, eyebrow, title, intro, content, narrow = false, cl
 
 export function cardGrid(cards, path, { cols = "" } = {}) {
   return `<div class="grid${cols ? " grid--" + cols : ""}">${cards
-    .map((c) => {
+    .map((c, i) => {
       const inner = `${c.icon ? icon(c.icon) : ""}${c.kicker ? `<span class="card-kicker">${esc(c.kicker)}</span>` : ""}<h3>${esc(c.title)}</h3>${c.text ? `<p>${c.text}</p>` : ""}${c.href ? `<span class="card-more">${esc(c.more || "En savoir plus")} ${icon("arrow", "icon icon--xs")}</span>` : ""}`;
       return c.href
-        ? `<a class="card link-card" href="${esc(resolve(c.href, path))}"${/^https?:/.test(c.href) ? ' target="_blank" rel="noopener noreferrer"' : ""}>${inner}</a>`
-        : `<div class="card">${inner}</div>`;
+        ? `<a class="card link-card spot tilt" data-reveal style="--i:${i % 4}" href="${esc(resolve(c.href, path))}"${/^https?:/.test(c.href) ? ' target="_blank" rel="noopener noreferrer"' : ""}>${inner}</a>`
+        : `<div class="card spot" data-reveal style="--i:${i % 4}">${inner}</div>`;
     })
     .join("")}</div>`;
 }
@@ -294,4 +297,24 @@ export function ctaBand({ title, text, primary, secondary, path }) {
       </div>
     </div>
   </section>`;
+}
+
+// ── Visuels produit ──────────────────────────────────────────────────────
+
+// Maquette de téléphone avec une vraie capture de l'appli (comptes de démo).
+export function phone(shot, alt, path, cls = "", attrs = "", eager = false) {
+  return `<div class="phone ${cls}"${attrs}><img src="${resolve(`/assets/images/app/${shot}.jpg`, path)}" alt="${esc(alt)}" width="390" height="844" ${eager ? 'fetchpriority="high" decoding="sync"' : 'loading="lazy" decoding="async"'} /></div>`;
+}
+
+// Outils réellement branchés à l'appli (logos Simple Icons, CC0), affichés
+// en monochrome pour rester dans la palette de la marque.
+export const TOOLS = [
+  ["claude", "Claude"], ["notion", "Notion"], ["stripe", "Stripe"], ["brevo", "Brevo"], ["calendly", "Calendly"],
+  ["youtube", "YouTube"], ["instagram", "Instagram"], ["tiktok", "TikTok"], ["threads", "Threads"], ["linkedin", "LinkedIn"],
+  ["supabase", "Supabase"], ["vercel", "Vercel"],
+];
+
+export function logoMarquee(svgs, title = "Branché sur les outils que tu utilises déjà") {
+  const items = TOOLS.map(([k, name]) => `<span class="logo-item">${svgs[k] || ""}<span>${esc(name)}</span></span>`).join("");
+  return `<section class="logos" aria-label="Outils compatibles"><p class="logos-title">${esc(title)}</p><div class="marquee"><div class="marquee-track">${items}${items.replace(/<span class="logo-item">/g, '<span class="logo-item" aria-hidden="true">')}</div></div></section>`;
 }
