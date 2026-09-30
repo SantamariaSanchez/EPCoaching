@@ -12,6 +12,24 @@ site est en production.**
 
 ---
 
+# Le site complet (depuis le 2026-09-30)
+
+Le site n'est plus un tunnel de 3 pages : c'est un site complet d'une
+centaine de pages, généré en HTML statique par `tools/build.mjs`, avec
+Node seul et aucune dépendance npm. GitHub Pages sert toujours des
+fichiers statiques commités.
+
+- **Relancer la génération** : `node tools/build.mjs`, ou `SITE_DATE=AAAA-MM-JJ node tools/build.mjs` pour fixer la date du sitemap. La commande réécrit toutes les pages, le `sitemap.xml`, puis le header et le footer de `physique/` et `business/`.
+- **Contenu** : `tools/content/` contient les rubriques de l'appli (`features.mjs`), le centre d'aide (`help.mjs`), la FAQ (`faq.mjs`) et les actus (`news.mjs`). L'accueil est dans `tools/home.mjs`.
+- **Configuration** : `tools/config.mjs` regroupe le domaine (`BASE`, la seule chose à changer le jour d'un CNAME), les liens vers l'appli, la navigation et le pied de page.
+- **Guides gratuits** : `tools/data/guides.json` est un export de `lead_magnets` publiés, fait depuis le dépôt de l'appli : `npx supabase db query --linked -o json "select slug, title, hook, category from lead_magnets where published = true order by category, title"`. Le relancer puis régénérer le site quand de nouveaux guides sortent.
+- **Visuels** : `assets/images/app/` contient de vraies captures de l'appli, prises sur les comptes de démo avec des données réalistes (voir `scripts/demo-accounts.ts` côté appli). `assets/images/logos/` contient les logos des outils réellement branchés à l'appli (Simple Icons, CC0), affichés en monochrome.
+- **Styles et scripts** : `assets/css/site.css` porte la structure (navigation, pied de page, pages de contenu), `assets/css/experience.css` le visuel (téléphones, hero, visite produit, bento, formulaire). `assets/js/site.js` gère les apparitions, la parallaxe, la visite, le formulaire de lead et les filtres.
+- **Capture de leads** : le formulaire « choisis ton guide » poste vers `https://ep-coaching.vercel.app/api/public/lead`. Le lead entre dans le CRM exactement comme depuis `/ressources` : table leads, setter, mail de livraison, newsletter. Le site transmet l'origine réelle du visiteur (Instagram, LinkedIn...).
+- **Garde-fous à la génération** : le build échoue si une page contient un tiret long ou un prix EP Coaching.
+
+---
+
 # Guide de passation
 
 Cette section suffit à reprendre le projet sans avoir suivi les 15
