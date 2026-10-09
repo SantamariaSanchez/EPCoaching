@@ -301,7 +301,7 @@ export const FEATURES = [
     points: [
       { icon: "apple", t: "Recettes", d: "Des recettes du monde et de nos terroirs, filtrables par temps et budget, avec les portions pour cuisiner à l'avance." },
       { icon: "dumbbell", t: "Exercices et salles", d: "Chaque exercice expliqué, avec ses variantes et le matériel à prévoir." },
-      { icon: "book", t: "Guides pratiques", d: "Des centaines de guides courts et concrets sur l'entraînement, la nutrition, la récupération et le mental." },
+      { icon: "book", t: "Guides pratiques", d: "Plus de 1000 guides courts et concrets sur l'entraînement, la nutrition, la récupération et le mental." },
       { icon: "search", t: "Science", d: "La recherche en sport et nutrition, traduite en conseils clairs, sans jargon." },
     ],
     faq: [

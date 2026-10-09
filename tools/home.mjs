@@ -141,7 +141,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
     content: `<div class="paths">
       <article class="path path--hot spot" data-reveal style="--i:0"><span class="path-tag">Gratuit</span><h3>Te suivre toi-même</h3><ul><li>Programme et séance guidée</li><li>Nutrition construite sur un plan</li><li>Bilan, photos et Road Map</li><li>${guides.length} guides pratiques</li></ul><a class="btn-cta-primary" href="${LINKS.signupMember}">Créer mon compte gratuit</a><div class="path-shot">${phone("bilan", "Écran Bilan", path)}</div></article>
       <article class="path spot" data-reveal style="--i:1"><span class="path-tag">Accompagnement</span><h3>Coaching physique 1-to-1</h3><ul><li>Un appel gratuit pour faire le point</li><li>Un plan construit pour toi</li><li>Ajusté avec toi chaque semaine</li><li>Messagerie et check-in dans l'appli</li></ul><a class="btn-ghost" href="${LINKS.prequalification}">Réserver mon appel gratuit</a><div class="path-shot">${phone("messages", "Écran Messages avec le coach", path)}</div></article>
-      <article class="path spot" data-reveal style="--i:2"><span class="path-tag">Coachs</span><h3>Faire grandir ton activité</h3><ul><li>Clients, programmes et check-ins</li><li>Studio de contenu et stats réseaux</li><li>Formations et ventes</li><li>Équipe et paie calculée</li></ul><a class="btn-ghost" href="${LINKS.signupCoach}">Créer mon espace coach</a><div class="path-shot">${phone("coach-accueil", "Accueil coach", path)}</div></article>
+      <article class="path spot" data-reveal style="--i:2"><span class="path-tag">Coachs</span><h3>Faire grandir ton activité</h3><ul><li>Gratuit en coach testeur, clients illimités</li><li>Clients, programmes et check-ins</li><li>Studio de contenu et stats réseaux</li><li>Formations et ventes</li><li>Équipe et paie calculée</li></ul><a class="btn-ghost" href="${LINKS.signupCoach}">Espace coach gratuit</a><div class="path-shot">${phone("coach-accueil", "Accueil coach", path)}</div></article>
     </div>`,
   });
 
@@ -163,7 +163,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
       <div class="compare-col after" data-reveal style="--i:1"><h3>Avec EP Coaching</h3><ul>${["Fiches clients avec priorités", "Boîte de réception unique", "Programmes et plans nutrition assignés", "Bilans et nutrition qui remontent seuls", "Mailing intégré avec modèles", "Studio créatif et stats réseaux"].map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>
     </div>
     <div class="bento" style="margin-top: var(--space-xl)">${BENTO.map(([shot, t, d, slug], i) => `<a class="bento-card spot" href="${r(`/appli/${slug}/`)}" data-reveal style="--i:${i % 3}"><h3>${esc(t)}</h3><p>${esc(d)}</p><span class="card-more bento-link">Découvrir ${icon("arrow", "icon icon--xs")}</span>${phone(shot, t, path)}</a>`).join("")}</div>
-    <div class="cta-row cta-row--center" style="margin-top: var(--space-lg)"><a class="btn-cta-primary btn-cta-primary--lg" href="${LINKS.signupCoach}">Créer mon espace coach</a><a class="btn-ghost" href="${r("/solutions/coachs/")}">Voir la plateforme coach</a></div>`,
+    <div class="cta-row cta-row--center" style="margin-top: var(--space-lg)"><a class="btn-cta-primary btn-cta-primary--lg" href="${LINKS.signupCoach}">Espace coach gratuit</a><a class="btn-ghost" href="${r("/solutions/coachs/")}">Voir la plateforme coach</a></div>`,
   });
 
   const founder = `<section class="section"><div class="founder">

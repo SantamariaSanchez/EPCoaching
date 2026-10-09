@@ -128,7 +128,7 @@ for (const f of FEATURES) {
   const path = `/appli/${f.slug}/`;
   const group = FEATURE_GROUPS.find((g) => g.id === f.group);
   const coach = isCoachFeature(f);
-  const primary = coach ? { label: "Créer mon espace coach", href: "LINK:signupCoach" } : { label: "Essayer gratuitement", href: "LINK:signupMember" };
+  const primary = coach ? { label: "Espace coach gratuit", href: "LINK:signupCoach" } : { label: "Essayer gratuitement", href: "LINK:signupMember" };
   const body = [
     fxHero({ eyebrow: f.name, title: f.title, lead: esc(f.lead), path, ctas: [primary, { label: "Voir toute l'appli", href: "/appli/" }], shot: SHOT[f.slug] || "aujourdhui", alt: `Écran ${f.name} de l'appli EP Coaching` }),
     `<div class="meta-strip"><span class="chip">${icon("users", "icon icon--xs")} ${esc(f.for)}</span><span class="chip">${esc(group.title)}</span></div>`,
@@ -204,7 +204,7 @@ for (const f of FEATURES) {
       content: `<p class="center">${link("/aide/installer-lappli/", "Comment l'installer", path, "btn-ghost")}</p>`,
       narrow: true,
     }),
-    ctaBand({ title: `Commence <span class="accent">aujourd'hui</span>`, text: "Inscription gratuite, sans carte bancaire.", primary: { label: "Créer mon compte", href: "LINK:signupMember" }, secondary: { label: "Créer mon espace coach", href: "LINK:signupCoach" }, path }),
+    ctaBand({ title: `Commence <span class="accent">aujourd'hui</span>`, text: "Inscription gratuite, sans carte bancaire.", primary: { label: "Créer mon compte", href: "LINK:signupMember" }, secondary: { label: "Espace coach gratuit", href: "LINK:signupCoach" }, path }),
   ].join("\n");
   emit({
     path,
@@ -257,7 +257,7 @@ const SOLUTIONS = [
     eyebrow: "Coachs",
     title: `Ton métier de coach, <span class="accent">dans une seule appli</span>`,
     lead: "Suivre tes clients, produire ton contenu, vendre, gérer ton équipe : EP Coaching remplace la pile d'outils éparpillés par une seule appli pensée pour le coaching en ligne.",
-    primary: { label: "Créer mon espace coach", href: "LINK:signupCoach" },
+    primary: { label: "Espace coach gratuit", href: "LINK:signupCoach" },
     pains: [
       { icon: "users", title: "Tu perds le fil de tes clients", text: "Fiches complètes, priorités et une boîte de réception unique : tu sais qui suivre en premier." },
       { icon: "sparkles", title: "Le contenu te prend un temps fou", text: "Scripts par plateforme, prompteur avec caméra, suivi du tournage à la publication." },
@@ -277,7 +277,7 @@ const SOLUTIONS = [
     eyebrow: "Équipes",
     title: `Quand ton coaching <span class="accent">devient une entreprise</span>`,
     lead: "Plusieurs coachs, un setter, un closer, un monteur : EP Coaching donne à chacun son espace de travail, et te donne la vision d'ensemble.",
-    primary: { label: "Créer mon espace coach", href: "LINK:signupCoach" },
+    primary: { label: "Espace coach gratuit", href: "LINK:signupCoach" },
     pains: [
       { icon: "users", title: "Chacun dans son outil", text: "Chaque poste a son espace dans la même appli : tâches, rendez-vous, prospects, livrables." },
       { icon: "message", title: "L'info se perd", text: "Messagerie d'équipe et documents centralisés, pour que rien ne se perde entre deux personnes." },

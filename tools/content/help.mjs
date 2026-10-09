@@ -60,7 +60,7 @@ export const HELP_ARTICLES = [
       "<strong>Plus</strong> : notes, bibliothèque, communauté et réglages. La loupe trouve tout : tape « leads » ou le nom d'un client.",
     ],
     tips: ["Commence par Mon appli (dans Plus) : réponds aux questions sur ta façon de travailler, et l'appli masque ce qui ne te sert pas encore."],
-    cta: { label: "Créer mon espace coach", href: "LINK:signupCoach" },
+    cta: { label: "Espace coach gratuit", href: "LINK:signupCoach" },
     related: ["inviter-ses-clients", "choisir-ses-suivis", "repondre-aux-bilans"],
   },
   {
