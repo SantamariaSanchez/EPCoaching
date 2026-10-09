@@ -124,3 +124,8 @@ export const FOOTER_BAR = [
   ["Plan du site", "/plan-du-site/"],
   ["Contact", "/contact/"],
 ];
+
+// VSL de la page d'accueil (10 min, motion design). Mettre ici l'identifiant
+// YouTube de la vidéo (la partie après v= ou après youtu.be/) une fois en
+// ligne : la section affiche alors le lecteur. Vide = « bientôt en ligne ».
+export const VSL_YOUTUBE_ID = "";

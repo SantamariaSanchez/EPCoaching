@@ -24,7 +24,7 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
   position: relative;
   width: var(--w);
   padding: calc(var(--w) * 0.035);
-  border-radius: calc(var(--w) * 0.16);
+  border-radius: calc(var(--w) * 0.14);
   background: linear-gradient(160deg, #2a0606 0%, #0d0000 45%, #1a0303 100%);
   border: 1px solid rgba(245,237,237,0.10);
   box-shadow:
@@ -50,9 +50,12 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
 .phone img {
   width: 100%;
   height: auto;
-  aspect-ratio: 390 / 844;
-  object-fit: cover;
-  object-position: top;
+  /* Même format que les captures (780 x 1328) : l'écran entier est
+     visible, plus rien n'est rogné sur les côtés. */
+  aspect-ratio: 780 / 1328;
+  object-fit: contain;
+  object-position: center;
+  background: #000;
   border-radius: calc(var(--w) * 0.125);
   display: block;
 }
@@ -391,3 +394,30 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
 .page-hero .hx-aura { inset: -20% 0 0; }
 .page-hero .hx-aura i:nth-child(1) { width: 420px; height: 420px; right: 30%; top: -10%; opacity: 0.35; }
 .page-hero .hx-aura i:nth-child(2) { width: 300px; height: 300px; right: 10%; top: 20%; opacity: 0.3; }
+
+/* ── VSL (section cinéma sous le hero) ───────────────────────────────── */
+.vx { position: relative; padding: clamp(56px, 9vw, 120px) 20px clamp(40px, 6vw, 80px); max-width: 1180px; margin: 0 auto; text-align: center; }
+.vx-head h2 { font-size: clamp(30px, 4.6vw, 56px); line-height: 1.05; margin: 10px 0 12px; }
+.vx-head .section-intro { max-width: 620px; margin: 0 auto; }
+.vx-frame { position: relative; margin: clamp(28px, 4vw, 48px) auto 0; perspective: 1600px; }
+.vx-glow { position: absolute; inset: -8% -4%; background: radial-gradient(ellipse at 50% 55%, rgba(224,30,30,0.38), transparent 62%); filter: blur(30px); pointer-events: none; animation: vxBreathe 6s ease-in-out infinite; }
+@keyframes vxBreathe { 0%, 100% { opacity: 0.7; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1.02); } }
+.vx-player { position: relative; aspect-ratio: 16 / 9; width: 100%; border-radius: clamp(14px, 2vw, 26px); background-size: cover; background-position: center; border: 1px solid rgba(224,30,30,0.45); box-shadow: 0 40px 120px -20px rgba(0,0,0,0.9), 0 0 0 1px rgba(245,237,237,0.06) inset; overflow: hidden; display: grid; place-items: center; cursor: pointer; transform: rotateX(6deg) scale(0.97); transition: transform 0.9s cubic-bezier(.2,.7,.2,1), box-shadow 0.6s; }
+.vx-frame:hover .vx-player, .vx-frame.is-in .vx-player { transform: none; }
+.vx-player::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(13,0,0,0.75)); pointer-events: none; }
+.vx-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.vx-play { position: relative; z-index: 1; width: clamp(70px, 9vw, 104px); height: clamp(70px, 9vw, 104px); border-radius: 999px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, #E01E1E, #890404); box-shadow: 0 0 0 10px rgba(224,30,30,0.18), 0 0 60px rgba(224,30,30,0.6); animation: vxPulse 2.4s ease-in-out infinite; }
+@keyframes vxPulse { 0%, 100% { box-shadow: 0 0 0 10px rgba(224,30,30,0.18), 0 0 60px rgba(224,30,30,0.55); } 50% { box-shadow: 0 0 0 22px rgba(224,30,30,0.06), 0 0 90px rgba(224,30,30,0.75); } }
+.vx-duration { position: absolute; z-index: 1; right: 18px; bottom: 16px; font-weight: 800; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,237,237,0.85); }
+.vx-player--soon { cursor: default; }
+.vx-soon { position: absolute; z-index: 1; bottom: 18px; left: 50%; transform: translateX(-50%); padding: 8px 16px; border-radius: 999px; background: rgba(13,0,0,0.75); border: 1px solid rgba(224,30,30,0.4); font-weight: 700; font-size: 13px; letter-spacing: 0.06em; color: rgba(245,237,237,0.85); white-space: nowrap; }
+.vx-choice { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 2vw, 22px); margin-top: clamp(24px, 3.5vw, 40px); text-align: left; }
+.vx-card { display: flex; flex-direction: column; gap: 6px; padding: clamp(18px, 2.4vw, 28px); border-radius: 20px; text-decoration: none; color: var(--blanc-casse); background: rgba(23,1,1,0.75); border: 1px solid rgba(224,30,30,0.28); transition: transform 0.35s cubic-bezier(.2,.7,.2,1), border-color 0.3s, box-shadow 0.3s; }
+.vx-card:hover { transform: translateY(-4px); border-color: rgba(224,30,30,0.7); box-shadow: 0 0 60px rgba(224,30,30,0.25); }
+.vx-card--hot { background: linear-gradient(160deg, rgba(224,30,30,0.22), rgba(23,1,1,0.9) 65%); border-color: rgba(224,30,30,0.6); }
+.vx-kicker { font-size: 11px; font-weight: 800; letter-spacing: 0.28em; text-transform: uppercase; color: #E01E1E; }
+.vx-card strong { font-weight: 900; font-size: clamp(20px, 2.4vw, 27px); line-height: 1.15; letter-spacing: -0.01em; }
+.vx-card span:not(.vx-kicker) { font-size: 14px; color: rgba(245,237,237,0.6); }
+.vx-card em { margin-top: 8px; font-style: normal; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #E01E1E; display: inline-flex; align-items: center; gap: 6px; }
+.vx-proof { margin: 18px auto 0; max-width: none; font-size: 13px; color: rgba(245,237,237,0.55); text-align: center; }
+@media (max-width: 680px) { .vx-choice { grid-template-columns: 1fr; } .vx-player { transform: none; } }

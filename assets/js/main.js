@@ -443,7 +443,8 @@ function initVslFacade() {
   // Vraie miniature YouTube en couverture (remplace le dégradé sombre de
   // base.css/home.css) + voile sombre (classe ci-dessous, voir home.css)
   // pour garantir le contraste du bouton play quelle que soit l'image.
-  el.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/maxresdefault.jpg)`;
+  // Affiche maison (image tirée de la VSL) si présente, sinon miniature YouTube.
+  if (!el.dataset.poster) el.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/maxresdefault.jpg)`;
   el.style.backgroundSize = "cover";
   el.style.backgroundPosition = "center";
   el.classList.add("vsl-placeholder--has-cover");

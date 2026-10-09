@@ -3,7 +3,7 @@
 // Matis Clouet : un système clair contenu, guide gratuit, appli, appel).
 // Uniquement des faits réels : écrans de l'appli (comptes de démo), chiffres
 // calculés depuis les données du site, jamais de témoignage inventé.
-import { APP, LINKS, BASE } from "./config.mjs";
+import { APP, LINKS, BASE, VSL_YOUTUBE_ID } from "./config.mjs";
 import { esc, resolve, link, icon, section, faqList, faqJsonLd, phone, logoMarquee, ORG_JSONLD } from "./render.mjs";
 
 export const QUIZ = [
@@ -66,6 +66,23 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
       <div class="float-chip c2">${icon("search")}<div><strong>Tape « poids »</strong>ta moyenne s'affiche</div></div>
       <div class="float-chip c3">${icon("dumbbell")}<div><strong>Séance guidée</strong>série par série</div></div>
     </div>
+  </section>`;
+
+  // VSL (2026-10-09) : la vidéo de présentation, puis le choix du chemin.
+  // Tant que la vidéo n'est pas en ligne, le cadre l'annonce honnêtement.
+  const vsl = `<section class="vx" id="video">
+    <div class="vx-head" data-reveal><p class="eyebrow">◆ À regarder avant de réserver</p><h2>Pourquoi tu stagnes, <span class="accent">et comment on règle ça</span></h2><p class="section-intro">10 minutes. Que tu veuilles transformer ton physique ou remplir ton agenda de coach.</p></div>
+    <div class="vx-frame" data-reveal>
+      <div class="vx-glow" aria-hidden="true"></div>
+      <div class="vsl-placeholder vx-player${VSL_YOUTUBE_ID ? "" : " vx-player--soon"}" id="vsl-placeholder" data-youtube-id="${VSL_YOUTUBE_ID || "VIDEO_ID_A_REMPLACER"}" data-poster="1" style="background-image:url(${r("/assets/images/vsl-poster.jpg")})">
+        ${VSL_YOUTUBE_ID ? `<span class="vsl-play vx-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="vx-duration">10 min</span>` : `<span class="vx-soon">La vidéo arrive très bientôt</span>`}
+      </div>
+    </div>
+    <div class="vx-choice" data-reveal>
+      <a class="vx-card vx-card--hot" href="${LINKS.prequalification}"><span class="vx-kicker">Premier cas</span><strong>Je veux transformer mon physique</strong><span>Perdre du gras, prendre du muscle, préparer une compétition</span><em>Réserver mon appel offert ${icon("arrow", "icon icon--xs")}</em></a>
+      <a class="vx-card" href="${r("/business/")}"><span class="vx-kicker">Deuxième cas</span><strong>Je suis coach</strong><span>Plus de clients, plus de temps, un vrai système</span><em>Réserver mon appel offert ${icon("arrow", "icon icon--xs")}</em></a>
+    </div>
+    <p class="vx-proof">Appel offert, sans engagement. Dans le pire des cas, tu repars avec un plan clair.</p>
   </section>`;
 
   const counters = `<div class="counters">
@@ -185,6 +202,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
 
   const body = [
     hero,
+    vsl,
     logoMarquee(svgs),
     counters,
     pains,
