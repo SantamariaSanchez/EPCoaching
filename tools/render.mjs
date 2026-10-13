@@ -160,15 +160,30 @@ function crumbsJsonLd(crumbs) {
   };
 }
 
+// Entreprise locale à Annecy (2026-10-13) : avant, seules les mentions
+// légales citaient Annecy, et Google les sortait sur « EP Coaching Annecy ».
+const ANNECY = { "@type": "PostalAddress", addressLocality: "Annecy", postalCode: "74600", addressRegion: "Haute-Savoie", addressCountry: "FR" };
 export const ORG_JSONLD = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "ProfessionalService"],
   name: "EP Coaching",
+  alternateName: "EP Coaching Annecy",
   url: BASE,
   logo: BASE + "assets/images/logo.png",
-  description: "Appli de coaching et accompagnement en musculation, nutrition et business de coach, fondés par Santamaria Sanchéz.",
-  founder: { "@type": "Person", name: "Santamaria Sanchéz" },
-  sameAs: SOCIALS.map((s) => s.url).concat([APP]),
+  image: BASE + "assets/images/og-image.png",
+  description: "Coaching sportif en musculation et nutrition basé à Annecy, accompagnement en ligne partout en France et appli pour les coachs sportifs, fondés par Santamaria Sanchéz.",
+  address: ANNECY,
+  areaServed: [{ "@type": "City", name: "Annecy" }, { "@type": "AdministrativeArea", name: "Haute-Savoie" }, { "@type": "Country", name: "France" }],
+  founder: {
+    "@type": "Person",
+    name: "Santamaria Sanchéz",
+    alternateName: "Santamaria Sanchez",
+    jobTitle: "Coach sportif en musculation et nutrition",
+    homeLocation: { "@type": "Place", name: "Annecy, Haute-Savoie", address: ANNECY },
+    url: APP + "/a-propos",
+    sameAs: SOCIALS.map((s) => s.url),
+  },
+  sameAs: SOCIALS.map((s) => s.url).concat([APP, APP + "/coach-sportif-annecy"]),
 };
 
 // Page complète. `body` est le HTML du <main>, déjà rendu.

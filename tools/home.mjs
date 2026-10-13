@@ -172,7 +172,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
       <p class="eyebrow">◆ Qui est derrière</p>
       <h2>Construit par un coach, <span class="accent">testé sur lui-même</span></h2>
       <blockquote>Je prends les gens motivés, et je fais en sorte qu'ils aillent plus vite que s'ils étaient seuls.</blockquote>
-      <p>Coach en musculation et en nutrition, athlète naturel, je prépare la Heroes Cup WNBF France en Classic Physique. Chaque outil de l'appli, je l'utilise d'abord sur moi. Ce que je sais, je l'ai appris en le faisant.</p>
+      <p>Coach en musculation et en nutrition basé à Annecy, athlète naturel, je prépare la Heroes Cup WNBF France en Classic Physique. Chaque outil de l'appli, je l'utilise d'abord sur moi. Ce que je sais, je l'ai appris en le faisant.</p>
       <div class="badges"><span class="chip">Athlète naturel WNBF</span><span class="chip">Classic Physique</span><span class="chip">Coach musculation et nutrition</span></div>
       <div class="cta-row" style="margin-top: var(--space-md)"><a class="btn-ghost" href="${r("/physique/")}">Découvrir l'accompagnement</a>${link("/a-propos/", `Mon histoire ${icon("arrow", "icon icon--xs")}`, path, "text-link")}</div>
     </div>
@@ -221,8 +221,8 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
 
   return {
     path,
-    title: "EP Coaching : appli de suivi musculation et nutrition, et logiciel pour coachs sportifs",
-    description: "Programme, nutrition, bilan en 30 secondes et progrès visibles : le suivi d'un vrai coach dans ta poche, gratuitement. Et pour les coachs : clients, contenu, formations et équipe dans une seule appli.",
+    title: "EP Coaching : coach sportif à Annecy et appli de suivi musculation et nutrition",
+    description: "Coaching musculation et nutrition fondé à Annecy par Santamaria Sanchéz : programme, nutrition, bilan en 30 secondes et progrès visibles dans ton téléphone, gratuitement. Et pour les coachs : une appli complète.",
     body,
     bodyClass: "page-home",
     jsonld: [

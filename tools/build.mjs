@@ -499,7 +499,7 @@ for (const a of HELP_ARTICLES) {
     section({
       eyebrow: "Le fondateur",
       title: "Santamaria Sanchéz",
-      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Santamaria Sanchéz, fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Fondateur d'EP Coaching. J'accompagne des personnes qui veulent progresser en musculation, et des coachs qui veulent structurer leur activité.</p><p>Je suis athlète naturel, objectif Heroes Cup WNBF France en Classic Physique. Je m'applique à moi-même ce que je transmets. Ce que je sais, je l'ai appris en le faisant, et je continue à l'apprendre.</p><p>Mon approche tient en une chose : je prends les gens motivés, et je fais en sorte qu'ils aillent plus vite que s'ils étaient seuls.</p></div></div>`,
+      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Santamaria Sanchéz, fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Fondateur d'EP Coaching, coach sportif basé à Annecy (Haute-Savoie). J'accompagne des personnes qui veulent progresser en musculation, et des coachs qui veulent structurer leur activité.</p><p>Je suis athlète naturel, objectif Heroes Cup WNBF France en Classic Physique. Je m'applique à moi-même ce que je transmets. Ce que je sais, je l'ai appris en le faisant, et je continue à l'apprendre.</p><p>Mon approche tient en une chose : je prends les gens motivés, et je fais en sorte qu'ils aillent plus vite que s'ils étaient seuls.</p></div></div>`,
     }),
     section({
       eyebrow: "Ce qu'on construit",
@@ -538,7 +538,7 @@ for (const a of HELP_ARTICLES) {
   ].join("\n");
   emit({
     path,
-    title: "À propos d'EP Coaching et de son fondateur Santamaria Sanchéz",
+    title: "À propos d'EP Coaching et de son fondateur Santamaria Sanchéz, coach à Annecy",
     description: "EP Coaching, fondé par Santamaria Sanchéz, athlète naturel et coach : une appli et un accompagnement pour progresser en musculation et pour faire grandir son activité de coach.",
     body,
     crumbs: [HOME, ["À propos", path]],
@@ -619,7 +619,7 @@ for (const a of HELP_ARTICLES) {
       <p>Photos : Santamaria Sanchéz. Polices : Montserrat et Playfair Display (Google Fonts).</p>
     </div>
   </article>`;
-  emit({ path, title: "Mentions légales", description: "Mentions légales du site EP Coaching : éditeur, directeur de la publication, hébergeur et propriété intellectuelle.", body, crumbs: [HOME, ["Légal", "/legal/"], ["Mentions légales", path]] });
+  emit({ path, title: "Mentions légales", description: "Mentions légales du site EP Coaching : éditeur, directeur de la publication, hébergeur et propriété intellectuelle.", body, crumbs: [HOME, ["Légal", "/legal/"], ["Mentions légales", path]], noindex: true });
 }
 
 {
@@ -641,7 +641,7 @@ for (const a of HELP_ARTICLES) {
       <p>L'application EP Coaching (ep-coaching.vercel.app) utilise uniquement les cookies nécessaires à ta connexion et au fonctionnement de ton compte. Le détail est dans sa ${link("LINK:privacy", "politique de confidentialité", path, "text-link")}.</p>
     </div>
   </article>`;
-  emit({ path, title: "Cookies", description: "Le site EP Coaching ne dépose aucun cookie de mesure d'audience ni de publicité. Détail des services chargés et de la newsletter.", body, crumbs: [HOME, ["Légal", "/legal/"], ["Cookies", path]] });
+  emit({ path, title: "Cookies", description: "Le site EP Coaching ne dépose aucun cookie de mesure d'audience ni de publicité. Détail des services chargés et de la newsletter.", body, crumbs: [HOME, ["Légal", "/legal/"], ["Cookies", path]], noindex: true });
 }
 
 {
