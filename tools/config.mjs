@@ -27,8 +27,8 @@ export const LINKS = {
 };
 
 export const SOCIALS = [
-  { name: "Instagram", url: "https://instagram.com/santamariasanchezep" },
-  { name: "Threads", url: "https://www.threads.net/@santamariasanchezep" },
+  { name: "Instagram", url: "https://www.instagram.com/santamariasanchezep_/" },
+  { name: "Threads", url: "https://www.threads.com/@santamariasanchezep_" },
   { name: "TikTok", url: "https://www.tiktok.com/@santamariasanchez_" },
   { name: "YouTube", url: "https://www.youtube.com/@santamaria_sanchez" },
 ];

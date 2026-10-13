@@ -701,7 +701,10 @@ function ensureHead(html, path) {
   if (!html.includes("assets/css/experience.css")) html = html.replace("</head>", `  ${exp}\n</head>`);
   const js = `<script src="${resolve("/assets/js/site.js", path)}" defer></script>`;
   if (!html.includes("assets/js/site.js")) html = html.replace("</body>", `  ${js}\n</body>`);
-  html = html.replace(/https:\/\/instagram\.com\/santamariasanchez_/g, "https://instagram.com/santamariasanchezep");
+  // Compte Instagram/Threads @santamariasanchezep_ depuis le 2026-10-13 : les
+  // anciens liens (santamariasanchez_, santamariasanchezep) sont réécrits.
+  html = html.replace(/https:\/\/(?:www\.)?instagram\.com\/santamariasanchez(?:ep)?_?\/?(?=["'<\s])/g, "https://www.instagram.com/santamariasanchezep_/");
+  html = html.replace(/https:\/\/www\.threads\.(?:net|com)\/@santamariasanchez(?:ep)?_?(?=["'<\s])/g, "https://www.threads.com/@santamariasanchezep_");
   return html;
 }
 
