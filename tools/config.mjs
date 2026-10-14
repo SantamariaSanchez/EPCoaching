@@ -27,11 +27,14 @@ export const LINKS = {
 };
 
 export const SOCIALS = [
-  { name: "Instagram", url: "https://www.instagram.com/santamariasanchezep_/" },
-  { name: "Threads", url: "https://www.threads.com/@santamariasanchezep_" },
-  { name: "TikTok", url: "https://www.tiktok.com/@santamariasanchez_" },
-  { name: "YouTube", url: "https://www.youtube.com/@santamaria_sanchez" },
+  { key: "instagram", name: "Instagram", handle: "@santamariasanchezep_", url: "https://www.instagram.com/santamariasanchezep_/" },
+  { key: "threads", name: "Threads", handle: "@santamariasanchezep_", url: "https://www.threads.com/@santamariasanchezep_" },
+  { key: "tiktok", name: "TikTok", handle: "@santamariasanchez_", url: "https://www.tiktok.com/@santamariasanchez_" },
+  { key: "youtube", name: "YouTube", handle: "@santamaria_sanchez", url: "https://www.youtube.com/@santamaria_sanchez" },
 ];
+
+// Nom public du fondateur (le nom légal n'apparaît que dans les mentions légales).
+export const FOUNDER = "Emmanuel Santamaria Sanchéz";
 
 // Navigation principale (header). Les chemins sont absolus au site ; le
 // générateur les transforme en chemins relatifs selon la profondeur de la

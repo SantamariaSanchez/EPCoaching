@@ -4,7 +4,7 @@
 // Uniquement des faits réels : écrans de l'appli (comptes de démo), chiffres
 // calculés depuis les données du site, jamais de témoignage inventé.
 import { APP, LINKS, BASE, VSL_YOUTUBE_ID } from "./config.mjs";
-import { esc, resolve, link, icon, section, faqList, faqJsonLd, phone, logoMarquee, ORG_JSONLD } from "./render.mjs";
+import { esc, resolve, link, icon, section, faqList, faqJsonLd, phone, logoMarquee, ORG_JSONLD, socialCards } from "./render.mjs";
 
 export const QUIZ = [
   { icon: "bolt", label: "Perdre du gras sans perdre mon muscle", slug: "guide-rythme-seche" },
@@ -167,7 +167,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
   });
 
   const founder = `<section class="section"><div class="founder">
-    <figure class="founder-photo" data-reveal><img src="${r("/assets/images/portrait_physique.jpg")}" alt="Santamaria Sanchéz, fondateur d'EP Coaching" loading="lazy" /><figcaption><strong>Santamaria Sanchéz</strong>Fondateur d'EP Coaching, athlète naturel</figcaption></figure>
+    <figure class="founder-photo" data-reveal><img src="${r("/assets/images/portrait_physique.jpg")}" alt="Emmanuel Santamaria Sanchéz, fondateur d'EP Coaching" loading="lazy" /><figcaption><strong>Emmanuel Santamaria Sanchéz</strong>Fondateur d'EP Coaching, athlète naturel</figcaption></figure>
     <div data-reveal style="--i:1">
       <p class="eyebrow">◆ Qui est derrière</p>
       <h2>Construit par un coach, <span class="accent">testé sur lui-même</span></h2>
@@ -175,6 +175,8 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
       <p>Coach en musculation et en nutrition basé à Annecy, athlète naturel, je prépare la Heroes Cup WNBF France en Classic Physique. Chaque outil de l'appli, je l'utilise d'abord sur moi. Ce que je sais, je l'ai appris en le faisant.</p>
       <div class="badges"><span class="chip">Athlète naturel WNBF</span><span class="chip">Classic Physique</span><span class="chip">Coach musculation et nutrition</span></div>
       <div class="cta-row" style="margin-top: var(--space-md)"><a class="btn-ghost" href="${r("/physique/")}">Découvrir l'accompagnement</a>${link("/a-propos/", `Mon histoire ${icon("arrow", "icon icon--xs")}`, path, "text-link")}</div>
+      <p class="founder-follow">Suis-moi au quotidien, conseils et coulisses :</p>
+      ${socialCards()}
     </div>
   </div></section>`;
 
@@ -222,7 +224,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
   return {
     path,
     title: "EP Coaching : coach sportif à Annecy et appli de suivi musculation et nutrition",
-    description: "Coaching musculation et nutrition fondé à Annecy par Santamaria Sanchéz : programme, nutrition, bilan en 30 secondes et progrès visibles dans ton téléphone, gratuitement. Et pour les coachs : une appli complète.",
+    description: "Coaching musculation et nutrition fondé à Annecy par Emmanuel Santamaria Sanchéz : programme, nutrition, bilan en 30 secondes et progrès visibles dans ton téléphone, gratuitement. Et pour les coachs : une appli complète.",
     body,
     bodyClass: "page-home",
     jsonld: [

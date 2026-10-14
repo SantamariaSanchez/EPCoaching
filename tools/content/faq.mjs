@@ -7,7 +7,7 @@ export const FAQ_GROUPS = [
     title: "EP Coaching en général",
     items: [
       { q: "Qu'est-ce qu'EP Coaching ?", a: "EP Coaching, c'est une appli de coaching et un accompagnement humain. L'appli sert à la fois aux personnes qui veulent progresser en musculation et en nutrition, et aux coachs qui veulent suivre leurs clients et faire grandir leur activité. Le tout a été fondé par Santamaria Sanchéz." },
-      { q: "Qui est derrière EP Coaching ?", a: "Santamaria Sanchéz, coach en musculation et en nutrition, athlète naturel, fondateur d'EP Coaching. Il accompagne des personnes qui veulent transformer leur physique et des coachs qui veulent structurer leur activité." },
+      { q: "Qui est derrière EP Coaching ?", a: "Emmanuel Santamaria Sanchéz, coach en musculation et en nutrition, athlète naturel, fondateur d'EP Coaching. Il accompagne des personnes qui veulent transformer leur physique et des coachs qui veulent structurer leur activité." },
       { q: "À qui s'adresse l'appli ?", a: "À trois profils : les membres qui veulent se suivre eux-mêmes, les clients accompagnés par un coach, et les coachs (seuls ou avec une équipe) qui gèrent leurs clients et leur business." },
       { q: "Est-ce que l'appli est gratuite ?", a: "Oui, l'inscription et le suivi en autonomie sont gratuits, sans carte bancaire. L'accompagnement par un coach et l'espace coach sont des offres payantes." },
       { q: "Pourquoi le site n'affiche-t-il pas de prix ?", a: "Parce que chaque accompagnement commence par un échange : on regarde ta situation avant de te proposer quoi que ce soit. Pour l'espace coach, les offres sont présentées au moment de l'inscription." },

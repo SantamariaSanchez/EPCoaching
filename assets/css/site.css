@@ -572,3 +572,40 @@ footer.site-footer {
   .site-nav-toggle-bar, .site-nav-toggle-bar::before, .site-nav-toggle-bar::after,
   .card-more .icon, .btn-ghost, .faq-item summary::after { transition: none; }
 }
+
+/* Réseaux sociaux : icônes (header, pied de page) et cartes « Suis-moi ». */
+.social-icons { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem; list-style: none; margin: 0; padding: 0; }
+.social-icons a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 999px;
+  color: color-mix(in srgb, var(--blanc-casse) 78%, transparent);
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+.social-icons a:hover, .social-icons a:focus-visible { color: var(--blanc-casse); background: color-mix(in srgb, var(--rouge-principal) 22%, transparent); transform: translateY(-1px); }
+.social-icons .icon { width: 22px; height: 22px; }
+.social-icons--header { margin-right: 0.25rem; }
+.social-icons--lg a { width: 48px; height: 48px; border: 1px solid color-mix(in srgb, var(--blanc-casse) 18%, transparent); }
+.social-icons--lg .icon { width: 24px; height: 24px; }
+.footer-follow { margin-top: var(--space-md); }
+.footer-follow-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 0.5rem; color: color-mix(in srgb, var(--blanc-casse) 70%, transparent); }
+.footer-bar .social-icons a { width: 40px; height: 40px; }
+.founder-follow { margin: var(--space-md) 0 0.5rem; font-weight: 600; }
+.social-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; list-style: none; margin: 0; padding: 0; }
+.social-card {
+  display: flex; align-items: center; gap: 0.7rem; min-height: 56px; padding: 0.7rem 0.85rem;
+  border-radius: 14px; border: 1px solid color-mix(in srgb, var(--blanc-casse) 14%, transparent);
+  background: color-mix(in srgb, var(--blanc-casse) 4%, transparent);
+  color: var(--blanc-casse); text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+.social-card:hover, .social-card:focus-visible { border-color: var(--rouge-principal); background: color-mix(in srgb, var(--rouge-principal) 12%, transparent); transform: translateY(-2px); }
+.social-card-icon { width: 26px; height: 26px; flex: none; color: var(--rose-clair); }
+.social-card-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+.social-card-text strong { font-size: 0.95rem; }
+.social-card-text span { font-size: 0.78rem; opacity: 0.7; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 560px) { .social-cards { grid-template-columns: 1fr; } }
+@media (max-width: 960px) { .social-icons--header { justify-content: center; margin: 0 0 0.5rem; } }
+@media (prefers-reduced-motion: reduce) { .social-icons a, .social-card { transition: none; } }
+.prose ul.social-cards { display: grid; gap: 0.6rem; }
+.prose ul.social-cards li { padding-left: 0; line-height: inherit; }
+.prose ul.social-cards li::before { content: none; }

@@ -1,0 +1,52 @@
+# EP Coaching
+
+> EP Coaching est une appli de coaching en musculation et nutrition, et un accompagnement humain, fondés à Annecy (Haute-Savoie, France) par Emmanuel Santamaria Sanchéz, coach en musculation et nutrition et athlète naturel (Classic Physique, fédération WNBF). L'appli sert aux personnes qui veulent progresser (programme, nutrition, bilan du jour, progrès) et aux coachs sportifs qui veulent suivre leurs clients et faire grandir leur activité (fiches clients, programmes, diètes, road maps, check-ins, messagerie, agenda, mailing, studio de contenu, stats réseaux, équipe).
+
+## Faits clés
+- Fondateur : Emmanuel Santamaria Sanchéz, coach sportif à Annecy, accompagnement en ligne partout en France.
+- Appli : https://ep-coaching.vercel.app, accessible depuis le téléphone ou l'ordinateur. Inscription gratuite pour suivre son propre entraînement et sa nutrition.
+- Coachs : espace coach sur https://ep-coaching.vercel.app/auth/coach
+- Guides gratuits : 1013 guides sur https://ep-coaching.vercel.app/ressources
+- Langue : français.
+
+## Pages principales
+- [Accueil](https://santamariasanchez.github.io/EPCoaching/)
+- [L'appli](https://santamariasanchez.github.io/EPCoaching/appli/)
+- [Pour les coachs](https://santamariasanchez.github.io/EPCoaching/solutions/coachs/)
+- [Coaching physique 1-to-1](https://santamariasanchez.github.io/EPCoaching/physique/)
+- [Accompagnement business pour coachs](https://santamariasanchez.github.io/EPCoaching/business/)
+- [FAQ](https://santamariasanchez.github.io/EPCoaching/faq/)
+- [À propos du fondateur](https://santamariasanchez.github.io/EPCoaching/a-propos/)
+- [Actus](https://santamariasanchez.github.io/EPCoaching/actus/)
+
+## Fonctionnalités de l'appli
+- [Aujourd'hui](https://santamariasanchez.github.io/EPCoaching/appli/aujourdhui/) : L'écran Aujourd'hui d'EP Coaching te montre ce que tu as à faire : bilan, repas, séance, pas. Tu coches au fur et à mesure, rien ne se perd.
+- [Entraînement](https://santamariasanchez.github.io/EPCoaching/appli/entrainement/) : Programme sur mesure, séance guidée, charges notées série par série, records et historique complet. Le logbook d'EP Coaching suit chaque séance.
+- [Nutrition](https://santamariasanchez.github.io/EPCoaching/appli/nutrition/) : Un tracker nutrition construit autour de ton plan : repas prévus, alternatives, recettes, aliments filtrés selon ton régime. Tes calories remontent seules dans ton bilan.
+- [Bilan du jour](https://santamariasanchez.github.io/EPCoaching/appli/bilan/) : Le bilan du jour EP Coaching : poids du matin, nuit, pas, ressenti, énergie, moral, hydratation, courbatures, fréquence cardiaque au repos et VFC. Tu ne suis que ce que tu choisis.
+- [Photos et mensurations](https://santamariasanchez.github.io/EPCoaching/appli/progression/) : Photos de progression avec poses guidées, mensurations, taux de masse grasse et courbes d'évolution. Ton avant et après, rangé et privé.
+- [Road Map](https://santamariasanchez.github.io/EPCoaching/appli/road-map/) : La Road Map EP Coaching découpe ton objectif en phases : prise de muscle, sèche, maintien. Tu sais où tu en es et ce qui vient ensuite.
+- [Ma semaine](https://santamariasanchez.github.io/EPCoaching/appli/semaine/) : Chaque semaine, EP Coaching résume ce que tu as noté : poids, séances, nutrition, sommeil, pas. Une revue claire pour ajuster la semaine suivante.
+- [Coach et messages](https://santamariasanchez.github.io/EPCoaching/appli/messages/) : Messagerie directe avec ton coach, check-in hebdomadaire, tâches et coaching live : l'accompagnement humain d'EP Coaching, au même endroit que ton suivi.
+- [Communauté](https://santamariasanchez.github.io/EPCoaching/appli/communaute/) : Partage tes victoires, pose tes questions, lis le mot du coach et suis le classement. La communauté EP Coaching pour ne pas avancer seul.
+- [Formations](https://santamariasanchez.github.io/EPCoaching/appli/formations/) : Suis des formations vidéo dans l'appli, ou crée et vends la tienne si tu es coach : sections, vidéos YouTube, accès inclus ou payant, accès donné en un clic.
+- [Bibliothèque](https://santamariasanchez.github.io/EPCoaching/appli/bibliotheque/) : Recettes du monde et de terroir, exercices et salles, guides pratiques et une section science expliquée simplement. Tout est dans l'appli.
+- [Agenda](https://santamariasanchez.github.io/EPCoaching/appli/agenda/) : Un agenda où chaque bloc ouvre la bonne page (repas, séance, scripts) et où un retard décale toute la suite de la journée en un geste.
+- [Notes](https://santamariasanchez.github.io/EPCoaching/appli/notes/) : Écris ou dicte une idée, ajoute des #tags, relie tes notes avec [[liens]], colle une capture d'écran. Tes notes EP Coaching se rangent seules et se retrouvent en un geste.
+- [Recherche et réponses rapides](https://santamariasanchez.github.io/EPCoaching/appli/recherche/) : Tape « poids », « calories », « sommeil » ou « leads » dans la loupe : EP Coaching affiche le chiffre tout de suite. La recherche retrouve aussi notes, recettes et clients.
+- [Connecteur Claude et Notion](https://santamariasanchez.github.io/EPCoaching/appli/claude-notion/) : Ajoute EP Coaching comme connecteur dans Claude : importe tes pages Notion dans tes notes, cherche dans tes notes, récupère tes chiffres de la semaine en conversation.
+- [Mon appli](https://santamariasanchez.github.io/EPCoaching/appli/personnalisation/) : Réponds à quelques questions dans Mon appli : EP Coaching n'affiche que les suivis et les outils que tu utilises. Tu peux changer à tout moment.
+- [Sur ton téléphone](https://santamariasanchez.github.io/EPCoaching/appli/appli-mobile/) : Installe EP Coaching sur ton écran d'accueil, active les notifications avec heures de silence, utilise les raccourcis et règle la taille du texte.
+- [Gestion des clients](https://santamariasanchez.github.io/EPCoaching/appli/clients/) : Chaque client avec ses bilans, son programme, sa nutrition et vos échanges. Priorités, boîte de réception unique, modèles de programmes et relances automatiques.
+- [Coaching live](https://santamariasanchez.github.io/EPCoaching/appli/live/) : Planifie tes appels 1-to-1, audits, check-ins hebdo, ateliers, webinaires et sessions de questions directement dans EP Coaching.
+- [Studio créatif](https://santamariasanchez.github.io/EPCoaching/appli/studio/) : Scripts de reels, vidéos YouTube, posts LinkedIn et Threads, prompteur avec caméra, suivi du tournage et de la publication. Le studio de contenu du coach en ligne.
+- [Stats réseaux](https://santamariasanchez.github.io/EPCoaching/appli/stats-reseaux/) : Note tes chiffres chaque semaine, relie chaque publication à son script et vois ce qui marche : format, jour, heure, et les leads captés par publication.
+- [Pilotage business](https://santamariasanchez.github.io/EPCoaching/appli/pilotage/) : Non-négociables du jour, stats hebdo, appels de vente, leads, publicité, revenus et dépenses, masterclass business : tout le pilotage d'un coach en ligne.
+- [Mailing](https://santamariasanchez.github.io/EPCoaching/appli/mailing/) : Envoie ta newsletter, annonce un contenu ou un live, relance un client. Une centaine de modèles d'email, l'envoi à une personne ou à un groupe, et les taux d'ouverture.
+- [Équipe et paie](https://santamariasanchez.github.io/EPCoaching/appli/equipe/) : Invite des coachs, donne un espace métier à ton setter, ton closer ou ton monteur, et laisse l'appli calculer la paie du mois à partir des vraies ventes.
+
+## Réseaux de Emmanuel Santamaria Sanchéz
+- Instagram @santamariasanchezep_ : https://www.instagram.com/santamariasanchezep_/
+- Threads @santamariasanchezep_ : https://www.threads.com/@santamariasanchezep_
+- TikTok @santamariasanchez_ : https://www.tiktok.com/@santamariasanchez_
+- YouTube @santamaria_sanchez : https://www.youtube.com/@santamaria_sanchez

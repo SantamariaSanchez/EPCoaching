@@ -1,7 +1,7 @@
 // Gabarit commun à toutes les pages générées : <head> SEO complet, header
 // avec navigation, fil d'Ariane, pied de page complet (colonnes + barre du
 // bas façon Instagram desktop). Aucune dépendance, uniquement des chaînes.
-import { BASE, APP, LINKS, SOCIALS, NAV, FOOTER_COLUMNS, FOOTER_BAR } from "./config.mjs";
+import { BASE, APP, LINKS, SOCIALS, NAV, FOOTER_COLUMNS, FOOTER_BAR, FOUNDER } from "./config.mjs";
 
 export function esc(s) {
   return String(s ?? "")
@@ -80,6 +80,25 @@ export function icon(name, cls = "icon") {
   return `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
 }
 
+// Icônes des réseaux (trait, couleur héritée du texte).
+const SOCIAL_ICONS = {
+  instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/>',
+  threads: '<circle cx="12" cy="12" r="3.6"/><path d="M15.6 12v1.4a2.4 2.4 0 0 0 4.8 0V12a8.4 8.4 0 1 0-3.3 6.7"/>',
+  tiktok: '<path d="M14 3v11.6a3.6 3.6 0 1 1-3.6-3.6"/><path d="M14 3c.6 2.7 2.6 4.6 5.4 4.9"/>',
+  youtube: '<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10.2 9.2v5.6l4.8-2.8z" fill="currentColor"/>',
+};
+export function socialIcon(key, cls = "icon") {
+  return `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SOCIAL_ICONS[key] || ""}</svg>`;
+}
+// Rangée d'icônes cliquables (header, pied de page).
+export function socialIconsRow(cls = "social-icons") {
+  return `<ul class="${cls}">${SOCIALS.map((s) => `<li><a href="${s.url}" target="_blank" rel="noopener noreferrer me" aria-label="${esc(s.name)} ${esc(s.handle)}" title="${esc(s.name)}">${socialIcon(s.key)}</a></li>`).join("")}</ul>`;
+}
+// Bloc « Suis-moi » : grandes cartes avec le nom du réseau et le compte.
+export function socialCards() {
+  return `<ul class="social-cards">${SOCIALS.map((s) => `<li><a class="social-card" href="${s.url}" target="_blank" rel="noopener noreferrer me">${socialIcon(s.key, "icon social-card-icon")}<span class="social-card-text"><strong>${esc(s.name)}</strong><span>${esc(s.handle)}</span></span></a></li>`).join("")}</ul>`;
+}
+
 export function headerHtml(path) {
   const r = (h) => resolve(h, path);
   const items = NAV.map((n) => {
@@ -91,6 +110,7 @@ export function headerHtml(path) {
     <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
       <ul class="site-nav-links">${items}</ul>
       <div class="site-nav-actions">
+        ${socialIconsRow("social-icons social-icons--header")}
         <a href="${LINKS.login}" class="site-nav-login">Se connecter</a>
         <a href="${LINKS.signupMember}" class="btn-cta-primary btn-cta-primary--sm">Essayer gratuitement</a>
       </div>
@@ -108,12 +128,12 @@ export function footerHtml(path) {
       .join("")}</ul></div>`
   ).join("");
   const bar = FOOTER_BAR.map(([label, href]) => link(href, esc(label), path)).join("");
-  const socials = SOCIALS.map((s) => `<a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.name}</a>`).join("");
   return `<footer class="site-footer">
     <div class="footer-top">
       <div class="footer-brand-block">
         <a href="${resolve("/", path)}" class="footer-brand"><img src="${resolve("/assets/images/logo.png", path)}" alt="EP Coaching" width="40" height="32" /></a>
         <p class="footer-tagline">L'appli et le coaching pour progresser, que tu t'entraînes ou que tu coaches.</p>
+        <div class="footer-follow"><p class="footer-follow-label">Suis ${esc(FOUNDER)}</p>${socialIconsRow("social-icons social-icons--lg")}</div>
         <div class="footer-newsletter">
           <p class="footer-newsletter-label"><strong>Le mail de 10h.</strong> Chaque matin, une seule chose concrète à appliquer le jour même pour ton physique. Deux minutes de lecture, désinscription en un clic.</p>
           <form id="newsletter-form" class="newsletter-form" novalidate>
@@ -129,7 +149,7 @@ export function footerHtml(path) {
     </div>
     <div class="footer-bar">
       <nav class="footer-bar-links" aria-label="Liens utiles et légaux">${bar}</nav>
-      <nav class="footer-bar-socials" aria-label="Réseaux sociaux">${socials}</nav>
+      <nav class="footer-bar-socials" aria-label="Réseaux sociaux">${socialIconsRow("social-icons social-icons--footer")}</nav>
       <p class="footer-copy"><span>Français</span><span>© 2026 EP Coaching</span></p>
     </div>
   </footer>`;
@@ -171,13 +191,13 @@ export const ORG_JSONLD = {
   url: BASE,
   logo: BASE + "assets/images/logo.png",
   image: BASE + "assets/images/og-image.png",
-  description: "Coaching sportif en musculation et nutrition basé à Annecy, accompagnement en ligne partout en France et appli pour les coachs sportifs, fondés par Santamaria Sanchéz.",
+  description: "Coaching sportif en musculation et nutrition basé à Annecy, accompagnement en ligne partout en France et appli pour les coachs sportifs, fondés par Emmanuel Santamaria Sanchéz.",
   address: ANNECY,
   areaServed: [{ "@type": "City", name: "Annecy" }, { "@type": "AdministrativeArea", name: "Haute-Savoie" }, { "@type": "Country", name: "France" }],
   founder: {
     "@type": "Person",
-    name: "Santamaria Sanchéz",
-    alternateName: "Santamaria Sanchez",
+    name: FOUNDER,
+    alternateName: ["Santamaria Sanchéz", "Santamaria Sanchez", "Emmanuel Santamaria Sanchez"],
     jobTitle: "Coach sportif en musculation et nutrition",
     homeLocation: { "@type": "Place", name: "Annecy, Haute-Savoie", address: ANNECY },
     url: APP + "/a-propos",

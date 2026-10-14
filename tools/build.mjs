@@ -7,10 +7,10 @@
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { BASE, APP, LINKS, BUILD_DATE, SOCIALS } from "./config.mjs";
+import { BASE, APP, LINKS, BUILD_DATE, SOCIALS, FOUNDER } from "./config.mjs";
 import {
   esc, resolve, link, icon, pageHtml, hero, section, cardGrid, steps, faqList, faqJsonLd, ctaBand,
-  headerHtml, footerHtml, canonical, ORG_JSONLD, phone, logoMarquee,
+  headerHtml, footerHtml, canonical, ORG_JSONLD, phone, logoMarquee, socialCards,
 } from "./render.mjs";
 import { buildHome, quizBlock } from "./home.mjs";
 import { readdirSync } from "node:fs";
@@ -498,8 +498,8 @@ for (const a of HELP_ARTICLES) {
     hero({ eyebrow: "À propos", title: `On veut que tu ailles <span class="accent">plus vite</span> que seul`, lead: "EP Coaching est né d'une conviction simple : les gens motivés méritent des outils et un accompagnement à la hauteur de leur motivation.", path }),
     section({
       eyebrow: "Le fondateur",
-      title: "Santamaria Sanchéz",
-      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Santamaria Sanchéz, fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Fondateur d'EP Coaching, coach sportif basé à Annecy (Haute-Savoie). J'accompagne des personnes qui veulent progresser en musculation, et des coachs qui veulent structurer leur activité.</p><p>Je suis athlète naturel, objectif Heroes Cup WNBF France en Classic Physique. Je m'applique à moi-même ce que je transmets. Ce que je sais, je l'ai appris en le faisant, et je continue à l'apprendre.</p><p>Mon approche tient en une chose : je prends les gens motivés, et je fais en sorte qu'ils aillent plus vite que s'ils étaient seuls.</p></div></div>`,
+      title: "Emmanuel Santamaria Sanchéz",
+      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Emmanuel Santamaria Sanchéz, fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Fondateur d'EP Coaching, coach sportif basé à Annecy (Haute-Savoie). J'accompagne des personnes qui veulent progresser en musculation, et des coachs qui veulent structurer leur activité.</p><p>Je suis athlète naturel, objectif Heroes Cup WNBF France en Classic Physique. Je m'applique à moi-même ce que je transmets. Ce que je sais, je l'ai appris en le faisant, et je continue à l'apprendre.</p><p>Mon approche tient en une chose : je prends les gens motivés, et je fais en sorte qu'ils aillent plus vite que s'ils étaient seuls.</p><p class="founder-follow">Suis-moi au quotidien, conseils et coulisses :</p>${socialCards()}</div></div>`,
     }),
     section({
       eyebrow: "Ce qu'on construit",
@@ -538,11 +538,11 @@ for (const a of HELP_ARTICLES) {
   ].join("\n");
   emit({
     path,
-    title: "À propos d'EP Coaching et de son fondateur Santamaria Sanchéz, coach à Annecy",
-    description: "EP Coaching, fondé par Santamaria Sanchéz, athlète naturel et coach : une appli et un accompagnement pour progresser en musculation et pour faire grandir son activité de coach.",
+    title: "Emmanuel Santamaria Sanchéz, fondateur d'EP Coaching à Annecy",
+    description: "EP Coaching, fondé par Emmanuel Santamaria Sanchéz, athlète naturel et coach : une appli et un accompagnement pour progresser en musculation et pour faire grandir son activité de coach.",
     body,
     crumbs: [HOME, ["À propos", path]],
-    jsonld: [ORG_JSONLD, { "@context": "https://schema.org", "@type": "AboutPage", name: "À propos d'EP Coaching", url: canonical(path) }],
+    jsonld: [ORG_JSONLD, { "@context": "https://schema.org", "@type": "AboutPage", name: "À propos d'EP Coaching", url: canonical(path), mainEntity: { ...ORG_JSONLD.founder, "@context": undefined, image: BASE + "assets/images/portrait_physique.jpg" } }],
   });
 }
 
@@ -562,7 +562,7 @@ for (const a of HELP_ARTICLES) {
         { cols: "2" }
       ),
     }),
-    section({ eyebrow: "Réseaux", title: "Suis-nous", content: `<ul class="socials">${SOCIALS.map((s) => `<li><a href="${s.url}" target="_blank" rel="noopener noreferrer" class="btn-ghost">${esc(s.name)}</a></li>`).join("")}</ul>`, narrow: true }),
+    section({ eyebrow: "Réseaux", title: "Suis-moi au quotidien", intro: "Conseils, coulisses de ma préparation et de l'appli : tout passe d'abord par mes réseaux.", content: socialCards(), narrow: true }),
   ].join("\n");
   emit({ path, title: "Contact", description: "Contacter EP Coaching : assistance, réservation d'un appel d'accompagnement, accompagnement business pour coachs, carrières et réseaux sociaux.", body, crumbs: [HOME, ["Contact", path]], jsonld: [{ "@context": "https://schema.org", "@type": "ContactPage", name: "Contact EP Coaching", url: canonical(path) }] });
 }
@@ -757,6 +757,40 @@ ${[...new Set(all)].map((p) => `  <url><loc>${canonical(p)}</loc><lastmod>${BUIL
 </urlset>
 `;
   writeFileSync(join(ROOT, "sitemap.xml"), xml);
+}
+
+// ── llms.txt (moteurs de réponse IA) ──────────────────────────────────────
+// Des faits nets et citables, et les pages qui font foi.
+{
+  const featureLines = FEATURES.map((f) => `- [${f.name}](${canonical(`/appli/${f.slug}/`)}) : ${f.metaDesc}`).join("\n");
+  const txt = `# EP Coaching
+
+> EP Coaching est une appli de coaching en musculation et nutrition, et un accompagnement humain, fondés à Annecy (Haute-Savoie, France) par ${FOUNDER}, coach en musculation et nutrition et athlète naturel (Classic Physique, fédération WNBF). L'appli sert aux personnes qui veulent progresser (programme, nutrition, bilan du jour, progrès) et aux coachs sportifs qui veulent suivre leurs clients et faire grandir leur activité (fiches clients, programmes, diètes, road maps, check-ins, messagerie, agenda, mailing, studio de contenu, stats réseaux, équipe).
+
+## Faits clés
+- Fondateur : ${FOUNDER}, coach sportif à Annecy, accompagnement en ligne partout en France.
+- Appli : ${APP}, accessible depuis le téléphone ou l'ordinateur. Inscription gratuite pour suivre son propre entraînement et sa nutrition.
+- Coachs : espace coach sur ${LINKS.signupCoach}
+- Guides gratuits : ${GUIDES.length} guides sur ${LINKS.guides}
+- Langue : français.
+
+## Pages principales
+- [Accueil](${canonical("/")})
+- [L'appli](${canonical("/appli/")})
+- [Pour les coachs](${canonical("/solutions/coachs/")})
+- [Coaching physique 1-to-1](${canonical("/physique/")})
+- [Accompagnement business pour coachs](${canonical("/business/")})
+- [FAQ](${canonical("/faq/")})
+- [À propos du fondateur](${canonical("/a-propos/")})
+- [Actus](${canonical("/actus/")})
+
+## Fonctionnalités de l'appli
+${featureLines}
+
+## Réseaux de ${FOUNDER}
+${SOCIALS.map((s) => `- ${s.name} ${s.handle} : ${s.url}`).join("\n")}
+`;
+  writeFileSync(join(ROOT, "llms.txt"), txt);
 }
 
 console.log(`${written.length} pages générées, 2 pages mises à jour (physique, business), sitemap : ${written.length + 2} URL.`);
