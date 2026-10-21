@@ -3,7 +3,7 @@
 // Matis Clouet : un système clair contenu, guide gratuit, appli, appel).
 // Uniquement des faits réels : écrans de l'appli (comptes de démo), chiffres
 // calculés depuis les données du site, jamais de témoignage inventé.
-import { APP, LINKS, BASE, VSL_YOUTUBE_ID } from "./config.mjs";
+import { APP, LINKS, BASE, VSL_YOUTUBE_ID, VSL_VIDEO } from "./config.mjs";
 import { esc, resolve, link, icon, section, faqList, faqJsonLd, phone, logoMarquee, ORG_JSONLD, socialCards } from "./render.mjs";
 
 export const QUIZ = [
@@ -69,14 +69,25 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
   </section>`;
 
   // VSL (2026-10-09) : la vidéo de présentation, puis le choix du chemin.
-  // Tant que la vidéo n'est pas en ligne, le cadre l'annonce honnêtement.
+  // Lecteur : YouTube si un identifiant est fourni (façade, rien ne charge avant le clic),
+  // sinon la vidéo auto-hébergée (preload="none", sous-titres français actifs par défaut).
+  const minutes = VSL_VIDEO.minutes;
+  const player = VSL_YOUTUBE_ID
+    ? `<div class="vsl-placeholder vx-player" id="vsl-placeholder" data-youtube-id="${VSL_YOUTUBE_ID}" data-poster="1" style="background-image:url(${r(VSL_VIDEO.poster)})">
+        <span class="vsl-play vx-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="vx-duration">${minutes} min</span>
+      </div>`
+    : `<div class="vx-player vx-player--video" id="vsl-video">
+        <video class="vx-video" playsinline preload="none" poster="${r(VSL_VIDEO.poster)}" aria-label="Vidéo de présentation EP Coaching (${minutes} minutes)">
+          <source src="${r(VSL_VIDEO.src)}" type="video/mp4" />
+          <track kind="subtitles" srclang="fr" label="Français" src="${r(VSL_VIDEO.vtt)}" default />
+        </video>
+        <button type="button" class="vx-start" aria-label="Lire la vidéo de présentation"><span class="vsl-play vx-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="vx-duration">${minutes} min</span></button>
+      </div>`;
   const vsl = `<section class="vx" id="video">
-    <div class="vx-head" data-reveal><p class="eyebrow">◆ À regarder avant de réserver</p><h2>Pourquoi tu stagnes, <span class="accent">et comment on règle ça</span></h2><p class="section-intro">10 minutes. Que tu veuilles transformer ton physique ou remplir ton agenda de coach.</p></div>
+    <div class="vx-head" data-reveal><p class="eyebrow">◆ À regarder avant de réserver</p><h2>Pourquoi tu stagnes, <span class="accent">et comment on règle ça</span></h2><p class="section-intro">${minutes} minutes. Que tu veuilles transformer ton physique ou remplir ton agenda de coach.</p></div>
     <div class="vx-frame" data-reveal>
       <div class="vx-glow" aria-hidden="true"></div>
-      <div class="vsl-placeholder vx-player${VSL_YOUTUBE_ID ? "" : " vx-player--soon"}" id="vsl-placeholder" data-youtube-id="${VSL_YOUTUBE_ID || "VIDEO_ID_A_REMPLACER"}" data-poster="1" style="background-image:url(${r("/assets/images/vsl-poster.jpg")})">
-        ${VSL_YOUTUBE_ID ? `<span class="vsl-play vx-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="vx-duration">10 min</span>` : `<span class="vx-soon">La vidéo arrive très bientôt</span>`}
-      </div>
+      ${player}
     </div>
     <div class="vx-choice" data-reveal>
       <a class="vx-card vx-card--hot" href="${LINKS.prequalification}"><span class="vx-kicker">Premier cas</span><strong>Je veux transformer mon physique</strong><span>Perdre du gras, prendre du muscle, préparer une compétition</span><em>Réserver mon appel offert ${icon("arrow", "icon icon--xs")}</em></a>

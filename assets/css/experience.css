@@ -410,6 +410,15 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
 @keyframes vxPulse { 0%, 100% { box-shadow: 0 0 0 10px rgba(224,30,30,0.18), 0 0 60px rgba(224,30,30,0.55); } 50% { box-shadow: 0 0 0 22px rgba(224,30,30,0.06), 0 0 90px rgba(224,30,30,0.75); } }
 .vx-duration { position: absolute; z-index: 1; right: 18px; bottom: 16px; font-weight: 800; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,237,237,0.85); }
 .vx-player--soon { cursor: default; }
+/* VSL auto-hébergée : la vidéo remplit le cadre, un gros bouton lecture tant qu'elle n'a pas démarré. */
+.vx-player--video { cursor: default; background: #0D0000; }
+.vx-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #0D0000; display: block; }
+.vx-player--video.is-playing::after { opacity: 0; }
+.vx-player--video::after { transition: opacity 0.4s; }
+.vx-start { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; color: inherit; font: inherit; }
+.vx-start:focus-visible { outline: 3px solid #E01E1E; outline-offset: -6px; }
+.vx-player--video.is-playing .vx-start { display: none; }
+.vx-video::cue { font-family: Montserrat, system-ui, sans-serif; font-weight: 700; background: rgba(13,0,0,0.78); color: #F5EDED; line-height: 1.35; }
 .vx-soon { position: absolute; z-index: 1; bottom: 18px; left: 50%; transform: translateX(-50%); padding: 8px 16px; border-radius: 999px; background: rgba(13,0,0,0.75); border: 1px solid rgba(224,30,30,0.4); font-weight: 700; font-size: 13px; letter-spacing: 0.06em; color: rgba(245,237,237,0.85); white-space: nowrap; }
 .vx-choice { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 2vw, 22px); margin-top: clamp(24px, 3.5vw, 40px); text-align: left; }
 .vx-card { display: flex; flex-direction: column; gap: 6px; padding: clamp(18px, 2.4vw, 28px); border-radius: 20px; text-decoration: none; color: var(--blanc-casse); background: rgba(23,1,1,0.75); border: 1px solid rgba(224,30,30,0.28); transition: transform 0.35s cubic-bezier(.2,.7,.2,1), border-color 0.3s, box-shadow 0.3s; }

@@ -132,3 +132,13 @@ export const FOOTER_BAR = [
 // YouTube de la vidéo (la partie après v= ou après youtu.be/) une fois en
 // ligne : la section affiche alors le lecteur. Vide = « bientôt en ligne ».
 export const VSL_YOUTUBE_ID = "";
+
+// VSL auto-hébergée (rendue depuis vsl/, voir vsl/README.md : npm run rendu puis npm run web).
+// Utilisée tant que VSL_YOUTUBE_ID est vide ; un identifiant YouTube reprend la main.
+// `minutes` : durée affichée sur le lecteur et dans l'intro de la section.
+export const VSL_VIDEO = {
+  src: "/assets/video/vsl-ep-coaching.mp4",
+  vtt: "/assets/video/vsl-ep-coaching.vtt",
+  poster: "/assets/video/vsl-poster.jpg",
+  minutes: 12,
+};

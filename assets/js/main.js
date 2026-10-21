@@ -482,6 +482,38 @@ function initVslFacade() {
   });
 }
 
+/* ── VSL auto-hébergée ─────────────────────────────────────────────────── */
+/* La vidéo ne se charge qu'au clic (preload="none"). Le gros bouton lance la
+   lecture puis s'efface ; les contrôles natifs prennent le relais. Les
+   sous-titres français sont actifs par défaut (piste .vtt « default »). */
+function initVslVideo() {
+  const box = document.getElementById("vsl-video");
+  if (!box) return;
+  const video = box.querySelector("video");
+  const start = box.querySelector(".vx-start");
+  if (!video) return;
+  const showSubs = () => {
+    const t = video.textTracks && video.textTracks[0];
+    if (t) t.mode = "showing";
+  };
+  // Contrôles natifs seulement une fois la lecture lancée (le poster reste propre).
+  const playing = () => {
+    box.classList.add("is-playing");
+    video.controls = true;
+  };
+  video.addEventListener("play", playing);
+  video.addEventListener("playing", playing);
+  if (start) {
+    start.addEventListener("click", () => {
+      showSubs();
+      playing();
+      const p = video.play();
+      if (p && p.catch) p.catch(() => box.classList.remove("is-playing"));
+    });
+  }
+  showSubs();
+}
+
 /* ── Navigation par ancre ──────────────────────────────────────────────── */
 /* Le seul lien d'ancre du site (#cta-final, bouton "Accompagnement 1-to-1"
    au milieu de /physique/ et /business/) passe par Lenis pour rester
@@ -652,6 +684,7 @@ initHeroDiamondParallax();
 initCtaFinalReveal();
 initHeaderScroll();
 initVslFacade();
+initVslVideo();
 initAnchorScroll();
 initScrollTriggerRefresh();
 initNewsletterFooter();
