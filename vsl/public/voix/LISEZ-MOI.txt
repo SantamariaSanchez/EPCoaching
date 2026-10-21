@@ -1,0 +1,11 @@
+Dépose ici tes enregistrements de voix off, un fichier par scène :
+  scene-1.mp3  (Ouverture)
+  scene-2.mp3  (Qui je suis)
+  scene-3.mp3  (Le vrai problème)
+  scene-4.mp3  (Le système)
+  scene-5.mp3  (Lequel c'est toi ?)
+  scene-6.mp3  (L'appel)
+  scene-7.mp3  (En résumé)
+.wav et .m4a marchent aussi. Chaque scène se cale toute seule sur la durée de son fichier.
+Pour un calage mot à mot : npm run caler (crée scene-N.json à côté).
+Voir vsl/README.md.

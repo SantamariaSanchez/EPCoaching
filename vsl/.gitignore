@@ -1,0 +1,18 @@
+node_modules
+dist
+out
+.remotion
+.whisper
+.DS_Store
+.env
+*.mp4
+*.mov
+*.webm
+# Générés à la demande (npm run preparer) : images copiées du site, sons et musique synthétisés.
+public/img/
+public/sfx/
+public/musique-generee.mp3
+# Enregistrements d'Emmanuel : déposés en local, pas dans Git (trop lourds).
+public/voix/*
+!public/voix/LISEZ-MOI.txt
+public/musique.mp3
