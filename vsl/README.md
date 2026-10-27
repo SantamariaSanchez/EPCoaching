@@ -1,48 +1,62 @@
 # VSL EP Coaching (motion design, Remotion)
 
-La vidéo de vente du site, en motion design : 7 scènes, 1920×1080, 30 images/s.
-Tout est du code (React + [Remotion](https://www.remotion.dev)) : chaque animation est calée
-sur le texte de la voix off, donc quand tu enregistres ta voix, la vidéo se recale toute seule.
+La vidéo de vente du site, en motion design 2026 : 7 scènes, 1920×1080, 30 images/s, environ 8 min 50.
+Tout est du code (React + [Remotion](https://www.remotion.dev)) : chaque animation est calée **au mot près**
+sur la voix off, donc si la voix change, la vidéo se recale toute seule.
 
-## Ce que tu dois faire : enregistrer ta voix
+## Direction artistique
 
-1. Lis le script **mot pour mot** (page Notion « VSL EP Coaching (site) : script voix off »,
-   copie exacte dans `script/voix-off.txt`). « / » = petite pause, « // » = vraie pause.
-   Corrige d'abord les 2 phrases marquées ⚠️ À VALIDER (voir plus bas).
-2. Un fichier par scène, au calme, téléphone près de la bouche. Dépose-les dans
-   `vsl/public/voix/` avec ces noms exacts :
+- **Deux mondes qui se répondent** : clair (papier chaud, encre noire, rouge de marque : le pratiquant,
+  le parcours, le problème, inspiré de la référence Pinterest) et sombre (noir profond, corail lumineux,
+  lueurs, grille de points en perspective : le coach, l'appli, l'appel, inspiré de la référence 2).
+  On passe de l'un à l'autre par un rideau de bandes diagonales (couverture totale au point de coupe).
+- **Une seule couleur d'accent**, contrastes vérifiés (WCAG) : titres corail #FF4A3D sur noir = 6,1:1
+  (l'ancien rouge sur noir faisait 4,3:1), rouge #D7151C sur papier = 4,6:1, texte 17:1 et plus.
+- **Un seul focus à l'écran** : chaque phrase clé est un « temps fort » ; le précédent sort (ease-in,
+  flou) avant que le suivant entre. Titres kinétiques lettre par lettre (rotation 3D, flou, graisse
+  variable 500 → 800 qui s'épaissit à l'atterrissage), mot accent souligné qui se dessine.
+- **Vrai motion design** : ressorts physiques, entrées en profondeur avec profondeur de champ, flou de
+  mouvement directionnel (SVG) et flou de caméra à sous-images (`@remotion/motion-blur`) sur les temps
+  forts rapides, compteurs, lignes lumineuses qui se tracent, téléphone 3D avec les **vraies captures**
+  de l'appli (changement d'écran, notification, retournement côté coach), calques 3D éclatés, pastilles
+  incandescentes reliées, cadenas qui se déverrouille, boutons métal du site, carte de fin rouge.
+- **Rien d'inventé de chiffré** : seuls les chiffres du script (80 kg, 3 raisons, 30 secondes,
+  une trentaine de minutes, 6 mois) apparaissent ; aucun résultat client ni nombre de membres.
 
-   | Fichier        | Scène                | Commence par                                  |
-   | -------------- | -------------------- | --------------------------------------------- |
-   | `scene-1.mp3`  | Ouverture            | « Tu t'entraînes. »                           |
-   | `scene-2.mp3`  | Qui je suis          | « Alors avant ça, je vais me présenter. »     |
-   | `scene-3.mp3`  | Le vrai problème     | « Laisse-moi te poser une question. »         |
-   | `scene-4.mp3`  | Le système           | « C'est pour ça que j'ai construit EP Coaching. » |
-   | `scene-5.mp3`  | Lequel c'est toi ?   | « Maintenant, il y a deux cas. »              |
-   | `scene-6.mp3`  | L'appel              | « Alors voilà ce que je te propose. »         |
-   | `scene-7.mp3`  | En résumé            | « Donc si je devais récapituler cette vidéo. » |
+## Voix off
 
-   `.wav` et `.m4a` marchent aussi. Coupe le silence au début et à la fin de chaque fichier.
-3. Relance le rendu **en une commande** (depuis le dossier `vsl/`) :
+Voix IA française (ElevenLabs « Liam », générée via le connecteur vidIQ voiceover) en 3 prises
+(`public/voix/brut/`, non versionnées). `npm run voix-ia` (scripts/voix-ia.mjs) :
+1. détecte les silences de chaque prise et retrouve où chaque bloc du script est dit (programmation
+   dynamique sur la durée attendue de chaque bloc, aucune transcription nécessaire) ;
+2. découpe une piste par scène, ajoute les respirations du script (« / », « // », paragraphes) ;
+3. écrit `public/voix/scene-N.mp3` et le temps de chaque mot dans `public/voix/scene-N.json`.
 
-   ```bash
-   npm install          # la première fois seulement
-   npm run rendu        # -> out/vsl-ep-coaching.mp4 (1080p)
-   npm run web          # -> ../assets/video/ (version web du site + sous-titres + affiche)
-   ```
+Pour mettre ta propre voix : dépose `public/voix/scene-N.mp3` (un fichier par scène), supprime les
+`scene-N.json`, puis `npm run caler` (Whisper, optionnel) et `npm run rendu`.
 
-   Chaque scène prend alors la durée exacte de ton fichier, et les mots clés, les écrans de
-   l'appli et les graphiques s'étirent sur ton rythme. La musique et les sous-titres sont
-   régénérés pour la nouvelle durée.
+## Commandes
 
-4. Option recommandée, calage **mot à mot** : `npm run caler` avant `npm run rendu`.
-   Whisper (gratuit, en local) transcrit chaque fichier et écrit `public/voix/scene-N.json` :
-   chaque mot clé tombe alors pile sur ta parole. Le premier lancement télécharge whisper.cpp
-   et le modèle (environ 1,5 Go, une seule fois).
+| Commande                          | Effet                                                                   |
+| --------------------------------- | ----------------------------------------------------------------------- |
+| `npm run dev`                     | Remotion Studio (une composition par scène + `VSL`)                     |
+| `npm run rendu`                   | Prépare tout (timeline, images, sons, musique, .vtt) puis rend en 1080p |
+| `npm run web`                     | Version web (1080p H.264 2 passes + faststart, < 80 Mo) + .vtt + affiche dans `../assets/video/` |
+| `npm run planche -- Scene3 --pas 20` | Planches contact d'une scène + **gardien** anti-chevauchement (voir plus bas) |
+| `npm run voix-ia`                 | Recale la voix IA (prises brutes -> scènes + temps des mots)            |
+| `npm run timeline`                | Régénère `src/timeline.ts` depuis `script/voix-off.txt`                 |
 
-Si tu changes le texte du script : modifie `script/voix-off.txt` (et la page Notion), puis
-`npm run timeline`. Les images sont accrochées aux phrases par leur texte : si une phrase
-disparaît, le rendu s'arrête en te disant laquelle.
+Rendu complet 1080p : environ 1 h sur une machine 4 cœurs.
+
+## Contrôle qualité automatique (le gardien)
+
+Chaque élément visible porte une zone (`data-zone`). Avec `--props='{"verifier":true}'` (fait par
+`npm run planche`), à chaque image le gardien mesure le DOM réel (glyphes visibles, blocs) et signale :
+- tout **chevauchement** entre deux textes ou blocs visibles ;
+- tout **débordement** du cadre de sécurité (une fois l'entrée de l'élément terminée) ;
+- tout **repère de mot** qui tombe avant le début de son temps fort (mauvaise occurrence d'un mot).
+Les tailles de titres sont calculées avec `@remotion/layout-utils` (measureText), une fois les polices
+chargées, pour qu'aucun texte ne déborde de sa zone.
 
 ## Les 2 phrases à valider
 
@@ -51,44 +65,29 @@ disparaît, le rendu s'arrête en te disant laquelle.
   tout mesurer, de tout structurer, et de ne plus rien laisser au hasard. » (ton vrai parcours)
 - Scène 6 : « ça dure une trentaine de minutes » (la vraie durée de ton appel Calendly ; le
   cadran « ~30 MINUTES » de la scène 6 est à changer avec, dans `src/scenes/Scene6.tsx`).
+- Ces deux passages sont dits par la voix IA : si tu les modifies, il faut régénérer la prise de la
+  scène concernée (ou enregistrer ta voix) puis relancer `npm run voix-ia` et `npm run rendu`.
 
 ## Musique et sons
 
-- `npm run musique` compose une musique originale en code (Ré mineur, 92 BPM, aucun droit
-  d'auteur tiers), à la longueur exacte de la vidéo, plus dense pendant le problème et le
-  système, plus légère à la bifurcation. Elle est jouée bas sous la voix.
-- Pour mettre ta propre musique (libre de droits), dépose `public/musique.mp3` : elle passe
-  avant la musique générée, en boucle si elle est plus courte.
-- `npm run sons` synthétise les sons d'habillage (whoosh, impacts, ticks…) dans `public/sfx/`.
-- Aucune voix de synthèse : la voix off sera la tienne.
-
-## Commandes
-
-| Commande             | Effet                                                                 |
-| -------------------- | --------------------------------------------------------------------- |
-| `npm run dev`        | Remotion Studio (aperçu interactif, une composition par scène + `VSL`) |
-| `npm run rendu`      | Prépare tout puis rend la VSL complète en 1080p (`out/`)               |
-| `npm run rendu:720`  | Pareil en 1280×720 (plus rapide)                                       |
-| `npm run web`        | Version web compressée + `.vtt` + affiche dans `../assets/video/`     |
-| `npm run stills`     | Quelques images fixes de contrôle dans `out/stills/`                  |
-| `npm run timeline`   | Régénère `src/timeline.ts` depuis `script/voix-off.txt`                |
-| `npm run vtt`        | Sous-titres seuls (`out/vsl-ep-coaching.vtt`)                          |
-
-Rendu complet 1080p : environ 1 h sur une machine 4 cœurs.
+- `npm run musique` compose une musique originale en code (Ré mineur, 92 BPM, sans droits tiers) à la
+  longueur exacte de la vidéo. Elle passe **sous la voix avec un ducking mot à mot** (≈ -21 dB pendant
+  la parole, remonte dans les respirations).
+- `npm run sons` synthétise les sons d'habillage (whoosh, swoosh des rideaux, impacts, pops, ticks,
+  frappe clavier, cloche du cadenas…) déclenchés par chaque temps fort.
+- Pour ta propre musique (libre de droits) : `public/musique.mp3`.
 
 ## Comment c'est construit
 
-- `script/voix-off.txt` : le script exact. `script/mise-en-valeur.json` : les mots clés qui
-  s'affichent en grand (le reste du texte est dans les sous-titres, pas à l'image).
-- `src/timeline.ts` (généré) : chaque bloc et chaque mot avec son temps estimé
-  (2,3 mots/s, « / » 0,35 s, « // » 1 s, fin de paragraphe 0,6 s).
-- `src/lib/resolve.ts` : recale cette timeline sur la voix (durée du fichier, ou mot à mot).
-- `src/scenes/Scene1.tsx` … `Scene7.tsx` : une composition par scène (dossier « Scenes » du
-  Studio) ; `src/VSL.tsx` les enchaîne avec la transition losange (le ◆ du logo).
-- Les captures de l'appli et les photos viennent de `../assets/images/` (copiées par
-  `npm run prep`, jamais dupliquées dans Git). Rien n'est inventé : les écrans sont les vrais.
-- Charte : rouge profond et noir uniquement, Montserrat (900 pour les titres, letter-spacing
-  négatif), logo EP en vrai PNG. Polices sous licence SIL OFL dans `public/fonts/`.
+- `script/voix-off.txt` : le script exact. `src/timeline.ts` (généré) : blocs et mots.
+- `src/motion/` : le design system. `tokens.ts` (couleurs clair/sombre, zones), `anim.ts` (ressorts,
+  courbes), `Titre.tsx` (titres kinétiques), `Beats.tsx` (temps forts, rideaux, gardien), `Kit.tsx`
+  (carte 3D, flou de mouvement, pastille, compteur, ligne lumineuse, curseur), `modules.tsx`, `m-ui.tsx`
+  (téléphone 3D, calques, mosaïque, logo, boutons, cadenas, messagerie, fin), `m-listes.tsx`,
+  `m-data.tsx`, `m-fx.tsx`, `m-perso.tsx`, `TransitionScene.tsx` (rideau entre scènes).
+- `src/scenes/Scene1.tsx` … `Scene7.tsx` : chaque scène est une liste de temps forts accrochés au texte
+  du script (`B("passage du script", monde, nom, rendu)`), donc au mot près sur la voix.
+- Les captures de l'appli et les photos viennent de `../assets/images/` (copiées par `npm run prep`).
 
 ## Machine sans accès au téléchargement de Chrome
 

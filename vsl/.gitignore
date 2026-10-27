@@ -12,7 +12,10 @@ out
 public/img/
 public/sfx/
 public/musique-generee.mp3
-# Enregistrements d'Emmanuel : déposés en local, pas dans Git (trop lourds).
+# Voix off : la voix IA calée (scene-N.mp3 + scene-N.json, ~9 Mo) est versionnée pour que le rendu
+# soit reproductible ; les prises brutes (public/voix/brut/) et tout autre fichier restent locaux.
 public/voix/*
 !public/voix/LISEZ-MOI.txt
+!public/voix/scene-*.mp3
+!public/voix/scene-*.json
 public/musique.mp3

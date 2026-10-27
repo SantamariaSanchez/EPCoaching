@@ -4,7 +4,7 @@ import type { Bloc, Mot, SceneTimeline } from "../timeline";
 
 export const FPS = 30;
 // Durée d'une transition entre deux scènes (les scènes se chevauchent d'autant).
-export const TRANSITION = 20;
+export const TRANSITION = 30;
 
 export type Caption = { text: string; startMs: number; endMs: number };
 

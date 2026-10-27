@@ -1,84 +1,43 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame } from "remotion";
-import { C, MONTSERRAT, blancA } from "../lib/brand";
 import { SceneProps, sceneParDefaut } from "../lib/props";
-import { EASE, EASE_IN, Layout, prog, useCues } from "../lib/scene";
-import { KineticText } from "../components/KineticText";
-import { Logo, Shell } from "../components/Shell";
-import { LightLeak } from "../components/Fond";
-import { Chip, Sfx } from "../components/primitives";
-import { CartesSite } from "../components/CartesSite";
-import { Phone } from "../components/Phone";
+import { fabrique, Plan } from "../motion/Plan";
+import { Chapitre, TitreSeul } from "../motion/modules";
+import { AppEtapes, Boutons, Cadenas, Fin } from "../motion/m-ui";
+import { Arbre } from "../motion/m-listes";
+import { Bulle, Cible, Graphique } from "../motion/Icones";
+import { TH } from "../motion/tokens";
 
-// Scène 7, fin : le récapitulatif, le système, l'appel offert, les boutons, le logo.
-const Contenu: React.FC = () => {
-  const { cue, mot, total } = useCues();
-  const c = {
-    recap: cue("récapituler"),
-    infos: cue("pas d'infos"),
-    priorites: cue("Tu manques de priorités"),
-    suivi: cue("de suivi"),
-    systeme: cue("et d'un système"),
-    existe: cue("il existe"),
-    offre: cue("je te l'offre"),
-    chose: cue("une chose à faire"),
-    bouton: cue("Choisis ton bouton"),
-    dessous: cue("juste en dessous"),
-    reserve: cue("réserve ton appel"),
-    vite: cue("à très vite"),
-  };
-  const layoutAt = (fr: number): Layout =>
-    fr < c.infos ? "plein" : fr < c.chose ? "gauche" : fr < c.bouton ? "plein" : fr < c.vite ? "haut" : "pied";
+const ic = (I: typeof Bulle) => <I size={44} color={TH.sombre.accent} stroke={2.2} />;
 
-  return (
-    <>
-      <Chip texte="Des infos" at={c.infos} x={1080} y={250} variante="barre" barreAt={mot("d'infos") + 8} size={60} fin={c.existe - 8} />
-      <Chip texte="Des priorités" at={c.priorites + 6} x={1080} y={420} variante="check" size={60} fin={c.existe - 8} />
-      <Chip texte="Du suivi" at={c.suivi} x={1080} y={570} variante="check" size={60} fin={c.existe - 8} />
-      <Chip texte="Un système" at={c.systeme} x={1080} y={720} variante="plein" size={60} fin={c.existe - 8} />
-
-      <Phone x={1180} y={600} h={620} tilt={-20} enter={c.existe - 4} sortie={c.chose - 10} ecrans={[{ src: "aujourdhui", at: c.existe - 4 }]} />
-      <Phone x={1450} y={560} h={700} tilt={-8} enter={c.existe + 4} sortie={c.chose - 10} ecrans={[{ src: "nutrition", at: c.existe + 4 }]} />
-      <Phone x={1720} y={600} h={620} tilt={4} enter={c.existe + 12} sortie={c.chose - 10} ecrans={[{ src: "coach-accueil", at: c.existe + 12 }]} />
-      <Chip texte="Premier appel offert" at={c.offre} x={1450} y={960} variante="plein" size={44} anchor="center" fin={c.chose - 10} />
-
-      <CartesSite at={c.bouton} y={470} fleche surligne={[c.dessous, c.dessous + 20]} fin={c.vite - 10} />
-
-      <Fin at={c.vite - 6} total={total} />
-
-      <KineticText layoutAt={layoutAt} />
-
-      <Sfx at={mot("d'infos") + 8} son="thud" volume={0.3} />
-      <Sfx at={c.priorites + 6} son="pop" volume={0.3} />
-      <Sfx at={c.suivi} son="pop" volume={0.3} />
-      <Sfx at={c.systeme} son="pop" volume={0.35} />
-      <Sfx at={c.existe - 4} son="whoosh" volume={0.3} />
-      <Sfx at={c.offre} son="bell" volume={0.3} />
-      <Sfx at={c.bouton} son="whoosh" volume={0.3} />
-      <Sfx at={c.vite - 6} son="impact" volume={0.45} />
-    </>
-  );
-};
-
-const Fin: React.FC<{ at: number; total: number }> = ({ at, total }) => {
-  const f = useCurrentFrame();
-  if (f < at - 2) return null;
-  const p = prog(f, at + 14, at + 34, EASE);
-  const o = prog(f, total - 16, total, EASE_IN);
-  return (
-    <AbsoluteFill style={{ opacity: 1 - o }}>
-      <LightLeak p={(f - at) / 70} force={0.9} />
-      <Logo at={at} x={960} y={400} w={520} />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 640, textAlign: "center", fontFamily: MONTSERRAT, opacity: p, translate: `0 ${(1 - p) * 20}px` }}>
-        <div style={{ fontWeight: 900, fontSize: 44, letterSpacing: "-0.03em", color: C.blanc }}>Emmanuel Santamaria Sanchéz</div>
-        <div style={{ marginTop: 12, fontWeight: 700, fontSize: 26, letterSpacing: "0.2em", color: blancA(0.6) }}>COACH, FONDATEUR D'EP COACHING</div>
-      </div>
-    </AbsoluteFill>
-  );
-};
-
-export const Scene7: React.FC<SceneProps> = ({ scene }) => (
-  <Shell scene={scene ?? sceneParDefaut(7)} fond={{ x: 50, y: 45 }}>
-    <Contenu />
-  </Shell>
+// Scène 7, en résumé : ce qui manque, le système, l'appel offert, le bouton, la carte de fin.
+export const Scene7: React.FC<SceneProps> = ({ num, scene }) => (
+  <Plan
+    scene={scene ?? sceneParDefaut(num)}
+    construire={(q) => {
+      const B = fabrique(q);
+      return [
+        B(0, "sombre", "chapitre", (c) => <Chapitre c={c} num={7} titre="En résumé" />),
+        B("Donc si je devais récapituler", "sombre", "resume", (c) => <TitreSeul c={c} texte={"En *résumé*."} style="impact" max={200} />, [{ at: 2, son: "thud", volume: 0.3 }]),
+        B("Tu ne manques pas d'infos", "sombre", "manque", (c, m) => (
+          <Arbre
+            c={c}
+            titre={"*Pas* d'infos en plus."}
+            moyeu={{ texte: "Il te manque", at: m("Tu manques de") }}
+            pastilles={[
+              { valeur: "Des priorités", legende: "", at: m("priorités"), icone: ic(Cible) },
+              { valeur: "Du suivi", legende: "", at: m("de suivi"), icone: ic(Graphique) },
+              { valeur: "Un système", legende: "", at: m("et d'un système"), icone: ic(Bulle) },
+            ]}
+          />
+        ), [{ at: 30, son: "pop", volume: 0.25 }]),
+        B("Le système, il existe", "sombre", "existe", (c) => <AppEtapes c={c} vivant={0.6} etapes={[{ at: 0, titre: "Le système,\nil *existe*.", ecran: "aujourdhui.jpg" }]} max={160} />),
+        B("Le premier appel", "sombre", "offert", (c) => <Cadenas c={c} texte={"Le premier appel :\n*je te l'offre*."} ouvre={18} />, [{ at: 18, son: "bell", volume: 0.3 }]),
+        B("Il te reste juste", "clair", "une-chose", (c) => <TitreSeul c={c} texte={"Il te reste\n*une seule chose*\nà faire."} />),
+        B("Choisis ton bouton", "clair", "bouton", (c, m) => (
+          <Boutons c={c} titre={"Choisis ton bouton,\n*juste en dessous*."} apparitions={[4, 8]} fleche clic={m("et réserve") + 6} />
+        ), [{ at: 0, son: "whoosh", volume: 0.3 }], undefined, true),
+        B("Je te dis à très vite", "sombre", "fin", (c) => <Fin c={c} />, [{ at: 0, son: "impact", volume: 0.35 }]),
+      ];
+    }}
+  />
 );

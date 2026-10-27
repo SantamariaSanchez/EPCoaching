@@ -180,7 +180,7 @@ for (const sc of scenes) {
     titre: sc.titre,
     cible: sc.cible,
     lead,
-    queue: QUEUE,
+    queue: sc.num === 7 ? QUEUE + 3 : QUEUE, // la dernière scène garde la carte de fin à l'écran
     duree: +fin.toFixed(3),
     mots: flat.length,
     blocs,

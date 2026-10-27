@@ -1,11 +1,11 @@
-Dépose ici tes enregistrements de voix off, un fichier par scène :
-  scene-1.mp3  (Ouverture)
-  scene-2.mp3  (Qui je suis)
-  scene-3.mp3  (Le vrai problème)
-  scene-4.mp3  (Le système)
-  scene-5.mp3  (Lequel c'est toi ?)
-  scene-6.mp3  (L'appel)
-  scene-7.mp3  (En résumé)
-.wav et .m4a marchent aussi. Chaque scène se cale toute seule sur la durée de son fichier.
-Pour un calage mot à mot : npm run caler (crée scene-N.json à côté).
-Voir vsl/README.md.
+Voix off de la VSL.
+
+Version actuelle : voix IA française (ElevenLabs, voix « Liam », générée via vidIQ voiceover),
+découpée par scène et calée mot à mot par `npm run voix-ia` (scripts/voix-ia.mjs) :
+  scene-1.mp3 … scene-7.mp3   la voix de chaque scène
+  scene-1.json … scene-7.json le temps de chaque mot (le montage se cale dessus)
+Les prises brutes sont dans brut/ (non versionnées).
+
+Pour remplacer par ta propre voix : dépose tes fichiers scene-N.mp3 (mêmes noms, un par scène,
+silence coupé au début et à la fin), supprime les scene-N.json correspondants, puis
+`npm run caler` (Whisper, optionnel) et `npm run rendu`.
