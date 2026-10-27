@@ -4,7 +4,7 @@ import { measureText } from "@remotion/layout-utils";
 import { FONT } from "./tokens";
 
 export const largeur = (texte: string, taille: number, graisse = 800, espacement = 0) =>
-  measureText({ text: texte, fontFamily: FONT, fontSize: taille, fontWeight: String(graisse), letterSpacing: `${espacement}em`, validateFontIsLoaded: true }).width;
+  measureText({ text: texte, fontFamily: FONT, fontSize: taille, fontWeight: String(graisse), letterSpacing: `${espacement}em` }).width;
 
 // Plus grande taille telle que chaque ligne tient dans w, et le bloc dans h (équivalent fitText, multi-lignes).
 export const ajuster = (
