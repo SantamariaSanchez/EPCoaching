@@ -519,17 +519,20 @@ export const ChiffresPhrase: React.FC<{ c: Ctx; range: number; titre: string }> 
   const th = TH[c.theme];
   const r = p(c.f, range, range + 26, E.inOut);
   const so = styleSortie(c.sortie, "fond");
-  const N = 26;
+  const N = 24;
   return (
     <Camera c={c} force={0.4}>
       <div style={{ position: "absolute", inset: 0, ...so }}>
         {Array.from({ length: N }).map((_, k) => {
-          const x = 1390 + (hash(k * 3) - 0.5) * 720;
-          const y = 540 + (hash(k * 5) - 0.5) * 780;
+          // grille 4 × 6 avec un léger désordre : « en vrac » mais jamais l'un sur l'autre
+          const col = k % 4;
+          const lig = Math.floor(k / 4);
+          const x = 1080 + col * 190 + (hash(k * 3) - 0.5) * 40;
+          const y = 200 + lig * 128 + (hash(k * 5) - 0.5) * 30;
           const v = (10 + hash(k * 7) * 90).toFixed(hash(k) > 0.5 ? 1 : 0).replace(".", ",");
           const tx = 1320;
           const ty = 540;
-          const flot = Math.sin((c.f + k * 13) / 18) * 14 * (1 - r);
+          const flot = Math.sin((c.f + k * 13) / 18) * 6 * (1 - r);
           const z = hash(k * 9);
           return (
             <div
@@ -540,10 +543,10 @@ export const ChiffresPhrase: React.FC<{ c: Ctx; range: number; titre: string }> 
                 top: y + (ty - y) * r + flot,
                 fontFamily: FONT,
                 fontWeight: 800,
-                fontSize: 36 + z * 60,
+                fontSize: 34 + z * 22,
                 color: th.doux,
-                opacity: (0.25 + z * 0.5) * (1 - r) * p(c.f, k * 0.6, 8 + k * 0.6),
-                filter: `blur(${(1 - z) * 4 + r * 8}px)`,
+                opacity: (0.35 + z * 0.45) * (1 - r) * p(c.f, k * 0.6, 8 + k * 0.6),
+                filter: `blur(${(1 - z) * 2 + r * 8}px)`,
                 translate: "-50% -50%",
               }}
             >
