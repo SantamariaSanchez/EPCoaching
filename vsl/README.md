@@ -60,6 +60,9 @@ chargées, pour qu'aucun texte ne déborde de sa zone.
 
 ## Les 2 phrases à valider
 
+Décision du 29/10/2026 (sans retour du fondateur, pour livrer) : les deux phrases sont **conservées
+telles quelles** dans la version en ligne. Elles restent signalées pour une validation d'Emmanuel :
+
 - Scène 2 : « J'ai commencé la muscu comme tout le monde. Des programmes trouvés sur internet,
   des diètes copiées, des mois sans vraiment savoir si j'avançais. Et un jour, j'ai décidé de
   tout mesurer, de tout structurer, et de ne plus rien laisser au hasard. » (ton vrai parcours)
