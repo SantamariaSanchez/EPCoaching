@@ -129,9 +129,9 @@ ci-dessous.
 ## Formulaires et Calendly
 
 - Formulaire physique : https://ep-coaching-formulaires.vercel.app/prequalification
-- Formulaire business : https://ep-coaching-formulaires.vercel.app/business
+- Formulaire business : retiré (accompagnement business humain arrêté le 01/11/2026, /business redirige vers la page logiciel coach)
 - Lien de réservation Calendly (les deux formulaires y renvoient après
-  soumission) : https://calendly.com/peccoux-manu/30min
+  soumission) : https://calendly.com/peccoux-manu/audit-strategique (événement unique « Audit stratégique »)
 - Ces deux formulaires vivent dans un **repo séparé**,
   github.com/EmmanuelPeccoux/ep-coaching-formulaires, avec son propre
   README (mécanisme de stockage des réponses, détail du câblage
@@ -833,7 +833,7 @@ maintenant symétriques et vides de règles de mise en page.
 - Instagram : https://instagram.com/santamariasanchez_
 - Pages légales (temporaires, pointent vers l'app) : https://ep-coaching.vercel.app/legal/{cgu,cgv,confidentialite}
 - Formulaire physique : https://ep-coaching-formulaires.vercel.app/prequalification (route inchangée depuis le prompt 13/15)
-- Formulaire business : https://ep-coaching-formulaires.vercel.app/business (câblé au prompt 14/15, repo séparé ep-coaching-formulaires)
+- Formulaire business : retiré (accompagnement business humain arrêté le 01/11/2026, /business redirige vers la page logiciel coach) (câblé au prompt 14/15, repo séparé ep-coaching-formulaires)
 - Fallback business (inscription gratuite) : https://ep-coaching.vercel.app/auth/client
 
 ## Accessibilité

@@ -14,7 +14,7 @@
 - [L'appli](https://santamariasanchez.github.io/EPCoaching/appli/)
 - [Pour les coachs](https://santamariasanchez.github.io/EPCoaching/solutions/coachs/)
 - [Coaching physique 1-to-1](https://santamariasanchez.github.io/EPCoaching/physique/)
-- [Accompagnement business pour coachs](https://santamariasanchez.github.io/EPCoaching/business/)
+- [Le logiciel EP Coaching pour coachs sportifs](https://santamariasanchez.github.io/EPCoaching/business/)
 - [FAQ](https://santamariasanchez.github.io/EPCoaching/faq/)
 - [À propos du fondateur](https://santamariasanchez.github.io/EPCoaching/a-propos/)
 - [Actus](https://santamariasanchez.github.io/EPCoaching/actus/)
