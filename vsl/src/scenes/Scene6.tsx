@@ -6,7 +6,7 @@ import { Boutons, Cadenas, Messagerie } from "../motion/m-ui";
 import { Liste } from "../motion/m-listes";
 import { Cadran } from "../motion/m-data";
 
-// Scène 6, l'appel : les deux boutons du site, l'appel offert, son déroulé.
+// Scène 6, l'audit : les deux boutons du site, l'audit offert, son déroulé.
 // À VALIDER (fondateur) : « ça dure une trentaine de minutes » (cadran ~30 min).
 export const Scene6: React.FC<SceneProps> = ({ num, scene }) => (
   <Plan
@@ -14,15 +14,15 @@ export const Scene6: React.FC<SceneProps> = ({ num, scene }) => (
     construire={(q) => {
       const B = fabrique(q);
       return [
-        B(0, "clair", "chapitre", (c) => <Chapitre c={c} num={6} titre="L'appel" />),
+        B(0, "clair", "chapitre", (c) => <Chapitre c={c} num={6} titre="L'audit" />),
         B("Alors voilà ce que je te propose", "clair", "propose", (c) => <TitreSeul c={c} texte={"Voilà ce que\nje te *propose*."} />),
         B("Juste sous cette vidéo", "clair", "deux-boutons", (c, m) => (
           <Boutons c={c} titre={"Juste sous la vidéo :\n*deux boutons*."} apparitions={[m("Un pour le physique"), m("un pour les coachs")]} />
         ), [{ at: 40, son: "pop", volume: 0.3 }, { at: 76, son: "pop", volume: 0.3 }]),
-        B("Tu choisis le tien", "clair", "choisis", (c, m) => (
-          <Boutons c={c} titre={"Tu choisis le tien,\ntu *réserves ton appel*."} apparitions={[0, 3]} clic={m("et tu réserves") + 8} />
+        B("Si tu veux transformer ton physique", "clair", "choisis", (c, m) => (
+          <Boutons c={c} titre={"Physique : *ton audit*.\nCoach : *ton espace*."} apparitions={[0, m("Si tu es coach")]} clic={m("tu réserves ton audit") + 8} />
         ), [{ at: 40, son: "click", volume: 0.5 }]),
-        B("Cet appel", "sombre", "offert", (c, m) => <Cadenas c={c} texte={"Cet appel est *offert*,\net sans engagement."} ouvre={m("il est offert") + 4} />, [{ at: 30, son: "bell", volume: 0.3 }]),
+        B("Cet audit", "sombre", "offert", (c, m) => <Cadenas c={c} texte={"Cet audit est *offert*,\net sans engagement."} ouvre={m("il est offert") + 4} />, [{ at: 30, son: "bell", volume: 0.3 }]),
         B("On regarde ta situation", "clair", "situation", (c, m) => (
           <Liste
             c={c}
@@ -34,7 +34,7 @@ export const Scene6: React.FC<SceneProps> = ({ num, scene }) => (
             ]}
           />
         )),
-        B("Dans le pire des cas", "clair", "pire", (c) => <TitreSeul c={c} texte={"Au pire, tu repars\navec *un plan clair*,\ngratuitement."} />),
+        B("Tu repars avec une stratégie claire", "clair", "strategie", (c) => <TitreSeul c={c} texte={"Tu repars avec\n*une stratégie claire*,\nquoi que tu décides."} />),
         B("Concrètement", "sombre", "duree", (c) => <Cadran c={c} valeur={30} prefixe="~" unite="minutes" titre={"Concrètement,\n*une trentaine\nde minutes*."} />, [{ at: 6, son: "tick", volume: 0.25 }]),
         B("Tu me racontes ton objectif", "sombre", "echange", (c, m) => (
           <Messagerie
