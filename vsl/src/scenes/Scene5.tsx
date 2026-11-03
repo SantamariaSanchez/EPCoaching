@@ -9,7 +9,7 @@ import { TH, Z } from "../motion/tokens";
 
 const ic = (I: typeof Halteres) => <I size={84} color={TH.clair.accent} stroke={2} />;
 
-// Scène 5, lequel c'est toi : coaching physique ou appli coach, pour qui ce n'est pas, et la question des 6 mois.
+// Scène 5, lequel c'est toi : les deux accompagnements, pour qui ce n'est pas, et la question des 6 mois.
 export const Scene5: React.FC<SceneProps> = ({ num, scene }) => (
   <Plan
     scene={scene ?? sceneParDefaut(num)}
@@ -63,24 +63,21 @@ export const Scene5: React.FC<SceneProps> = ({ num, scene }) => (
             items={[
               { texte: "Les connaissances", at: 6, etat: "ok" },
               { texte: "Pas le temps de tout gérer", at: m("pas le temps"), etat: "non" },
-              { texte: "Chaque client bien suivi", at: m("ni de suivre"), etat: "non" },
             ]}
           />
         )),
-        B("Là, c'est l'appli coach", "sombre", "appli-coach", (c) => <PhotoTitre c={c} src="portrait_business.jpg" pos="50% 30%" texte={"L'appli coach\n*t'aide*."} cote="gauche" />),
-        B("Tes clients", "sombre", "etapes", (c, m) => (
+        B("Avec l'appli coach", "sombre", "pipeline", (c, m) => (
           <Chemin
             c={c}
-            vertical
-            titre={"Tout au\n*même endroit* :"}
+            titre={"L'appli coach\n*comme système*"}
             etapes={[
-              { texte: "Tes clients", at: 2 },
-              { texte: "Leurs programmes", at: m("leurs programmes") },
-              { texte: "Leurs bilans", at: m("leurs bilans") },
+              { texte: "Premier contenu", at: m("du premier contenu") },
+              { texte: "Prospects", at: m("du premier contenu") + 12 },
+              { texte: "Appel", at: m("du premier contenu") + 24 },
+              { texte: "Client suivi", at: m("client suivi") },
             ]}
           />
         )),
-        B("Tu vois tout de suite", "sombre", "decides", (c) => <TitreSeul c={c} texte={"Qui a besoin de toi :\n*tu le vois*.\nTu décides."} />),
         B("Et je vais être transparent", "clair", "transparent", (c, m) => (
           <Camera c={c}>
             <TitresEnEtapes
