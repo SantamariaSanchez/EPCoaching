@@ -9,7 +9,7 @@ import { TH } from "../motion/tokens";
 
 const ic = (I: typeof Bulle) => <I size={44} color={TH.sombre.accent} stroke={2.2} />;
 
-// Scène 7, en résumé : ce qui manque, le système, l'appel offert, le bouton, la carte de fin.
+// Scène 7, en résumé : ce qui manque, le système, l'audit offert, le bouton, la carte de fin.
 export const Scene7: React.FC<SceneProps> = ({ num, scene }) => (
   <Plan
     scene={scene ?? sceneParDefaut(num)}
@@ -31,10 +31,10 @@ export const Scene7: React.FC<SceneProps> = ({ num, scene }) => (
           />
         ), [{ at: 30, son: "pop", volume: 0.25 }]),
         B("Le système, il existe", "sombre", "existe", (c) => <AppEtapes c={c} vivant={0.6} etapes={[{ at: 0, titre: "Le système,\nil *existe*.", ecran: "aujourdhui.jpg" }]} max={160} />),
-        B("Le premier appel", "sombre", "offert", (c) => <Cadenas c={c} texte={"Le premier appel :\n*je te l'offre*."} ouvre={18} />, [{ at: 18, son: "bell", volume: 0.3 }]),
+        B("L'audit, je te l'offre", "sombre", "offert", (c) => <Cadenas c={c} texte={"L'audit :\n*je te l'offre*."} ouvre={18} />, [{ at: 18, son: "bell", volume: 0.3 }]),
         B("Il te reste juste", "clair", "une-chose", (c) => <TitreSeul c={c} texte={"Il te reste\n*une seule chose*\nà faire."} />),
         B("Choisis ton bouton", "clair", "bouton", (c, m) => (
-          <Boutons c={c} titre={"Choisis ton bouton,\n*juste en dessous*."} apparitions={[4, 8]} fleche clic={m("et réserve") + 6} />
+          <Boutons c={c} titre={"Choisis ton bouton,\n*juste en dessous*."} apparitions={[4, 8]} fleche clic={m("et passe à l'action") + 6} />
         ), [{ at: 0, son: "whoosh", volume: 0.3 }], undefined, true),
         B("Je te dis à très vite", "sombre", "fin", (c) => <Fin c={c} />, [{ at: 0, son: "impact", volume: 0.35 }]),
       ];
