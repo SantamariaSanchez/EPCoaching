@@ -1,10 +1,26 @@
 # VSL EP Coaching (motion design, Remotion)
 
-La vidéo de vente du site, en motion design 2026 : 7 scènes, 1920×1080, 30 images/s, environ 8 min 50.
+La vidéo de vente du site, en motion design : **version 2 (13/11/2026)**, 5 scènes, 1920×1080, 30 images/s, environ 2 min 10.
+Niche : débutants et intermédiaires de 18 à 25 ans qui veulent perdre du gras sans culpabiliser.
 Tout est du code (React + [Remotion](https://www.remotion.dev)) : chaque animation est calée **au mot près**
 sur la voix off, donc si la voix change, la vidéo se recale toute seule.
 
-## Direction artistique
+## Direction artistique (v2, 13/11/2026)
+
+Inspirée de la référence vidéo envoyée par Emmanuel (motion design « Claude cocinando ») :
+
+- **Typographie cinétique empilée** (`src/v2/Cinetique.tsx`) : les mots tombent un par un au moment exact où la voix
+  les dit (rotation 3D, flou, ressort), en capitales Montserrat 900 ; le mot mis en valeur passe en **Playfair
+  italique rouge lumineux** (police du logo EP). Les mots mis en valeur se règlent dans `script/mise-en-valeur.json`.
+- **Cartes en verre inclinées en 3D** (`src/v2/kit.tsx`, `Verre`) : coins très arrondis, liseré, reflet qui balaie,
+  entrée en profondeur avec flou de mouvement, légère dérive.
+- **Bulles de message**, puces, éclairs d'ouverture qui fusionnent, traînée lumineuse, photos d'Emmanuel en noir
+  et blanc derrière le texte, vraies captures de l'appli dans un écran en verre.
+- Fond noir profond, lueurs rouges qui dérivent, grain et vignette. Une seule couleur d'accent (rouge EP / corail).
+- Scènes : `src/v2/Scenes.tsx` ; chaque visuel est accroché à un mot du script (`c.mot("...")`).
+
+## Direction artistique (v1, archivée dans src/scenes/Scene1-7.tsx)
+
 
 - **Deux mondes qui se répondent** : clair (papier chaud, encre noire, rouge de marque : le pratiquant,
   le parcours, le problème, inspiré de la référence Pinterest) et sombre (noir profond, corail lumineux,
@@ -24,6 +40,13 @@ sur la voix off, donc si la voix change, la vidéo se recale toute seule.
   une trentaine de minutes, 6 mois) apparaissent ; aucun résultat client ni nombre de membres.
 
 ## Voix off
+
+**v2** : voix gratuite Microsoft Edge (« Rémy », multilingue), générée et calée mot à mot par
+`python3 scripts/voix-edge.py` (pip `edge-tts`, hôte `speech.platform.bing.com`), qui écrit
+`public/voix/scene-N.mp3` et `scene-N.json`. Pour changer une scène : modifier `script/voix-off.txt`,
+`npm run timeline`, puis `python3 scripts/voix-edge.py N` et `npm run rendu`.
+
+Ancienne voix (v1) :
 
 Voix IA française (ElevenLabs « Liam », générée via le connecteur vidIQ voiceover) en 3 prises
 (`public/voix/brut/`, non versionnées). `npm run voix-ia` (scripts/voix-ia.mjs) :
