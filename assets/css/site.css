@@ -511,12 +511,15 @@ footer.site-footer {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
+  /* minmax(0, 1fr) : sans colonne définie, la grille prenait la largeur du
+     plus long élément et débordait de 8 px sur téléphone. */
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-xl);
 }
 @media (min-width: 1024px) {
-  .footer-top { grid-template-columns: 320px 1fr; }
+  .footer-top { grid-template-columns: 320px minmax(0, 1fr); }
 }
-.footer-brand-block { display: flex; flex-direction: column; gap: var(--space-sm); }
+.footer-brand-block { display: flex; flex-direction: column; gap: var(--space-sm); min-width: 0; }
 .footer-brand img { height: 36px; width: auto; }
 .footer-tagline { font-size: 0.9rem; }
 .site-footer .footer-newsletter { align-items: flex-start; text-align: left; }

@@ -49,6 +49,10 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: auto; /* Lenis prend le relais du smooth scroll */
+  /* Filet de sécurité téléphone : aucun défilement horizontal, même si un
+     décor (halo, téléphones, bandeau de logos) dépasse. clip ne casse pas
+     position: sticky, contrairement à hidden. */
+  overflow-x: clip;
 }
 
 body {
@@ -60,6 +64,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden; /* le diamant fantôme du hero déborde volontairement du viewport */
   position: relative;
+  overflow-x: clip;
 }
 
 /* ── Atmosphère de marque : noir profond + brume rouge ────────────────────
