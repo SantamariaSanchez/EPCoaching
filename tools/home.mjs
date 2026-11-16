@@ -178,7 +178,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
   });
 
   const founder = `<section class="section"><div class="founder">
-    <figure class="founder-photo" data-reveal><img src="${r("/assets/images/portrait_physique.jpg")}" alt="Emmanuel Santamaria Sanchéz (Emmanuel Peccoux), coach sportif à Annecy et fondateur d'EP Coaching" loading="lazy" /><figcaption><strong>Emmanuel Santamaria Sanchéz</strong>${FOUNDER_FACTS.age} ans, né à ${FOUNDER_FACTS.naissance} (Colombie), coach à Annecy</figcaption></figure>
+    <figure class="founder-photo" data-reveal><img src="${r("/assets/images/portrait_physique.jpg")}" alt="Emmanuel, coach sportif à Annecy et fondateur d'EP Coaching" loading="lazy" /><figcaption><strong>Emmanuel Santamaria Sanchéz</strong>${FOUNDER_FACTS.age} ans, né à ${FOUNDER_FACTS.naissance} (Colombie), coach à Annecy</figcaption></figure>
     <div data-reveal style="--i:1">
       <p class="eyebrow">◆ Qui est derrière</p>
       <h2>Construit par un coach, <span class="accent">testé sur lui-même</span></h2>
@@ -235,7 +235,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
   return {
     path,
     title: "EP Coaching · Emmanuel Santamaria Sanchéz, coach sportif à Annecy : perdre du gras en 6 mois",
-    description: "EP Coaching, l'entreprise d'Emmanuel Santamaria Sanchéz (Emmanuel Peccoux), coach sportif à Annecy né en Colombie : coaching en ligne de 6 mois pour les débutantes qui veulent perdre du gras, et l'appli EP Coaching.",
+    description: "EP Coaching, coach sportif à Annecy : coaching en ligne de 6 mois pour les débutantes qui veulent perdre du gras, et l'appli EP Coaching.",
     body,
     bodyClass: "page-home",
     jsonld: [

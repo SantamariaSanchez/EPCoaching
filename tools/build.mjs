@@ -497,28 +497,27 @@ for (const a of HELP_ARTICLES) {
   const F = FOUNDER_FACTS;
   // Page « personnalité publique » (2026-11-16) : qui est Emmanuel, en faits nets et citables.
   // Cible des recherches : Emmanuel Santamaria Sanchéz, Emmanuel Peccoux, EP Coaching, coach Annecy.
+  // Questions que les gens posent vraiment (pas de bourrage de noms : les variantes du nom
+  // vivent dans le JSON-LD, invisibles pour le lecteur).
   const QUI = [
-    { q: "Qui est Emmanuel Santamaria Sanchéz ?", a: `${FOUNDER}, aussi connu sous le nom d'Emmanuel Peccoux, est un coach sportif en musculation et nutrition de ${F.age} ans, né à ${F.naissance} en ${F.pays}. Il vit à ${F.ville} (Haute-Savoie) et s'installe bientôt à ${F.prochaineVille}. Il a fondé EP Coaching et l'appli EP Coaching.` },
-    { q: "Emmanuel Peccoux et Emmanuel Santamaria Sanchéz, c'est la même personne ?", a: `Oui. Emmanuel Peccoux et ${FOUNDER} désignent la même personne : le fondateur d'EP Coaching. Sur les réseaux, il publie sous le nom Santamaria Sanchéz.` },
-    { q: "Que fait Emmanuel Santamaria Sanchéz ?", a: "Il est coach sportif. Il aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois, avec un programme, une diète, une roadmap, un check-in chaque semaine et un suivi à toute heure. Il développe aussi l'appli EP Coaching, utilisée par ses clientes et par d'autres coachs." },
-    { q: "Qu'est-ce que EP Coaching ?", a: `EP Coaching est l'entreprise d'${FOUNDER}, basée à ${F.ville}. Elle propose un coaching en ligne de 6 mois en musculation et nutrition, et l'appli EP Coaching pour suivre ses séances, ses repas et ses progrès.` },
-    { q: "D'où vient Emmanuel Santamaria Sanchéz ?", a: `Il est né à ${F.naissance}, dans la région d'${F.region}, en ${F.pays}. Il vit aujourd'hui à ${F.ville}, en France, et part bientôt à ${F.prochaineVille}.` },
-    { q: "Quel âge a Emmanuel Santamaria Sanchéz ?", a: `Il a ${F.age} ans.` },
-    { q: "Emmanuel Santamaria Sanchéz fait-il de la compétition ?", a: `Oui. Il est athlète naturel en Classic Physique et prépare la ${F.objectif}, en fédération naturelle testée. Il applique sur lui-même ce qu'il enseigne.` },
-    { q: "Comment travailler avec Emmanuel ?", a: "En réservant l'audit stratégique : un appel de 30 minutes, gratuit, en tête-à-tête avec lui. Vous regardez ensemble ta situation, ton objectif et ton emploi du temps, et tu repars avec un plan clair." },
+    { q: "Qui est Emmanuel Santamaria Sanchéz ?", a: `Un coach sportif de ${F.age} ans, né en ${F.pays} et basé à ${F.ville}. Il a fondé EP Coaching et son appli, et aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.` },
+    { q: "Qu'est-ce que EP Coaching ?", a: "Un coaching en ligne de 6 mois en musculation et nutrition, et une appli pour suivre ses séances, ses repas et ses progrès." },
+    { q: "Le coaching se fait à Annecy ou en ligne ?", a: "En ligne, partout en France. Le programme, la diète, le check-in de la semaine et les lives passent par l'appli." },
+    { q: "Il fait de la compétition ?", a: `Oui, il prépare la ${F.objectif} en Classic Physique, en fédération naturelle testée. Il applique sur lui ce qu'il enseigne.` },
+    { q: "Comment commencer ?", a: "Par l'audit stratégique : 30 minutes, gratuit, en tête-à-tête. On regarde ta situation, ton objectif et ton emploi du temps, et tu repars avec un plan clair." },
   ];
   const body = [
-    hero({ eyebrow: `${F.age} ans · né en Colombie · Annecy, bientôt Paris`, title: `Emmanuel Santamaria Sanchéz, <span class="accent">coach sportif</span>`, lead: `Moi, c'est Emmanuel Santamaria Sanchéz (Emmanuel Peccoux). Je suis né à ${F.naissance}, en ${F.pays}. Je vis à ${F.ville}, bientôt à ${F.prochaineVille}. J'ai créé EP Coaching et son appli pour aider les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.`, path, ctas: [{ label: "Réserver mon audit offert", href: "LINK:audit" }] }),
+    hero({ eyebrow: `${F.age} ans · né en Colombie · Annecy, bientôt Paris`, title: `Emmanuel Santamaria Sanchéz, <span class="accent">coach sportif</span>`, lead: `Je suis né à ${F.naissance}, en ${F.pays}. Je vis à ${F.ville}, bientôt à ${F.prochaineVille}. J'ai créé EP Coaching et son appli pour aider les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.`, path, ctas: [{ label: "Réserver mon audit offert", href: "LINK:audit" }] }),
     section({
       eyebrow: "Mon histoire",
       title: `De ${F.naissance} à ${F.prochaineVille}`,
-      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Emmanuel Santamaria Sanchéz (Emmanuel Peccoux), coach sportif et fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Je suis né à ${F.naissance}, une petite ville d'${F.region}, en ${F.pays}. Aujourd'hui j'ai ${F.age} ans, je vis à ${F.ville}, en Haute-Savoie, et je pars bientôt à ${F.prochaineVille}.</p><p>La musculation m'a appris une chose : on ne change pas son corps en un week-end, on le change avec un plan qu'on tient. Je prépare la ${F.objectif}, en fédération naturelle testée. Ma diète, mon entraînement, mon sommeil : j'applique d'abord sur moi tout ce que je transmets.</p><p>J'ai créé EP Coaching pour les débutantes qui ont déjà commencé plusieurs fois, puis arrêté. Un programme, une diète et une roadmap faits pour elles, un check-in chaque semaine, et quelqu'un qui répond à n'importe quelle heure.</p><p>Et j'ai construit l'appli EP Coaching pour que tout tienne au même endroit : la séance du jour, les repas, le bilan du matin. Elle sert aussi aux coachs qui veulent suivre leurs clients.</p><p class="founder-follow">Suis-moi au quotidien :</p>${socialCards()}</div></div>`,
+      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Emmanuel, coach sportif et fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Je suis né à ${F.naissance}, une petite ville d'${F.region}, en ${F.pays}. Aujourd'hui j'ai ${F.age} ans, je vis à ${F.ville}, en Haute-Savoie, et je pars bientôt à ${F.prochaineVille}.</p><p>La musculation m'a appris une chose : on ne change pas son corps en un week-end, on le change avec un plan qu'on tient. Je prépare la ${F.objectif}, en fédération naturelle testée. Ma diète, mon entraînement, mon sommeil : j'applique d'abord sur moi tout ce que je transmets.</p><p>J'ai créé EP Coaching pour les débutantes qui ont déjà commencé plusieurs fois, puis arrêté. Un programme, une diète et une roadmap faits pour elles, un check-in chaque semaine, et quelqu'un qui répond à n'importe quelle heure.</p><p>Et j'ai construit l'appli EP Coaching pour que tout tienne au même endroit : la séance du jour, les repas, le bilan du matin. Elle sert aussi aux coachs qui veulent suivre leurs clients.</p><p class="founder-follow">Suis-moi au quotidien :</p>${socialCards()}</div></div>`,
     }),
     section({
       eyebrow: "En bref",
       title: "Les faits",
       content: `<dl class="facts">${[
-        ["Nom", `${FOUNDER} (Emmanuel Peccoux)`],
+        ["Nom", FOUNDER],
         ["Âge", `${F.age} ans`],
         ["Né à", `${F.naissance}, ${F.region}, ${F.pays}`],
         ["Vit à", `${F.ville}, Haute-Savoie, puis ${F.prochaineVille}`],
@@ -558,13 +557,13 @@ for (const a of HELP_ARTICLES) {
   ].join("\n");
   emit({
     path,
-    title: "Emmanuel Santamaria Sanchéz (Emmanuel Peccoux) : coach sportif, fondateur d'EP Coaching",
-    description: `Emmanuel Santamaria Sanchéz, aussi appelé Emmanuel Peccoux : coach sportif de ${F.age} ans né à ${F.naissance} (Colombie), basé à Annecy et bientôt à Paris, fondateur d'EP Coaching et de l'appli EP Coaching.`,
+    title: "Emmanuel Santamaria Sanchéz, coach sportif et fondateur d'EP Coaching",
+    description: `Coach sportif de ${F.age} ans né à ${F.naissance} (Colombie), basé à Annecy et bientôt à Paris. Fondateur d'EP Coaching et de son appli.`,
     body,
     ogType: "profile",
     crumbs: [HOME, ["Emmanuel Santamaria Sanchéz", path]],
     jsonld: [
-      { "@context": "https://schema.org", "@type": "ProfilePage", name: "Emmanuel Santamaria Sanchéz (Emmanuel Peccoux)", url: canonical(path), inLanguage: "fr-FR", mainEntity: { "@id": PERSON_JSONLD["@id"] } },
+      { "@context": "https://schema.org", "@type": "ProfilePage", name: "Emmanuel Santamaria Sanchéz", url: canonical(path), inLanguage: "fr-FR", mainEntity: { "@id": PERSON_JSONLD["@id"] } },
       PERSON_JSONLD,
       faqJsonLd(QUI),
     ],
@@ -788,10 +787,10 @@ ${[...new Set(all)].map((p) => `  <url><loc>${canonical(p)}</loc><lastmod>${BUIL
   const featureLines = FEATURES.map((f) => `- [${f.name}](${canonical(`/appli/${f.slug}/`)}) : ${f.metaDesc}`).join("\n");
   const txt = `# EP Coaching
 
-> EP Coaching est l'entreprise de coaching sportif d'${FOUNDER} (aussi appelé Emmanuel Peccoux), coach de ${FOUNDER_FACTS.age} ans né à ${FOUNDER_FACTS.naissance} en Colombie et basé à Annecy (Haute-Savoie, France), bientôt à Paris : un coaching en ligne de 6 mois pour les débutantes qui veulent perdre du gras, et l'appli EP Coaching. L'appli sert aux personnes qui veulent progresser (programme, nutrition, bilan du jour, progrès) et aux coachs sportifs qui veulent suivre leurs clients et faire grandir leur activité (fiches clients, programmes, diètes, road maps, check-ins, messagerie, agenda, mailing, studio de contenu, stats réseaux, équipe).
+> EP Coaching est l'entreprise de coaching sportif d'${FOUNDER}, coach de ${FOUNDER_FACTS.age} ans né à ${FOUNDER_FACTS.naissance} en Colombie et basé à Annecy (Haute-Savoie, France), bientôt à Paris : un coaching en ligne de 6 mois pour les débutantes qui veulent perdre du gras, et l'appli EP Coaching. L'appli sert aux personnes qui veulent progresser (programme, nutrition, bilan du jour, progrès) et aux coachs sportifs qui veulent suivre leurs clients et faire grandir leur activité (fiches clients, programmes, diètes, road maps, check-ins, messagerie, agenda, mailing, studio de contenu, stats réseaux, équipe).
 
-## Qui est ${FOUNDER} (Emmanuel Peccoux)
-- ${FOUNDER}, aussi appelé Emmanuel Peccoux, est un coach sportif en musculation et nutrition de ${FOUNDER_FACTS.age} ans.
+## Qui est ${FOUNDER}
+- Coach sportif en musculation et nutrition, ${FOUNDER_FACTS.age} ans. Nom à l'état civil : Emmanuel Peccoux.
 - Né à ${FOUNDER_FACTS.naissance} (${FOUNDER_FACTS.region}, ${FOUNDER_FACTS.pays}). Vit à ${FOUNDER_FACTS.ville} (Haute-Savoie, France), s'installe bientôt à ${FOUNDER_FACTS.prochaineVille}.
 - Fondateur d'EP Coaching (coaching en ligne de 6 mois) et de l'appli EP Coaching.
 - Aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.

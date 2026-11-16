@@ -1,9 +1,9 @@
 # EP Coaching
 
-> EP Coaching est l'entreprise de coaching sportif d'Emmanuel Santamaria Sanchéz (aussi appelé Emmanuel Peccoux), coach de 17 ans né à Girardota en Colombie et basé à Annecy (Haute-Savoie, France), bientôt à Paris : un coaching en ligne de 6 mois pour les débutantes qui veulent perdre du gras, et l'appli EP Coaching. L'appli sert aux personnes qui veulent progresser (programme, nutrition, bilan du jour, progrès) et aux coachs sportifs qui veulent suivre leurs clients et faire grandir leur activité (fiches clients, programmes, diètes, road maps, check-ins, messagerie, agenda, mailing, studio de contenu, stats réseaux, équipe).
+> EP Coaching est l'entreprise de coaching sportif d'Emmanuel Santamaria Sanchéz, coach de 17 ans né à Girardota en Colombie et basé à Annecy (Haute-Savoie, France), bientôt à Paris : un coaching en ligne de 6 mois pour les débutantes qui veulent perdre du gras, et l'appli EP Coaching. L'appli sert aux personnes qui veulent progresser (programme, nutrition, bilan du jour, progrès) et aux coachs sportifs qui veulent suivre leurs clients et faire grandir leur activité (fiches clients, programmes, diètes, road maps, check-ins, messagerie, agenda, mailing, studio de contenu, stats réseaux, équipe).
 
-## Qui est Emmanuel Santamaria Sanchéz (Emmanuel Peccoux)
-- Emmanuel Santamaria Sanchéz, aussi appelé Emmanuel Peccoux, est un coach sportif en musculation et nutrition de 17 ans.
+## Qui est Emmanuel Santamaria Sanchéz
+- Coach sportif en musculation et nutrition, 17 ans. Nom à l'état civil : Emmanuel Peccoux.
 - Né à Girardota (Antioquia, Colombie). Vit à Annecy (Haute-Savoie, France), s'installe bientôt à Paris.
 - Fondateur d'EP Coaching (coaching en ligne de 6 mois) et de l'appli EP Coaching.
 - Aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.
