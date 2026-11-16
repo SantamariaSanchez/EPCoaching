@@ -8,7 +8,7 @@ import { rideauScene } from "./motion/TransitionScene";
 import { Theme } from "./motion/tokens";
 
 // Monde (clair / sombre) du premier plan de chaque scène : le rideau prend sa couleur.
-const ENTREE: Record<number, Theme> = { 1: "sombre", 2: "sombre", 3: "sombre", 4: "sombre", 5: "sombre" };
+const ENTREE: Record<number, Theme> = Object.fromEntries(Array.from({ length: 14 }, (_, i) => [i + 1, "sombre"])) as Record<number, Theme>;
 import { SCENES } from "./scenes";
 
 export type VSLProps = { scenes: SceneResolue[]; musique: string | null; voix: boolean };

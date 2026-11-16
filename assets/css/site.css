@@ -612,3 +612,9 @@ footer.site-footer {
 .prose ul.social-cards { display: grid; gap: 0.6rem; }
 .prose ul.social-cards li { padding-left: 0; line-height: inherit; }
 .prose ul.social-cards li::before { content: none; }
+
+/* Page Emmanuel : les faits en bref (2026-11-16) */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 0; }
+.facts > div { padding: 16px 18px; border-radius: 14px; background: rgba(245, 237, 237, 0.04); border: 1px solid rgba(245, 237, 237, 0.1); }
+.facts dt { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E01E1E; margin-bottom: 4px; }
+.facts dd { margin: 0; font-weight: 700; }

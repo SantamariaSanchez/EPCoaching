@@ -12,7 +12,7 @@ RYTHME = "+6%"
 PAUSE = {"vraie": 0.55, "paragraphe": 0.45}
 SR = 24000
 # Ce que la voix doit lire à la place de certains mots (le texte affiché ne change pas).
-LECTURE = {"WNBF": "W.N.B.F.", "EP Coaching": "E.P. Coaching"}
+LECTURE = {"WNBF": "W.N.B.F.", "EP Coaching": "E.P. Coaching", "coaching EP": "coaching E.P.", "roadmap": "rôde-mappe"}
 
 def segments(texte):
     """Découpe une scène en segments séparés par une pause (vraie ou paragraphe)."""

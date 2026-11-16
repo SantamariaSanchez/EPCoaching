@@ -1,7 +1,7 @@
 // Gabarit commun à toutes les pages générées : <head> SEO complet, header
 // avec navigation, fil d'Ariane, pied de page complet (colonnes + barre du
 // bas façon Instagram desktop). Aucune dépendance, uniquement des chaînes.
-import { BASE, APP, LINKS, SOCIALS, NAV, FOOTER_COLUMNS, FOOTER_BAR, FOUNDER } from "./config.mjs";
+import { BASE, APP, LINKS, SOCIALS, NAV, FOOTER_COLUMNS, FOOTER_BAR, FOUNDER, FOUNDER_FACTS } from "./config.mjs";
 
 export function esc(s) {
   return String(s ?? "")
@@ -183,26 +183,45 @@ function crumbsJsonLd(crumbs) {
 // Entreprise locale à Annecy (2026-10-13) : avant, seules les mentions
 // légales citaient Annecy, et Google les sortait sur « EP Coaching Annecy ».
 const ANNECY = { "@type": "PostalAddress", addressLocality: "Annecy", postalCode: "74600", addressRegion: "Haute-Savoie", addressCountry: "FR" };
+// Emmanuel, entité « personne » (2026-11-16) : un seul @id réutilisé partout,
+// pour que Google et les moteurs IA relient le nom, EP Coaching, l'appli et les réseaux.
+const F = FOUNDER_FACTS;
+export const PERSON_ID = BASE + "a-propos/#emmanuel";
+export const ORG_ID = BASE + "#ep-coaching";
+export const PERSON_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": PERSON_ID,
+  name: FOUNDER,
+  givenName: "Emmanuel",
+  familyName: "Santamaria Sanchéz",
+  alternateName: F.noms.filter((n) => n !== FOUNDER),
+  description: `${FOUNDER} (Emmanuel Peccoux), ${F.age} ans, coach sportif en musculation et nutrition né à ${F.naissance} (${F.pays}), basé à ${F.ville} et bientôt à ${F.prochaineVille}. Fondateur d'EP Coaching et de l'appli EP Coaching. Il aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois, et prépare la ${F.objectif}.`,
+  jobTitle: "Coach sportif en musculation et nutrition, fondateur d'EP Coaching",
+  url: BASE + "a-propos/",
+  image: BASE + "assets/images/portrait_physique.jpg",
+  birthPlace: { "@type": "Place", name: `${F.naissance}, ${F.region}, ${F.pays}`, address: { "@type": "PostalAddress", addressLocality: F.naissance, addressRegion: F.region, addressCountry: "CO" } },
+  nationality: { "@type": "Country", name: F.pays },
+  homeLocation: { "@type": "Place", name: `${F.ville}, Haute-Savoie, France`, address: ANNECY },
+  worksFor: { "@id": ORG_ID },
+  knowsAbout: ["Musculation", "Nutrition", "Perte de gras", "Coaching sportif en ligne", "Bodybuilding naturel", "Classic Physique", "WNBF"],
+  knowsLanguage: ["fr", "es"],
+  sameAs: SOCIALS.map((s) => s.url),
+};
 export const ORG_JSONLD = {
   "@context": "https://schema.org",
   "@type": ["Organization", "ProfessionalService"],
+  "@id": ORG_ID,
   name: "EP Coaching",
-  alternateName: "EP Coaching Annecy",
+  alternateName: ["EP Coaching Annecy", "EP Coaching Emmanuel", "EPCoaching"],
   url: BASE,
   logo: BASE + "assets/images/logo.png",
   image: BASE + "assets/images/og-image.png",
-  description: "Coaching sportif en musculation et nutrition basé à Annecy, accompagnement en ligne partout en France et appli pour les coachs sportifs, fondés par Emmanuel Santamaria Sanchéz.",
+  slogan: "Perds du gras et atteins tes objectifs en 6 mois.",
+  description: `EP Coaching est l'entreprise de coaching sportif d'${FOUNDER} (Emmanuel Peccoux), basée à Annecy : un coaching en ligne de 6 mois en musculation et nutrition pour les débutantes, et l'appli EP Coaching pour se suivre et pour les coachs.`,
   address: ANNECY,
-  areaServed: [{ "@type": "City", name: "Annecy" }, { "@type": "AdministrativeArea", name: "Haute-Savoie" }, { "@type": "Country", name: "France" }],
-  founder: {
-    "@type": "Person",
-    name: FOUNDER,
-    alternateName: ["Santamaria Sanchéz", "Santamaria Sanchez", "Emmanuel Santamaria Sanchez"],
-    jobTitle: "Coach sportif en musculation et nutrition",
-    homeLocation: { "@type": "Place", name: "Annecy, Haute-Savoie", address: ANNECY },
-    url: APP + "/a-propos",
-    sameAs: SOCIALS.map((s) => s.url),
-  },
+  areaServed: [{ "@type": "City", name: "Annecy" }, { "@type": "City", name: "Paris" }, { "@type": "AdministrativeArea", name: "Haute-Savoie" }, { "@type": "Country", name: "France" }],
+  founder: { "@id": PERSON_ID },
   sameAs: SOCIALS.map((s) => s.url).concat([APP, APP + "/coach-sportif-annecy"]),
 };
 
@@ -211,7 +230,15 @@ export function pageHtml({ path, title, description, body, crumbs = [], jsonld =
   const r = (h) => resolve(h, path);
   const url = canonical(path);
   const fullTitle = title.includes("EP Coaching") ? title : `${title} · EP Coaching`;
-  const ld = [...(crumbs.length > 1 ? [crumbsJsonLd(crumbs)] : []), ...jsonld]
+  // Emmanuel et EP Coaching sur chaque page (sans doublon si la page les passe déjà).
+  const seen = new Set();
+  const ld = [...(crumbs.length > 1 ? [crumbsJsonLd(crumbs)] : []), ...jsonld, ORG_JSONLD, PERSON_JSONLD]
+    .filter((o) => {
+      const k = JSON.stringify(o);
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    })
     .map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`)
     .join("\n  ");
   return `<!DOCTYPE html>

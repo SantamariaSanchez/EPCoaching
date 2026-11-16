@@ -3,7 +3,7 @@
 // Matis Clouet : un système clair contenu, guide gratuit, appli, appel).
 // Uniquement des faits réels : écrans de l'appli (comptes de démo), chiffres
 // calculés depuis les données du site, jamais de témoignage inventé.
-import { APP, LINKS, BASE, VSL_YOUTUBE_ID, VSL_VIDEO } from "./config.mjs";
+import { APP, LINKS, BASE, VSL_YOUTUBE_ID, VSL_VIDEO, FOUNDER_FACTS } from "./config.mjs";
 import { esc, resolve, link, icon, section, faqList, faqJsonLd, phone, logoMarquee, ORG_JSONLD, socialCards } from "./render.mjs";
 
 export const QUIZ = [
@@ -49,14 +49,14 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
     <div class="hx-aura" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="hx-grid" aria-hidden="true"></div>
     <div class="hx-copy">
-      <a class="pill" href="${r("/actus/")}"><b>Nouveau</b> Notes, agenda vivant et connecteur Claude ${icon("arrow", "icon icon--xs")}</a>
-      <h1>Le suivi d'un vrai coach. <span class="accent">Dans ta poche.</span></h1>
-      <p class="page-lead">Programme, nutrition, bilan en 30 secondes et progrès enfin visibles. Et si tu es coach : tes clients, ton contenu et ton business au même endroit.</p>
+      <a class="pill" href="${r("/a-propos/")}"><b>Emmanuel Santamaria Sanchéz</b> coach à Annecy, né en Colombie ${icon("arrow", "icon icon--xs")}</a>
+      <h1>Perds du gras et atteins tes objectifs <span class="accent">en 6 mois.</span></h1>
+      <p class="page-lead">Même si tu pars de zéro. Un programme, une diète et une roadmap faits pour toi, un check-in chaque semaine, et un coach qui te répond à toute heure.</p>
       <div class="cta-row">
-        <a href="${LINKS.signupMember}" class="btn-cta-primary btn-cta-primary--lg">Commencer gratuitement</a>
-        <a href="${r("/solutions/coachs/")}" class="btn-ghost">Je suis coach</a>
+        <a href="${LINKS.audit}" class="btn-cta-primary btn-cta-primary--lg">Réserver mon audit offert</a>
+        <a href="${LINKS.signupMember}" class="btn-ghost">Essayer l'appli 60 jours</a>
       </div>
-      <p class="hx-proof"><span>${icon("shield")} Gratuit, sans carte bancaire</span><span>${icon("map")} Données hébergées en Europe</span><span>${icon("book")} ${guides.length} guides offerts</span></p>
+      <p class="hx-proof"><span>${icon("target")} Audit 30 min, gratuit, en tête-à-tête</span><span>${icon("shield")} Appli gratuite 60 jours</span><span>${icon("heart")} Pour les débutantes</span></p>
     </div>
     <div class="phones" aria-label="Aperçu de l'appli EP Coaching">
       ${phone("nutrition", "Écran Nutrition de l'appli EP Coaching", path, "p-left", "", true)}
@@ -84,16 +84,16 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
         <button type="button" class="vx-start" aria-label="Lire la vidéo de présentation"><span class="vsl-play vx-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="vx-duration">${minutes} min</span></button>
       </div>`;
   const vsl = `<section class="vx" id="video">
-    <div class="vx-head" data-reveal><p class="eyebrow">◆ À regarder avant de réserver</p><h2>Pourquoi tu stagnes, <span class="accent">et comment on règle ça</span></h2><p class="section-intro">${minutes} minutes. Que tu veuilles transformer ton physique ou remplir ton agenda de coach.</p></div>
+    <div class="vx-head" data-reveal><p class="eyebrow">◆ À regarder avant de réserver</p><h2>Pourquoi tu recommences sans arrêt, <span class="accent">et comment on règle ça</span></h2><p class="section-intro">${minutes} minutes. Les 4 piliers pour perdre du gras quand on débute, sans y passer sa vie.</p></div>
     <div class="vx-frame" data-reveal>
       <div class="vx-glow" aria-hidden="true"></div>
       ${player}
     </div>
     <div class="vx-choice" data-reveal>
-      <a class="vx-card vx-card--hot" href="${LINKS.prequalification}"><span class="vx-kicker">Premier cas</span><strong>Je veux transformer mon physique</strong><span>Perdre du gras, prendre du muscle, préparer une compétition</span><em>Réserver mon appel offert ${icon("arrow", "icon icon--xs")}</em></a>
-      <a class="vx-card" href="${r("/business/")}"><span class="vx-kicker">Deuxième cas</span><strong>Je suis coach</strong><span>Plus de clients, plus de temps, un vrai système</span><em>Réserver mon appel offert ${icon("arrow", "icon icon--xs")}</em></a>
+      <a class="vx-card vx-card--hot" href="${LINKS.audit}"><span class="vx-kicker">Coaching 6 mois</span><strong>Je veux perdre du gras et me sentir bien</strong><span>Programme, diète, roadmap, check-in chaque semaine</span><em>Réserver mon audit offert ${icon("arrow", "icon icon--xs")}</em></a>
+      <a class="vx-card" href="${LINKS.signupMember}"><span class="vx-kicker">En autonomie</span><strong>Je veux d'abord essayer l'appli</strong><span>Séance, repas et bilan du matin, gratuit 60 jours</span><em>Créer mon compte ${icon("arrow", "icon icon--xs")}</em></a>
     </div>
-    <p class="vx-proof">Appel offert, sans engagement. Dans le pire des cas, tu repars avec un plan clair.</p>
+    <p class="vx-proof">Audit de 30 minutes, gratuit, avec Emmanuel. Dans le pire des cas, tu repars avec un plan clair.</p>
   </section>`;
 
   const counters = `<div class="counters">
@@ -178,14 +178,14 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
   });
 
   const founder = `<section class="section"><div class="founder">
-    <figure class="founder-photo" data-reveal><img src="${r("/assets/images/portrait_physique.jpg")}" alt="Emmanuel Santamaria Sanchéz, fondateur d'EP Coaching" loading="lazy" /><figcaption><strong>Emmanuel Santamaria Sanchéz</strong>Fondateur d'EP Coaching, athlète naturel</figcaption></figure>
+    <figure class="founder-photo" data-reveal><img src="${r("/assets/images/portrait_physique.jpg")}" alt="Emmanuel Santamaria Sanchéz (Emmanuel Peccoux), coach sportif à Annecy et fondateur d'EP Coaching" loading="lazy" /><figcaption><strong>Emmanuel Santamaria Sanchéz</strong>${FOUNDER_FACTS.age} ans, né à ${FOUNDER_FACTS.naissance} (Colombie), coach à Annecy</figcaption></figure>
     <div data-reveal style="--i:1">
       <p class="eyebrow">◆ Qui est derrière</p>
       <h2>Construit par un coach, <span class="accent">testé sur lui-même</span></h2>
-      <blockquote>Je prends les gens motivés, et je fais en sorte qu'ils aillent plus vite que s'ils étaient seuls.</blockquote>
-      <p>Coach en musculation et en nutrition basé à Annecy, athlète naturel, je prépare la Heroes Cup WNBF France en Classic Physique. Chaque outil de l'appli, je l'utilise d'abord sur moi. Ce que je sais, je l'ai appris en le faisant.</p>
-      <div class="badges"><span class="chip">Athlète naturel WNBF</span><span class="chip">Classic Physique</span><span class="chip">Coach musculation et nutrition</span></div>
-      <div class="cta-row" style="margin-top: var(--space-md)"><a class="btn-ghost" href="${r("/physique/")}">Découvrir l'accompagnement</a>${link("/a-propos/", `Mon histoire ${icon("arrow", "icon icon--xs")}`, path, "text-link")}</div>
+      <blockquote>Le plan parfait que tu abandonnes ne vaut rien. Le plan simple que tu tiens change tout.</blockquote>
+      <p>Moi, c'est Emmanuel. J'ai ${FOUNDER_FACTS.age} ans, je suis né à ${FOUNDER_FACTS.naissance}, en Colombie, je vis à Annecy et je pars bientôt à Paris. Je prépare la ${FOUNDER_FACTS.objectif} en fédération naturelle testée, et j'applique d'abord sur moi tout ce que je transmets. J'ai créé EP Coaching et son appli pour aider les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.</p>
+      <div class="badges"><span class="chip">${FOUNDER_FACTS.objectif}</span><span class="chip">Naturel testé</span><span class="chip">Annecy · bientôt Paris</span></div>
+      <div class="cta-row" style="margin-top: var(--space-md)"><a class="btn-ghost" href="${LINKS.audit}">Réserver mon audit offert</a>${link("/a-propos/", `Mon histoire ${icon("arrow", "icon icon--xs")}`, path, "text-link")}</div>
       <p class="founder-follow">Suis-moi au quotidien, conseils et coulisses :</p>
       ${socialCards()}
     </div>
@@ -208,9 +208,9 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
 
   const finalCta = `<section class="cta-band"><div class="cta-band-inner">
     <span class="diamond diamond--lg" aria-hidden="true"></span>
-    <h2>Ton premier bilan prend <span class="accent">30 secondes</span></h2>
-    <p>Crée ton compte, réponds à trois questions, et l'appli se règle sur toi. Gratuit, sans carte bancaire.</p>
-    <div class="cta-row cta-row--center"><a class="btn-cta-primary btn-cta-primary--lg" href="${LINKS.signupMember}">Commencer gratuitement</a><a class="btn-ghost" href="${LINKS.signupCoach}">Je suis coach</a></div>
+    <h2>Cette fois, <span class="accent">on le fait bien</span></h2>
+    <p>Audit stratégique avec Emmanuel : 30 minutes, gratuit, en tête-à-tête. Tu repars avec un plan clair.</p>
+    <div class="cta-row cta-row--center"><a class="btn-cta-primary btn-cta-primary--lg" href="${LINKS.audit}">Réserver mon audit offert</a><a class="btn-ghost" href="${LINKS.signupMember}">Essayer l'appli</a></div>
   </div></section>`;
 
   const body = [
@@ -229,13 +229,13 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
     section({ eyebrow: "Actus", title: "Ce qui vient de sortir", content: `<div class="grid grid--3">${news.slice(0, 3).map((n) => newsCard(n, path)).join("")}</div><p class="center">${link("/actus/", "Toutes les actus", path, "btn-ghost")}</p>` }),
     section({ eyebrow: "FAQ", title: "Questions fréquentes", content: faqList(faq) + `<p class="center">${link("/faq/", "Toutes les questions", path, "btn-ghost")}</p>`, narrow: true }),
     finalCta,
-    `<div class="sticky-cta" aria-hidden="false"><span>Ton suivi, gratuit</span><a class="btn-cta-primary" href="${LINKS.signupMember}">Commencer</a></div>`,
+    `<div class="sticky-cta" aria-hidden="false"><span>Audit 30 min, offert</span><a class="btn-cta-primary" href="${LINKS.audit}">Réserver</a></div>`,
   ].join("\n");
 
   return {
     path,
-    title: "EP Coaching : coach sportif à Annecy et appli de suivi musculation et nutrition",
-    description: "Coaching musculation et nutrition fondé à Annecy par Emmanuel Santamaria Sanchéz : programme, nutrition, bilan en 30 secondes et progrès visibles dans ton téléphone, gratuitement. Et pour les coachs : une appli complète.",
+    title: "EP Coaching · Emmanuel Santamaria Sanchéz, coach sportif à Annecy : perdre du gras en 6 mois",
+    description: "EP Coaching, l'entreprise d'Emmanuel Santamaria Sanchéz (Emmanuel Peccoux), coach sportif à Annecy né en Colombie : coaching en ligne de 6 mois pour les débutantes qui veulent perdre du gras, et l'appli EP Coaching.",
     body,
     bodyClass: "page-home",
     jsonld: [

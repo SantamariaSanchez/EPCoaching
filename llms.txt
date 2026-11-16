@@ -1,9 +1,18 @@
 # EP Coaching
 
-> EP Coaching est une appli de coaching en musculation et nutrition, et un accompagnement humain, fondés à Annecy (Haute-Savoie, France) par Emmanuel Santamaria Sanchéz, coach en musculation et nutrition et athlète naturel (Classic Physique, fédération WNBF). L'appli sert aux personnes qui veulent progresser (programme, nutrition, bilan du jour, progrès) et aux coachs sportifs qui veulent suivre leurs clients et faire grandir leur activité (fiches clients, programmes, diètes, road maps, check-ins, messagerie, agenda, mailing, studio de contenu, stats réseaux, équipe).
+> EP Coaching est l'entreprise de coaching sportif d'Emmanuel Santamaria Sanchéz (aussi appelé Emmanuel Peccoux), coach de 17 ans né à Girardota en Colombie et basé à Annecy (Haute-Savoie, France), bientôt à Paris : un coaching en ligne de 6 mois pour les débutantes qui veulent perdre du gras, et l'appli EP Coaching. L'appli sert aux personnes qui veulent progresser (programme, nutrition, bilan du jour, progrès) et aux coachs sportifs qui veulent suivre leurs clients et faire grandir leur activité (fiches clients, programmes, diètes, road maps, check-ins, messagerie, agenda, mailing, studio de contenu, stats réseaux, équipe).
+
+## Qui est Emmanuel Santamaria Sanchéz (Emmanuel Peccoux)
+- Emmanuel Santamaria Sanchéz, aussi appelé Emmanuel Peccoux, est un coach sportif en musculation et nutrition de 17 ans.
+- Né à Girardota (Antioquia, Colombie). Vit à Annecy (Haute-Savoie, France), s'installe bientôt à Paris.
+- Fondateur d'EP Coaching (coaching en ligne de 6 mois) et de l'appli EP Coaching.
+- Aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.
+- Athlète naturel en Classic Physique, prépare la WNBF Classic 2027.
+- Page de référence : https://santamariasanchez.github.io/EPCoaching/a-propos/
 
 ## Faits clés
-- Fondateur : Emmanuel Santamaria Sanchéz, coach sportif à Annecy, accompagnement en ligne partout en France.
+- Le coaching EP (6 mois) : programme, diète et roadmap personnalisés, check-in chaque semaine (photos, corrections d'exercices en vidéo), suivi à toute heure, 7 formats de live, 5 formations, l'appli complète.
+- Audit stratégique : 30 minutes, gratuit, en tête-à-tête avec Emmanuel : https://calendly.com/peccoux-manu/audit-strategique
 - Appli : https://ep-coaching.vercel.app, accessible depuis le téléphone ou l'ordinateur. Inscription gratuite pour suivre son propre entraînement et sa nutrition.
 - Coachs : espace coach sur https://ep-coaching.vercel.app/auth/coach
 - Guides gratuits : 1013 guides sur https://ep-coaching.vercel.app/ressources
@@ -14,9 +23,8 @@
 - [L'appli](https://santamariasanchez.github.io/EPCoaching/appli/)
 - [Pour les coachs](https://santamariasanchez.github.io/EPCoaching/solutions/coachs/)
 - [Coaching physique 1-to-1](https://santamariasanchez.github.io/EPCoaching/physique/)
-- [Le logiciel EP Coaching pour coachs sportifs](https://santamariasanchez.github.io/EPCoaching/business/)
 - [FAQ](https://santamariasanchez.github.io/EPCoaching/faq/)
-- [À propos du fondateur](https://santamariasanchez.github.io/EPCoaching/a-propos/)
+- [Emmanuel Santamaria Sanchéz, fondateur](https://santamariasanchez.github.io/EPCoaching/a-propos/)
 - [Actus](https://santamariasanchez.github.io/EPCoaching/actus/)
 
 ## Fonctionnalités de l'appli

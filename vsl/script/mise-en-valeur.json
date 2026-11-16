@@ -1,47 +1,17 @@
 {
-  "_lisez-moi": "Mots clés mis en valeur (accent couleur, italique serif). Un par phrase au plus. Après modification : npm run timeline.",
-  "1": [
-    "perdre du gras",
-    "tout gâché",
-    "culpabilises",
-    "pour toi",
-    "pas toi"
-  ],
-  "2": [
-    "Santamaria",
-    "WNBF Classic 2027",
-    "d'abord sur moi",
-    "Tous les jours"
-  ],
-  "3": [
-    "partout",
-    "trois pièges",
-    "pas fait pour toi",
-    "tu lâches",
-    "balance",
-    "de l'eau",
-    "deux semaines",
-    "culpabilité",
-    "encore plus fort",
-    "ne vaut rien",
-    "change tout"
-  ],
-  "4": [
-    "EP Coaching",
-    "vrai coach",
-    "ta situation",
-    "trente secondes",
-    "s'adapte",
-    "Rien n'est gâché",
-    "ajuste avec toi"
-  ],
-  "5": [
-    "gratuitement",
-    "sans carte bancaire",
-    "audit stratégique",
-    "offert",
-    "plan clair",
-    "Pas de culpabilité",
-    "que tu tiens"
-  ]
+  "_lisez-moi": "Mots clés mis en valeur (accent couleur). Un par phrase au plus. Après modification : npm run timeline.",
+  "1": ["Plusieurs fois", "tout s'est arrêté", "tous les jours", "jusqu'au bout", "motivation"],
+  "2": ["Colombie", "Emmanuel", "WNBF Classic 2027", "d'abord sur moi", "aimer leur corps"],
+  "3": ["trois choses", "pas le temps", "vrai emploi du temps", "trop débutante", "au début", "assez régulière", "se construit"],
+  "4": ["imagine", "exactement quoi faire", "ce qui a changé", "six mois"],
+  "5": ["cardio", "sans avoir faim", "balance", "craquent"],
+  "6": ["volonté", "quelqu'un d'autre", "ne vaut rien", "change tout"],
+  "7": ["avant le cardio", "La musculation, si", "trop massive", "ce qu'on construit"],
+  "8": ["Manger plus", "craques le soir", "protéines", "à ta faim"],
+  "9": ["pas la balance", "de l'eau", "tendance"],
+  "10": ["pas un échec", "même erreur", "un repas", "Rien n'est gâché"],
+  "11": ["dans l'ordre", "les bases", "confiance", "affine", "seule"],
+  "12": ["coaching EP", "faits pour toi", "check-in", "n'importe quelle heure", "jamais seule"],
+  "13": ["même endroit", "en vidéo", "trente secondes", "quoi faire"],
+  "14": ["audit stratégique", "offert", "toi et moi", "je te le dirai", "plan clair", "ton objectif", "sous cette vidéo"]
 }
