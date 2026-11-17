@@ -126,7 +126,7 @@ export const FEATURES = [
     ],
     stepsTitle: "Pourquoi ça marche",
     steps: [
-      { t: "C'est court", d: "Quelques champs, pas un questionnaire. C'est ce qui permet de le tenir tous les jours." },
+      { t: "C'est court", d: "Quelques champs : tu le tiens tous les jours." },
       { t: "C'est relié", d: "Les calories viennent du tracker nutrition, les pas de ta journée : tu ne tapes pas deux fois la même chose." },
       { t: "C'est lu", d: "Si tu as un coach, il voit tes bilans et s'en sert pour ajuster ton plan." },
     ],
@@ -357,7 +357,7 @@ export const FEATURES = [
     points: [
       { icon: "note", t: "Écrire ou dicter", d: "Tape, dicte, colle un lien ou ajoute une capture d'écran. Une note rapide est accessible de partout dans l'appli." },
       { icon: "sparkles", t: "Des #tags qui rangent", d: "Ajoute #reel, #client ou #idée : les notes se classent seules, et une note qui parle d'un tag existant le reçoit automatiquement." },
-      { icon: "plug", t: "Des notes reliées", d: "Relie deux notes avec [[Titre de la note]], comme dans Obsidian. Ton savoir devient un réseau, pas une pile." },
+      { icon: "plug", t: "Des notes reliées", d: "Relie deux notes avec [[Titre de la note]], comme dans Obsidian. Tes idées se retrouvent en un clic." },
       { icon: "search", t: "Recherche instantanée", d: "La recherche retrouve tout, même depuis la loupe de l'appli." },
     ],
     stepsTitle: "Prendre une note",

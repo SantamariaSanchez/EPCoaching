@@ -7,7 +7,7 @@ export const FAQ_GROUPS = [
     title: "EP Coaching en général",
     items: [
       { q: "Qu'est-ce qu'EP Coaching ?", a: "EP Coaching, c'est une appli de coaching et un accompagnement humain. L'appli sert à la fois aux personnes qui veulent progresser en musculation et en nutrition, et aux coachs qui veulent suivre leurs clients et faire grandir leur activité. Le tout a été fondé par Santamaria Sanchéz." },
-      { q: "Qui est derrière EP Coaching ?", a: "Emmanuel Santamaria Sanchéz, coach en musculation et en nutrition, athlète naturel, fondateur d'EP Coaching. Il accompagne des personnes qui veulent transformer leur physique et des coachs qui veulent structurer leur activité." },
+      { q: "Qui est derrière EP Coaching ?", a: "Emmanuel Santamaria Sanchéz, coach en musculation et en nutrition à Annecy, fondateur d'EP Coaching. Il accompagne les débutantes qui veulent perdre du gras en 6 mois." },
       { q: "À qui s'adresse l'appli ?", a: "À trois profils : les membres qui veulent se suivre eux-mêmes, les clients accompagnés par un coach, et les coachs (seuls ou avec une équipe) qui gèrent leurs clients et leur business." },
       { q: "Est-ce que l'appli est gratuite ?", a: "Oui, l'inscription et le suivi en autonomie sont gratuits, sans carte bancaire. L'accompagnement par un coach et l'espace coach sont des offres payantes." },
       { q: "Pourquoi le site n'affiche-t-il pas de prix ?", a: "Parce que chaque accompagnement commence par un échange : on regarde ta situation avant de te proposer quoi que ce soit. Pour l'espace coach, les offres sont présentées au moment de l'inscription." },
@@ -37,7 +37,7 @@ export const FAQ_GROUPS = [
       { q: "Comment être accompagné par un coach ?", a: "Si un coach t'a envoyé un lien d'invitation, crée ton compte avec ce lien. Sinon, parcours l'annuaire des coachs, ou réserve un appel pour l'accompagnement physique de Santamaria Sanchéz." },
       { q: "Comment se passe l'accompagnement physique 1-to-1 ?", a: "On commence par un appel gratuit pour faire le point sur ta situation. Si l'accompagnement est adapté, ton coach construit ton plan (entraînement, nutrition, objectifs), puis l'ajuste en continu avec toi." },
       { q: "Qu'est-ce qu'un check-in hebdomadaire ?", a: "Une fois par semaine, ton bilan de la semaine part à ton coach, qui te répond directement dans l'appli pour ajuster la suite." },
-      { q: "Je prépare une compétition, EP Coaching peut m'aider ?", a: "Oui : poses de ta catégorie, guide de posing, compte à rebours et suivi précis. L'accompagnement est pensé par un athlète naturel qui prépare lui-même la compétition." },
+      { q: "Je prépare une compétition, EP Coaching peut m'aider ?", a: "Oui : poses de ta catégorie, guide de posing, compte à rebours et suivi précis. Emmanuel prépare lui-même la WNBF Classic 2027." },
       { q: "Les coachs d'EP Coaching sont-ils de vraies personnes ?", a: "Oui. L'accompagnement est assuré par des coachs humains, qui lisent tes bilans et te répondent." },
     ],
   },
