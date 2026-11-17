@@ -36,6 +36,26 @@ const repere = (sc: SceneResolue) => (texte: string, nth = 0) => {
 type R = ReturnType<typeof repere>;
 type Plan = { at: number; v: (t0: number) => React.ReactNode | null };
 
+// v3.3 (cut-the-curve) : changement de visuel = coupe en plein mouvement vers la gauche.
+// Sortie 0 -> -230 px en power4.in (7 images), entrée +230 -> 0 en power4.out, mêmes
+// distance et durée : la vitesse est identique des deux côtés de la coupe.
+const Coupe: React.FC<{ at: number; suivant?: number; children: React.ReactNode }> = ({ at, suivant, children }) => {
+  const f = useCurrentFrame();
+  const DUREE = 7;
+  const e = Math.max(0, Math.min(1, (f - at) / DUREE));
+  const entree = 1 - Math.pow(1 - e, 4);
+  const s = suivant === undefined ? 0 : Math.max(0, Math.min(1, (f - (suivant - DUREE)) / DUREE));
+  const sortie = Math.pow(s, 4);
+  const x = 230 * (1 - entree) - 230 * sortie;
+  const flou = 8 * (1 - entree) + 8 * sortie;
+  const opacite = Math.min(0.35 + 0.65 * Math.min(1, e * 2.5), 1 - Math.min(1, s * 1.4));
+  return (
+    <AbsoluteFill style={{ transform: `translateX(${x}px)`, opacity: opacite, filter: flou > 0.3 ? `blur(${flou.toFixed(1)}px)` : undefined }}>
+      {children}
+    </AbsoluteFill>
+  );
+};
+
 const Moteur: React.FC<{ scene: SceneResolue; plans: (r: R) => Plan[]; sons?: (r: R) => number[] }> = ({ scene, plans, sons }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -58,7 +78,7 @@ const Moteur: React.FC<{ scene: SceneResolue; plans: (r: R) => Plan[]; sons?: (r
       <Fond teinte={scene.num} energie={energie} />
       <AbsoluteFill style={{ transform: cam }}>
         {visuel ? null : cles.map((c, i) => <Onde key={i} at={c} x={50} y={50} />)}
-        {visuel}
+        {visuel ? <Coupe at={actif!.at} suivant={liste.find((p) => p.at > actif!.at)?.at}>{visuel}</Coupe> : null}
         {visuel ? null : <MotsCles scene={scene} />}
       </AbsoluteFill>
       <Progression part={(scene.num - 1 + f / scene.dureeFrames) / NB_SCENES} />

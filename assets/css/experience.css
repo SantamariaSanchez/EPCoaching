@@ -11,10 +11,10 @@
 /* ── Apparition au défilement (activée seulement si le JS tourne) ─────── */
 html.js [data-reveal] {
   opacity: 0;
-  transform: translateY(18px);
-  /* 2026-11-17 : plus de flou (lourd à calculer, lent à l'œil). Entrée nette en 0,45 s. */
-  transition: opacity 0.45s cubic-bezier(.16,1,.3,1), transform 0.45s cubic-bezier(.16,1,.3,1);
-  transition-delay: calc(var(--i, 0) * 60ms);
+  transform: translateY(10px);
+  /* Sections : entrée discrète. Le seul vrai moment de mouvement est le titre du hero. */
+  transition: opacity 0.35s cubic-bezier(.16,1,.3,1), transform 0.35s cubic-bezier(.16,1,.3,1);
+  transition-delay: calc(var(--i, 0) * 50ms);
 }
 html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
 
@@ -152,7 +152,7 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
 }
 .float-chip strong { display: block; font-size: 0.95rem; color: var(--blanc-casse); }
 .float-chip .icon { width: 1.5rem; height: 1.5rem; }
-.float-chip.c1 { left: 2%; top: 18%; animation-delay: 0.5s; }
+.float-chip.c1 { left: 0; top: 44%; animation-delay: 0.5s; }
 .float-chip.c2 { right: 0; top: 58%; animation-delay: 1.5s; }
 .float-chip.c3 { left: 8%; bottom: 6%; animation-delay: 2.5s; }
 @media (max-width: 640px) { .float-chip.c3 { display: none; } .float-chip { font-size: 0.7rem; } }
@@ -172,7 +172,7 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
 .counters { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md); max-width: 1100px; margin: 0 auto; padding: 0 var(--space-md); }
 @media (min-width: 800px) { .counters { grid-template-columns: repeat(4, 1fr); } }
 .counter { text-align: center; padding: var(--space-md) var(--space-sm); border-radius: 18px; background: color-mix(in srgb, var(--rouge-tres-fonce) 45%, transparent); border: 1px solid color-mix(in srgb, var(--rouge-principal) 14%, transparent); }
-.counter strong { display: block; font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1; background: linear-gradient(180deg, var(--blanc-casse) 30%, var(--rose-clair)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.counter strong { display: block; font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1; color: var(--blanc-casse); }
 .counter span { display: block; margin-top: 0.5rem; font-size: 0.85rem; color: color-mix(in srgb, var(--blanc-casse) 68%, transparent); }
 
 /* ── Cartes lumineuses (halo qui suit la souris) + inclinaison ────────── */
@@ -322,6 +322,7 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
 .quiz-guide h3 { font-size: 1.2rem; margin: 0.35rem 0; }
 .quiz-guide p { font-size: 0.92rem; }
 .quiz-form { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.quiz-form input[type="email"]::placeholder { color: color-mix(in srgb, var(--blanc-casse) 60%, transparent); }
 .quiz-form input[type="email"] { flex: 1 1 240px; padding: 1rem 1.1rem; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--rouge-principal) 35%, transparent); background: color-mix(in srgb, var(--noir-profond) 80%, transparent); color: var(--blanc-casse); font: inherit; }
 .quiz-form input[type="email"]:focus { outline: 2px solid var(--rouge-principal); outline-offset: 2px; }
 .quiz-form button { flex: 0 0 auto; }
@@ -374,18 +375,12 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
 @media (min-width: 1024px) { .sticky-cta { display: none; } }
 
 /* ── Titres de section plus impactants ───────────────────────────────── */
-.section-head h2 .accent, .hx h1 .accent, .fx-hero h1 .accent {
-  background: linear-gradient(90deg, var(--rouge-principal), var(--rose-clair), var(--rouge-principal));
-  background-size: 200% 100%;
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  animation: shine 6s linear infinite;
-}
+.section-head h2 .accent, .hx h1 .accent, .fx-hero h1 .accent { color: var(--rouge-principal); }
 @keyframes shine { to { background-position: -200% 0; } }
 
 @media (prefers-reduced-motion: reduce) {
   html.js [data-reveal] { opacity: 1; transform: none; filter: none; transition: none; }
   .phones .phone, .float-chip, .fx-hero-visual .phone, .hx-aura i, .marquee-track,
-  .section-head h2 .accent, .hx h1 .accent, .fx-hero h1 .accent { animation: none; }
 }
 
 /* Halo derrière les héros simples (aide, FAQ, légal...) */
@@ -456,4 +451,22 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
   .road::before { content: ""; position: absolute; left: 4%; right: 4%; top: -14px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, #E01E1E, rgba(224, 30, 30, 0.15)); }
   .offer { grid-template-columns: 1.1fr 1fr; align-items: center; gap: 40px; padding: 48px; }
   .ck--grid { grid-template-columns: 1fr; }
+}
+
+/* ── Moment signature (2026-11-17) : le titre du hero monte mot par mot, flou qui se
+   dissipe, puis le sous-titre, les boutons et les téléphones arrivent dans la foulée. */
+.hx h1 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.hx h1 .w > span { display: inline-block; }
+html.js .hx h1 .w > span { animation: hx-rise 0.9s cubic-bezier(.16,1,.3,1) both; animation-delay: calc(var(--k) * 70ms + 80ms); }
+html.js .hx .page-lead, html.js .hx .cta-row, html.js .hx .hx-proof, html.js .hx .pill { animation: hx-fade 0.7s cubic-bezier(.16,1,.3,1) both; }
+html.js .hx .pill { animation-delay: 0ms; }
+html.js .hx .page-lead { animation-delay: 520ms; }
+html.js .hx .cta-row { animation-delay: 620ms; }
+html.js .hx .hx-proof { animation-delay: 720ms; }
+html.js .hx .phones { animation: hx-phones 1.1s cubic-bezier(.16,1,.3,1) both 450ms; }
+@keyframes hx-rise { from { transform: translateY(105%); filter: blur(6px); } to { transform: none; filter: blur(0); } }
+@keyframes hx-fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes hx-phones { from { opacity: 0; transform: translateY(60px) scale(0.96); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html.js .hx h1 .w > span, html.js .hx .page-lead, html.js .hx .cta-row, html.js .hx .hx-proof, html.js .hx .pill, html.js .hx .phones { animation: none; }
 }

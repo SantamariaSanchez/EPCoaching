@@ -302,8 +302,7 @@ body.nav-open { overflow: hidden; }
   align-items: flex-start;
   padding: var(--space-md);
   border-radius: var(--radius-md);
-  border: 1px solid color-mix(in srgb, var(--rouge-principal) 25%, transparent);
-  border-left: 3px solid var(--rouge-principal);
+  border: 1px solid color-mix(in srgb, var(--rouge-principal) 35%, transparent);
   background: color-mix(in srgb, var(--rouge-tres-fonce) 55%, transparent);
 }
 .callout p { margin: 0; }
