@@ -81,9 +81,19 @@ export const Pilier: React.FC<{ t0: number; num: number; titre: string }> = ({ t
   return (
     <div style={ZONE}>
       <div style={{ position: "relative", display: "flex", alignItems: "center", gap: 70, transform: `translateX(${-d * 0.8}px)` }}>
-        <div style={{ position: "relative", fontFamily: MONTSERRAT, fontWeight: 900, fontSize: 420, letterSpacing: -30, lineHeight: 0.8 }}>
-          <span style={{ color: "transparent", WebkitTextStroke: `4px ${C.rouge}`, opacity: eo(d, 0, 6) }}>{n}</span>
-          <span style={{ position: "absolute", left: 0, top: 0, color: C.rouge, clipPath: `inset(${(1 - rempli) * 100}% 0 0 0)`, textShadow: `0 0 80px ${rougeA(0.5)}` }}>{n}</span>
+        <div style={{ perspective: 1400 }}>
+          <Extrude
+            couches={18}
+            pas={4}
+            style={{ fontFamily: MONTSERRAT, fontWeight: 900, fontSize: 420, letterSpacing: -30, lineHeight: 0.8, transform: `rotateY(${-38 + eo(d, 0, 90) * 26}deg) rotateX(${10 - eo(d, 0, 90) * 6}deg)` }}
+            flanc={(k) => <span style={{ color: `rgb(${Math.round(120 - k * 90)}, 4, 4)`, opacity: rempli }}>{n}</span>}
+            face={
+              <div style={{ position: "relative" }}>
+                <span style={{ color: "transparent", WebkitTextStroke: `4px ${C.rouge}`, opacity: eo(d, 0, 6) }}>{n}</span>
+                <span style={{ position: "absolute", left: 0, top: 0, color: C.rouge, clipPath: `inset(${(1 - rempli) * 100}% 0 0 0)`, textShadow: `0 0 80px ${rougeA(0.5)}` }}>{n}</span>
+              </div>
+            }
+          />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 26 }}>
           <div style={{ fontFamily: MONTSERRAT, fontWeight: 800, fontSize: 30, letterSpacing: 10, color: blancA(0.6), textTransform: "uppercase", opacity: eo(d, 4, 12) }}>Pilier {num} sur 4</div>
@@ -502,7 +512,15 @@ export const Compteur: React.FC<{ t0: number; valeur: number; unite: string; sou
           <circle cx={R} cy={R} r={R - 16} fill="none" stroke={C.rouge} strokeWidth={18} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - p} strokeLinecap="round" style={{ filter: `drop-shadow(0 0 16px ${C.rouge})` }} />
         </svg>
         <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ fontFamily: MONTSERRAT, fontWeight: 900, fontSize: 220, lineHeight: 0.9, letterSpacing: -10, color: C.blanc }}>{Math.round(p * valeur)}</div>
+          <div style={{ perspective: 1000 }}>
+            <Extrude
+              couches={14}
+              pas={3}
+              style={{ fontFamily: MONTSERRAT, fontWeight: 900, fontSize: 220, lineHeight: 0.9, letterSpacing: -10, transform: `rotateY(${-30 + eo(d, 0, 60) * 22}deg) rotateX(8deg)` }}
+              flanc={(k) => <span style={{ color: `rgb(${Math.round(150 - k * 110)}, 10, 10)` }}>{Math.round(p * valeur)}</span>}
+              face={<span style={{ color: C.blanc }}>{Math.round(p * valeur)}</span>}
+            />
+          </div>
           <div style={{ fontFamily: MONTSERRAT, fontWeight: 900, fontSize: 64, color: C.rouge, letterSpacing: -1 }}>{unite}</div>
         </div>
       </div>
@@ -537,6 +555,40 @@ export const Jour1: React.FC<{ t0: number; ats: number[] }> = ({ ats }) => {
           </div>
         );
       })}
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+/** Volume 3D : le contenu est empilé en profondeur (couches de plus en plus sombres), ce
+ *  qui donne une vraie épaisseur quand l'objet tourne. */
+export const Extrude: React.FC<{ couches?: number; pas?: number; face: React.ReactNode; flanc: (k: number) => React.ReactNode; style?: React.CSSProperties }> = ({ couches = 14, pas = 3, face, flanc, style }) => (
+  <div style={{ position: "relative", transformStyle: "preserve-3d", ...style }}>
+    {Array.from({ length: couches }, (_, i) => couches - i).map((k) => (
+      <div key={k} style={{ position: "absolute", inset: 0, transform: `translateZ(${-k * pas}px)` }}>{flanc(k / couches)}</div>
+    ))}
+    <div style={{ position: "relative", transform: "translateZ(0px)" }}>{face}</div>
+  </div>
+);
+
+/** Sol 3D : une grille rouge en perspective qui défile vers la caméra (profondeur). */
+export const Sol: React.FC = () => {
+  const f = useCurrentFrame();
+  return (
+    <div style={{ position: "absolute", left: -600, right: -600, bottom: -260, height: 900, perspective: 700, perspectiveOrigin: "50% 0%", pointerEvents: "none" }}>
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          transform: "rotateX(74deg)",
+          transformOrigin: "50% 0%",
+          backgroundImage: `linear-gradient(${rougeA(0.35)} 2px, transparent 2px), linear-gradient(90deg, ${rougeA(0.35)} 2px, transparent 2px)`,
+          backgroundSize: "120px 120px",
+          backgroundPosition: `0px ${(f * 3) % 120}px`,
+          maskImage: "linear-gradient(180deg, transparent 0%, black 35%, black 70%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(180deg, transparent 0%, black 35%, black 70%, transparent 100%)",
+        }}
+      />
     </div>
   );
 };

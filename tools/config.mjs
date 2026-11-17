@@ -47,7 +47,6 @@ export const FOUNDER_FACTS = {
   pays: "Colombie",
   ville: "Annecy",
   prochaineVille: "Paris",
-  objectif: "WNBF Classic 2027",
   // Toutes les façons dont on le cherche sur Google.
   noms: ["Emmanuel Santamaria Sanchéz", "Emmanuel Santamaria Sanchez", "Emmanuel Santamaria", "Santamaria Sanchez", "Santamaria Sanchéz", "Emmanuel Peccoux", "Peccoux Emmanuel", "Manu Peccoux"],
 };

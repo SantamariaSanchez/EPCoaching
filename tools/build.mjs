@@ -500,14 +500,13 @@ for (const a of HELP_ARTICLES) {
     { q: "Qui est Emmanuel Santamaria Sanchéz ?", a: `Un coach sportif de ${F.age} ans, né en ${F.pays} et basé à ${F.ville}. Il a fondé EP Coaching et son appli, et aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.` },
     { q: "Qu'est-ce que EP Coaching ?", a: "Un coaching en ligne de 6 mois en musculation et nutrition, et une appli pour suivre ses séances, ses repas et ses progrès." },
     { q: "Le coaching se fait à Annecy ou en ligne ?", a: "En ligne, partout en France. Le programme, la diète, le check-in de la semaine et les lives passent par l'appli." },
-    { q: "Il fait de la compétition ?", a: `Oui, il prépare la ${F.objectif} en Classic Physique.` },
     { q: "Comment commencer ?", a: "Par un audit de 30 minutes, offert, avec Emmanuel." },
   ];
   const body = [
     hero({ eyebrow: `${F.age} ans · né en Colombie · Annecy, bientôt Paris`, title: `Emmanuel Santamaria Sanchéz, <span class="accent">coach sportif</span>`, lead: `J'aide les débutantes à perdre du gras en 6 mois.`, path, ctas: [{ label: "Réserver mon audit offert", href: "LINK:audit" }] }),
     section({
       title: `De ${F.naissance} à ${F.prochaineVille}`,
-      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Emmanuel, coach sportif et fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Je suis né à ${F.naissance}, en ${F.pays}. J'ai ${F.age} ans, je vis à ${F.ville} et je pars bientôt à ${F.prochaineVille}.</p><p>Je prépare la ${F.objectif}. J'ai créé EP Coaching et son appli.</p>${socialCards()}</div></div>`,
+      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Emmanuel, coach sportif et fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Je suis né à ${F.naissance}, en ${F.pays}. J'ai ${F.age} ans, je vis à ${F.ville} et je pars bientôt à ${F.prochaineVille}.</p><p>J'ai créé EP Coaching et son appli.</p>${socialCards()}</div></div>`,
     }),
     section({
       title: "Les faits",
@@ -518,7 +517,6 @@ for (const a of HELP_ARTICLES) {
         ["Vit à", `${F.ville}, Haute-Savoie, puis ${F.prochaineVille}`],
         ["Métier", "Coach sportif en musculation et nutrition"],
         ["Entreprise", "EP Coaching (coaching en ligne et appli)"],
-        ["Compétition", `${F.objectif}, Classic Physique`],
         ["Langues", "Français, espagnol"],
       ].map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`,
       narrow: true,
@@ -765,7 +763,6 @@ ${[...new Set(all)].map((p) => `  <url><loc>${canonical(p)}</loc><lastmod>${BUIL
 - Né à ${FOUNDER_FACTS.naissance} (${FOUNDER_FACTS.region}, ${FOUNDER_FACTS.pays}). Vit à ${FOUNDER_FACTS.ville} (Haute-Savoie, France), s'installe bientôt à ${FOUNDER_FACTS.prochaineVille}.
 - Fondateur d'EP Coaching (coaching en ligne de 6 mois) et de l'appli EP Coaching.
 - Aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.
-- Athlète naturel en Classic Physique, prépare la ${FOUNDER_FACTS.objectif}.
 - Page de référence : ${canonical("/a-propos/")}
 
 ## Faits clés

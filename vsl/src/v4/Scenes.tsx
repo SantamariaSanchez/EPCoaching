@@ -6,7 +6,7 @@ import { FPS, SceneResolue } from "../lib/resolve";
 import { PolicesPretes } from "../motion/Polices";
 import { Defile, Fond, Progression } from "../v3/core";
 import { Typo, debutPage } from "./Texte";
-import { Bouton, Boucle, Jour1, Cartes, Compteur, Courbe, Duo, Offre, PhotoCine, Pilier, Route, Semaine, Telephone, Titre, Trajet, eo } from "./Kit";
+import { Bouton, Boucle, Jour1, Sol, Cartes, Compteur, Courbe, Duo, Offre, PhotoCine, Pilier, Route, Semaine, Telephone, Titre, Trajet, eo } from "./Kit";
 
 // VSL v4 (17/11/2026) : un visuel riche par idée + typographie cinétique toujours présente.
 // Caméra avec intention : chaque plan avance lentement vers le sujet et glisse vers la gauche
@@ -71,6 +71,7 @@ const Moteur: React.FC<{ scene: SceneResolue; plans: (r: R) => Plan[] }> = ({ sc
   return (
     <AbsoluteFill>
       <Fond teinte={scene.num} energie={energie} />
+      <Sol />
       <div style={{ position: "absolute", inset: 0, opacity: 0.7 }}><Defile texte={MOT_FOND[scene.num] ?? scene.titre} /></div>
       {visuel ? <Coupe at={actif!.at} suivant={liste.find((p) => p.at > actif!.at)?.at}>{visuel}</Coupe> : null}
       {lame >= 0 && lame <= 1 ? <div style={{ position: "absolute", top: 0, bottom: 0, left: `${-20 + lame * 140}%`, width: 120, background: "linear-gradient(90deg, transparent, rgba(255,220,220,0.10), transparent)", transform: "skewX(-20deg)" }} /> : null}
