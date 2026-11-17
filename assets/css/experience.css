@@ -11,10 +11,10 @@
 /* ── Apparition au défilement (activée seulement si le JS tourne) ─────── */
 html.js [data-reveal] {
   opacity: 0;
-  transform: translateY(28px);
-  filter: blur(6px);
-  transition: opacity 0.8s cubic-bezier(.2,.7,.2,1), transform 0.8s cubic-bezier(.2,.7,.2,1), filter 0.8s ease;
-  transition-delay: calc(var(--i, 0) * 80ms);
+  transform: translateY(18px);
+  /* 2026-11-17 : plus de flou (lourd à calculer, lent à l'œil). Entrée nette en 0,45 s. */
+  transition: opacity 0.45s cubic-bezier(.16,1,.3,1), transform 0.45s cubic-bezier(.16,1,.3,1);
+  transition-delay: calc(var(--i, 0) * 60ms);
 }
 html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
 
@@ -430,3 +430,30 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
 .vx-card em { margin-top: 8px; font-style: normal; font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #E01E1E; display: inline-flex; align-items: center; gap: 6px; }
 .vx-proof { margin: 18px auto 0; max-width: none; font-size: 13px; color: rgba(245,237,237,0.55); text-align: center; }
 @media (max-width: 680px) { .vx-choice { grid-template-columns: 1fr; } .vx-player { transform: none; } }
+
+/* ═══ Accueil débutantes (2026-11-17) ═══ */
+.ck { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.ck li { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 16px; background: rgba(245, 237, 237, 0.04); border: 1px solid rgba(245, 237, 237, 0.1); font-weight: 700; font-size: 16px; line-height: 1.4; }
+.ck li::before { content: ""; flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: #D41B1B url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 14px no-repeat; box-shadow: 0 4px 16px rgba(224, 30, 30, 0.4); }
+.ck--grid { display: grid; grid-template-columns: 1fr; }
+.myths { display: grid; gap: 14px; }
+.myth { padding: 26px; border-radius: 20px; background: rgba(245, 237, 237, 0.04); border: 1px solid rgba(245, 237, 237, 0.1); }
+.myth-f { margin: 0 0 12px; font-weight: 700; color: rgba(245, 237, 237, 0.5); }
+.myth-f s { text-decoration-color: #E01E1E; text-decoration-thickness: 2.5px; }
+.myth-v { margin: 0; font-size: 18px; font-weight: 800; line-height: 1.4; }
+.road { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: road; position: relative; }
+.road-step { position: relative; padding: 24px 22px 24px 26px; border-radius: 20px; background: linear-gradient(150deg, rgba(224, 30, 30, 0.1), rgba(245, 237, 237, 0.03) 60%); border: 1px solid rgba(224, 30, 30, 0.22); }
+.road-m { display: inline-block; margin-bottom: 10px; padding: 4px 12px; border-radius: 999px; background: rgba(224, 30, 30, 0.16); color: #FDC4C4; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+.road-step h3 { margin: 0 0 6px; font-size: 20px; font-weight: 900; letter-spacing: -0.02em; }
+.road-step p { margin: 0; color: rgba(245, 237, 237, 0.72); line-height: 1.55; }
+.offer { display: grid; gap: 22px; padding: 28px 22px; border-radius: 28px; background: radial-gradient(90% 120% at 0% 0%, rgba(224, 30, 30, 0.2), rgba(245, 237, 237, 0.03) 65%); border: 1px solid rgba(224, 30, 30, 0.3); }
+.offer-cta p { margin: 0 0 18px; color: rgba(245, 237, 237, 0.78); line-height: 1.6; font-size: 16px; }
+.section--slim { padding-top: 0; padding-bottom: 0; }
+.coach-line { text-align: center; color: rgba(245, 237, 237, 0.65); font-weight: 600; }
+@media (min-width: 900px) {
+  .myths { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .road { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .road::before { content: ""; position: absolute; left: 4%; right: 4%; top: -14px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, #E01E1E, rgba(224, 30, 30, 0.15)); }
+  .offer { grid-template-columns: 1.1fr 1fr; align-items: center; gap: 40px; padding: 48px; }
+  .ck--grid { grid-template-columns: 1fr; }
+}
