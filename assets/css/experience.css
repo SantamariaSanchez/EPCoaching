@@ -470,3 +470,9 @@ html.js .hx .phones { animation: hx-phones 1.1s cubic-bezier(.16,1,.3,1) both 45
 @media (prefers-reduced-motion: reduce) {
   html.js .hx h1 .w > span, html.js .hx .page-lead, html.js .hx .cta-row, html.js .hx .hx-proof, html.js .hx .pill, html.js .hx .phones { animation: none; }
 }
+
+/* Téléphone : la pastille du hero tient sur une ligne (le nom complet reste dans le JSON-LD et la page À propos). */
+@media (max-width: 480px) {
+  .hx .pill b { display: none; }
+  .hx .pill { font-size: 0.82rem; }
+}
