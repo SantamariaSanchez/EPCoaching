@@ -123,7 +123,7 @@ export const Pilier: React.FC<{ t0: number; num: number; titre: string }> = ({ t
 // ─────────────────────────────────────────────────────────────────────────────
 /** Photo cinéma : cadre incliné en 3D qui se redresse, zoom lent dans l'image, balayage de
  *  lumière, crochets d'angle et étiquette. */
-export const PhotoCine: React.FC<{ t0: number; src: string; tag?: string; pos?: string; cote?: "g" | "d" }> = ({ t0, src, tag, pos = "50% 35%", cote = "d" }) => {
+export const PhotoCine: React.FC<{ t0: number; src: string; tag?: string; pos?: string; cote?: "g" | "d"; badges?: { texte: string; at: number }[] }> = ({ t0, src, tag, pos = "50% 35%", cote = "d", badges = [] }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
   const d = f - t0;
@@ -143,6 +143,13 @@ export const PhotoCine: React.FC<{ t0: number; src: string; tag?: string; pos?: 
           const top = k < 2, left = k % 2 === 0;
           return <div key={k} style={{ position: "absolute", width: 70, height: 70, [top ? "top" : "bottom"]: -22, [left ? "left" : "right"]: -22, borderTop: top ? `6px solid ${C.rouge}` : undefined, borderBottom: !top ? `6px solid ${C.rouge}` : undefined, borderLeft: left ? `6px solid ${C.rouge}` : undefined, borderRight: !left ? `6px solid ${C.rouge}` : undefined, opacity: e, transform: `scale(${1.6 - e * 0.6})` }} />;
         })}
+        {badges.map((b, i) => {
+          if (f < b.at - 1) return null;
+          const rb = ressort(f, fps, b.at, 260);
+          return (
+            <div key={`b${i}`} style={{ position: "absolute", right: -60, top: 60 + i * 120, padding: "18px 34px", borderRadius: 22, background: C.blanc, color: C.noir, fontFamily: MONTSERRAT, fontWeight: 900, fontSize: 54, letterSpacing: -1, transform: `translateZ(60px) scale(${0.4 + 0.6 * rb}) rotate(${(1 - rb) * 14 + 3}deg)`, boxShadow: `0 30px 70px ${noirA(0.7)}` }}>{b.texte}</div>
+          );
+        })}
         {tag ? (
           <div style={{ position: "absolute", left: 40, bottom: 36, padding: "16px 30px", borderRadius: 18, background: C.rouge, fontFamily: MONTSERRAT, fontWeight: 900, fontSize: 44, color: C.blanc, transform: `translateX(${(1 - eo(d, 12, 22)) * -80}px)`, opacity: eo(d, 12, 20), boxShadow: `0 20px 50px ${rougeA(0.5)}` }}>{tag}</div>
         ) : null}
@@ -154,12 +161,21 @@ export const PhotoCine: React.FC<{ t0: number; src: string; tag?: string; pos?: 
 // ─────────────────────────────────────────────────────────────────────────────
 /** Téléphone 3D : l'écran défile, l'appareil pivote, des bulles reliées par un trait
  *  sortent sur les mots de la voix. */
-export const Telephone: React.FC<{ t0: number; src: string; bulles?: { texte: string; at: number }[]; titre?: string }> = ({ t0, src, bulles = [], titre }) => {
+export const Telephone: React.FC<{ t0: number; src: string; bulles?: { texte: string; at: number }[]; titre?: string; ecrans?: { src: string; titre: string; at: number }[] }> = ({ t0, src: src0, bulles = [], titre: titre0, ecrans }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const d = f - t0;
+  const d0 = f - t0;
   const r = ressort(f, fps, t0, 150);
-  const rot = -26 + r * 14 + eo(d, 20, 160) * 6;
+  const rot = -26 + r * 14 + eo(d0, 20, 160) * 6;
+  // Démo de l'appli : l'écran change sur la voix (glisse dans le téléphone), le titre aussi.
+  const liste = ecrans && ecrans.length ? ecrans : [{ src: src0, titre: titre0 ?? "", at: t0 }];
+  const ie = Math.max(0, liste.reduce((k, e, i) => (f >= e.at ? i : k), 0));
+  const cur = liste[ie];
+  const prev = ie > 0 ? liste[ie - 1] : null;
+  const glisse = ie > 0 ? eo(f, cur.at, cur.at + 10) : 1;
+  const src = cur.src;
+  const titre = cur.titre || undefined;
+  const d = f - cur.at;
   const defile = eo(d, 18, 150) * 38;
   return (
     <div style={{ ...ZONE, perspective: 2000 }}>
@@ -177,9 +193,13 @@ export const Telephone: React.FC<{ t0: number; src: string; bulles?: { texte: st
       ) : null}
       <div style={{ position: "absolute", left: titre ? 880 : 760, top: 10 + (1 - r) * 120, width: 340, height: 690, scale: "1.08", transform: `rotateY(${rot}deg) rotateX(${6 - r * 4}deg) rotateZ(${(1 - r) * 6}deg)`, transformStyle: "preserve-3d" }}>
         <div style={{ position: "absolute", inset: -40, borderRadius: 120, background: `radial-gradient(closest-side, ${rougeA(0.5)}, transparent)`, opacity: r }} />
-        <div style={{ position: "absolute", inset: 0, borderRadius: 52, background: "#140202", boxShadow: `0 60px 120px ${noirA(0.85)}, inset 0 0 0 3px ${blancA(0.12)}`, padding: 12 }}>
+        {Array.from({ length: 10 }, (_, k) => (
+          <div key={`e${k}`} style={{ position: "absolute", inset: 0, borderRadius: 52, background: k % 3 === 0 ? "#3a0a0a" : "#220404", transform: `translateZ(${-(k + 1) * 2.4}px)` }} />
+        ))}
+        <div style={{ position: "absolute", inset: 0, borderRadius: 52, background: "#140202", transform: "translateZ(0.5px)", boxShadow: `0 60px 120px ${noirA(0.85)}, inset 0 0 0 3px ${blancA(0.12)}`, padding: 12 }}>
           <div style={{ width: "100%", height: "100%", borderRadius: 42, overflow: "hidden", position: "relative", background: C.noir }}>
-            <Img src={staticFile(src)} style={{ width: "100%", position: "absolute", top: 0, transform: `translateY(-${defile}%)`, filter: "brightness(1.45) contrast(1.08) saturate(1.1)" }} />
+            {prev && glisse < 1 ? <Img src={staticFile(prev.src)} style={{ width: "100%", position: "absolute", top: 0, transform: `translateX(${-glisse * 100}%)`, filter: "brightness(1.45) contrast(1.08) saturate(1.1)" }} /> : null}
+            <Img src={staticFile(src)} style={{ width: "100%", position: "absolute", top: 0, transform: `translateX(${(1 - glisse) * 100}%) translateY(-${defile}%)`, filter: "brightness(1.45) contrast(1.08) saturate(1.1)" }} />
             <div style={{ position: "absolute", top: 12, left: "50%", width: 90, height: 24, marginLeft: -45, borderRadius: 14, background: "#000" }} />
           </div>
         </div>

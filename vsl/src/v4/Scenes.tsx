@@ -119,8 +119,7 @@ export const SCENES_V4: Record<number, React.FC<SceneProps>> = {
     rien(r("Depuis")),
   ]),
   2: scene((r) => [
-    { at: r("Emmanuel"), v: (t0) => <PhotoCine t0={t0} src="img/hero_current.jpg" tag="Emmanuel" /> },
-    { at: r("dix-sept ans"), v: (t0) => <Compteur t0={t0} valeur={17} unite="ans" sous="Coach EP" /> },
+    { at: r("Emmanuel"), v: (t0) => <PhotoCine t0={t0} src="img/hero_current.jpg" pos="50% 12%" tag="Emmanuel" badges={[{ texte: "17 ans", at: r("dix-sept ans") }]} /> },
     { at: r("Colombie"), v: (t0) => <Trajet t0={t0} departAt={r("Colombie")} arriveeAt={r("Annecy")} /> },
     { at: r("Il est coach"), v: (t0) => <PhotoCine t0={t0} src="img/gym_pose.jpg" tag="Coach" cote="g" /> },
     { at: r("il accompagne"), v: (t0) => <Cartes t0={t0} items={[{ texte: "Débutantes", at: r("débutantes") }, { texte: "Perdre du gras", at: r("perdre du gras") }, { texte: "Aimer leur corps", at: r("aimer") }]} /> },
@@ -204,10 +203,22 @@ export const SCENES_V4: Record<number, React.FC<SceneProps>> = {
     },
   ]),
   13: scene((r) => [
-    { at: r("même endroit"), v: (t0) => <Telephone t0={t0} src="img/app/aujourdhui.jpg" titre="Tout au même endroit" /> },
-    { at: r("Ta séance"), v: (t0) => <Telephone t0={t0} src="img/app/entrainement.jpg" titre="Ta séance du jour" bulles={[{ texte: "Exercices en vidéo", at: r("en vidéo") }]} /> },
-    { at: r("Tes repas"), v: (t0) => <Telephone t0={t0} src="img/app/nutrition.jpg" titre="Tes repas" /> },
-    { at: r("Ton bilan"), v: (t0) => <Telephone t0={t0} src="img/app/bilan.jpg" titre="Ton bilan du matin" bulles={[{ texte: "30 secondes", at: r("trente secondes") }]} /> },
+    {
+      at: r("même endroit"),
+      v: (t0) => (
+        <Telephone
+          t0={t0}
+          src="img/app/aujourdhui.jpg"
+          ecrans={[
+            { src: "img/app/aujourdhui.jpg", titre: "Tout au même endroit", at: r("même endroit") },
+            { src: "img/app/entrainement.jpg", titre: "Ta séance du jour", at: r("Ta séance") },
+            { src: "img/app/nutrition.jpg", titre: "Tes repas", at: r("Tes repas") },
+            { src: "img/app/bilan.jpg", titre: "Ton bilan du matin", at: r("Ton bilan") },
+          ]}
+          bulles={[{ texte: "Exercices en vidéo", at: r("en vidéo") }, { texte: "30 secondes", at: r("trente secondes") }, { texte: "Tu sais quoi faire", at: r("tu sais quoi faire") }]}
+        />
+      ),
+    },
   ]),
   14: scene((r) => [
     { at: r("audit stratégique"), v: (t0) => <Bouton t0={t0} titre="Audit stratégique offert" details={["30 min", "avec Emmanuel", "offert"]} clicAt={r("Il est offert")} /> },
