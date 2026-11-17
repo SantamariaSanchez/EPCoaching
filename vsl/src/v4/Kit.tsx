@@ -208,12 +208,11 @@ export const Telephone: React.FC<{ t0: number; src: string; bulles?: { texte: st
         const e = eo(f, b.at, b.at + 10);
         if (f < b.at - 1) return null;
         const y = 150 + i * 150;
-        const x = (titre ? 1300 : 1100) + (i % 2) * 60;
         return (
-          <div key={i} style={{ position: "absolute", left: x, top: y, display: "flex", alignItems: "center", opacity: e, transform: `translateX(${(1 - e) * 60}px)` }}>
-            <div style={{ width: 120 * e, height: 4, background: `linear-gradient(90deg, transparent, ${C.rouge})`, marginRight: 14 }} />
+          <div key={i} style={{ position: "absolute", right: 70 + (i % 2) * 40, top: y, display: "flex", alignItems: "center", opacity: e, transform: `translateX(${(1 - e) * 60}px)` }}>
+            <div style={{ width: 70 * e, height: 4, background: `linear-gradient(90deg, transparent, ${C.rouge})`, marginRight: 12 }} />
             <div style={{ width: 16, height: 16, borderRadius: 8, background: C.rouge, boxShadow: `0 0 20px ${C.rouge}`, marginRight: 18 }} />
-            <div style={{ padding: "18px 28px", borderRadius: 20, background: blancA(0.07), border: `2px solid ${rougeA(0.5)}`, fontFamily: MONTSERRAT, fontWeight: 800, fontSize: 40, color: C.blanc, whiteSpace: "nowrap" }}>{b.texte}</div>
+            <div style={{ padding: "16px 26px", borderRadius: 20, background: "rgba(40, 6, 6, 0.92)", border: `2px solid ${rougeA(0.6)}`, fontFamily: MONTSERRAT, fontWeight: 800, fontSize: 38, color: C.blanc, whiteSpace: "nowrap", boxShadow: `0 20px 50px ${noirA(0.6)}` }}>{b.texte}</div>
           </div>
         );
       })}
@@ -271,7 +270,7 @@ export const Cartes: React.FC<{ t0: number; items: { texte: string; at: number; 
 export const Boucle: React.FC<{ t0: number; etapes: { texte: string; at: number }[]; centre?: string }> = ({ t0, etapes, centre }) => {
   const f = useCurrentFrame();
   const d = f - t0;
-  const R = 300;
+  const R = 250;
   const tour = d * (2.2 + eo(d, 0, 200) * 3.5);
   const angles = [-90, 30, 150];
   return (
@@ -283,12 +282,13 @@ export const Boucle: React.FC<{ t0: number; etapes: { texte: string; at: number 
           <circle cx={R} cy={R} r={R} fill="none" stroke={C.rouge} strokeWidth={14} pathLength={1} strokeDasharray="0.22 0.78" strokeDashoffset={-tour / 360} strokeLinecap="round" style={{ filter: `drop-shadow(0 0 14px ${C.rouge})` }} />
         </svg>
         {centre ? (
-          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: MONTSERRAT, fontWeight: 900, fontSize: 96, letterSpacing: -3, color: C.blanc, textAlign: "center", lineHeight: 1, opacity: eo(d, 6, 16), transform: `scale(${0.9 + eo(d, 6, 30) * 0.1})` }}>{centre}</div>
+          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: MONTSERRAT, fontWeight: 900, fontSize: centre.length > 10 ? 62 : 96, letterSpacing: -2, color: C.blanc, textAlign: "center", lineHeight: 1, padding: 40, opacity: eo(d, 6, 16), transform: `scale(${0.9 + eo(d, 6, 30) * 0.1})` }}>{centre}</div>
         ) : null}
         {etapes.map((e, i) => {
           const a = (angles[i] * Math.PI) / 180;
-          const x = R + Math.cos(a) * R;
-          const y = R + Math.sin(a) * R;
+          // Étiquettes poussées hors du cercle pour ne jamais se chevaucher.
+          const x = R + Math.cos(a) * (R + 40) * (i === 0 ? 1 : 1.35);
+          const y = R + Math.sin(a) * (R + 40);
           const on = eo(f, e.at, e.at + 8);
           return (
             <div key={i} style={{ position: "absolute", left: x, top: y, transform: `translate(-50%, -50%) scale(${0.7 + 0.3 * on})`, padding: "20px 34px", borderRadius: 22, background: on > 0.5 ? C.rouge : blancA(0.06), border: `2px solid ${on > 0.5 ? C.rouge : blancA(0.12)}`, fontFamily: MONTSERRAT, fontWeight: 900, fontSize: 54, color: C.blanc, whiteSpace: "nowrap", opacity: 0.15 + 0.85 * on, boxShadow: on > 0.5 ? `0 0 50px ${rougeA(0.6)}` : "none" }}>{e.texte}</div>
