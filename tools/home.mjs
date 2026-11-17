@@ -50,7 +50,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
     <div class="hx-grid" aria-hidden="true"></div>
     <div class="hx-copy">
       <a class="pill" href="${r("/a-propos/")}"><b>Emmanuel Santamaria Sanchéz</b> coach à Annecy, né en Colombie ${icon("arrow", "icon icon--xs")}</a>
-      <h1>Perds du gras et atteins tes objectifs <span class="accent">en 6 mois.</span></h1>
+      <h1><span class="w" style="--k:0"><span>Perds</span></span> <span class="w" style="--k:1"><span>du</span></span> <span class="w" style="--k:2"><span>gras</span></span> <span class="w" style="--k:3"><span>et</span></span> <span class="w" style="--k:4"><span>atteins</span></span> <span class="w" style="--k:5"><span>tes</span></span> <span class="w" style="--k:6"><span>objectifs</span></span> <span class="accent"><span class="w" style="--k:7"><span>en</span></span> <span class="w" style="--k:8"><span>6</span></span> <span class="w" style="--k:9"><span>mois.</span></span></span></h1>
       <p class="page-lead">Même si tu pars de zéro. Programme, diète et check-in chaque semaine.</p>
       <div class="cta-row">
         <a href="${LINKS.audit}" class="btn-cta-primary btn-cta-primary--lg">Réserver mon audit offert</a>

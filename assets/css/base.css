@@ -469,7 +469,7 @@ footer {
 }
 
 .newsletter-input::placeholder {
-  color: color-mix(in srgb, var(--blanc-casse) 35%, transparent);
+  color: color-mix(in srgb, var(--blanc-casse) 60%, transparent);
 }
 
 .newsletter-input:focus {
@@ -1073,3 +1073,14 @@ footer {
   padding: 1.25rem 2.75rem;
   font-size: 1.0625rem;
 }
+
+/* Surfaces du navigateur aux couleurs de la marque (2026-11-17). */
+::selection { background: color-mix(in srgb, var(--rouge-principal) 70%, transparent); color: var(--blanc-casse); }
+html { scrollbar-color: color-mix(in srgb, var(--rouge-principal) 55%, #1a0303) #0d0000; accent-color: var(--rouge-principal); }
+input, textarea { caret-color: var(--rouge-principal); }
+a { text-underline-offset: 0.18em; }
+
+/* Petit texte rouge sur fond sombre : #E01E1E ne passe pas 4,5:1 en petite taille.
+   Les titres gardent le rouge principal (grand texte, 3:1 suffit). */
+:root { --rouge-texte: #F25050; }
+.eyebrow, .text-link, .step-index, .road-m, .vx-kicker, .vx-card em, .footer a:hover { color: var(--rouge-texte); }

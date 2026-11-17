@@ -156,5 +156,5 @@ export const VSL_VIDEO = {
   src: "/assets/video/vsl-ep-coaching-v32.mp4",
   vtt: "/assets/video/vsl-ep-coaching.vtt",
   poster: "/assets/video/vsl-poster-v32.jpg",
-  minutes: 5,
+  minutes: 4,
 };

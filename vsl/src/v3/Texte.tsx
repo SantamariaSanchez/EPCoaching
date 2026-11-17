@@ -95,7 +95,6 @@ export const TexteCinetique: React.FC<{ scene: SceneResolue; zone: "plein" | "ga
 // apparaissent, en grand, au moment exact où ils sont dits. Pas de mot clé : rien.
 export const MotsCles: React.FC<{ scene: SceneResolue }> = ({ scene }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
   const pi = pageActive(scene, frame);
   const mots = scene.pages[pi].flatMap((i) => scene.blocs[i].mots);
   // Regroupe les mots clés consécutifs en expressions (« perdre du gras »).
@@ -108,12 +107,24 @@ export const MotsCles: React.FC<{ scene: SceneResolue }> = ({ scene }) => {
   if (!groupes.length) return null;
   const longueur = groupes.reduce((n, g) => n + g.map((m) => m.t).join(" ").length, 0);
   const base = longueur < 10 ? 210 : longueur < 18 ? 170 : longueur < 28 ? 130 : 104;
+  // v3.3 (cut-the-curve) : zoom-through entre deux pages. La page sort en grossissant
+  // (1 -> 1,2, flou 10 px, opacité linéaire), coupe franche au pic de vitesse, la suivante
+  // entre en grossissant aussi (0,75 -> 1) : même sens sur l'axe Z des deux côtés.
+  const g0 = groupes[0][0].s * FPS - ANTICIPE;
+  const suivante = pi + 1 < scene.pages.length ? debutPage(scene, pi + 1) : Infinity;
+  const entree = ease(frame, g0, g0 + 14);
+  const sortie = clampLin(frame, suivante - 6, suivante);
+  const sortieAcc = sortie * sortie * sortie;
+  const echelle = (0.75 + 0.25 * entree) * (1 + 0.2 * sortieAcc);
+  const flou = 10 * (1 - entree) + 10 * sortieAcc;
+  const opacite = (0.15 + 0.85 * clampLin(frame, g0, g0 + 6)) * (1 - 0.85 * sortie);
   return (
-    <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: base * 0.12, padding: "0 140px", textAlign: "center" }}>
+    <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: base * 0.12, padding: "0 140px", textAlign: "center", transform: `scale(${echelle})`, filter: flou > 0.3 ? `blur(${flou.toFixed(1)}px)` : undefined, opacity: frame < g0 ? 0 : opacite }}>
       {groupes.map((g, gi) => {
         const t = g[0].s * FPS - ANTICIPE;
         if (frame < t) return null;
-        const p = pop(frame, fps, t, 8);
+        // Groupes suivants : arrivée en cascade (waterfall entry), allumage à 0,35 en vol.
+        const p = gi === 0 ? 1 : ease(frame, t, t + 9);
         return (
           <div key={gi} style={{ overflow: "hidden", paddingBottom: base * 0.08 }}>
             <div
@@ -123,7 +134,8 @@ export const MotsCles: React.FC<{ scene: SceneResolue }> = ({ scene }) => {
                 fontSize: base,
                 lineHeight: 1,
                 letterSpacing: -base * 0.04,
-                transform: `translateY(${(1 - ease(frame, t, t + 7)) * 100}%) scale(${1.25 - 0.25 * p})`,
+                opacity: 0.35 + 0.65 * p,
+                transform: `translateY(${(1 - p) * 70}%)`,
                 background: gi % 2 === 0 ? `linear-gradient(100deg, ${C.blanc} 0%, #FDC4C4 100%)` : `linear-gradient(100deg, ${C.rouge} 0%, #FF5A5A 50%, #FDC4C4 100%)`,
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
@@ -138,3 +150,5 @@ export const MotsCles: React.FC<{ scene: SceneResolue }> = ({ scene }) => {
     </div>
   );
 };
+
+const clampLin = (f: number, a: number, b: number) => Math.max(0, Math.min(1, (f - a) / (b - a)));
