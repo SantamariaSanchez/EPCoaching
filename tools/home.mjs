@@ -119,7 +119,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
   const pourToi = section({
     eyebrow: "C'est pour toi si",
     title: `Tu as déjà commencé. <span class="accent">Plusieurs fois.</span>`,
-    intro: "Et à chaque fois, une semaine chargée a tout arrêté. Le problème n'est pas ta motivation : c'est un plan qui ne tenait pas dans ta vraie vie.",
+    intro: "Et à chaque fois, une semaine chargée a tout arrêté. Il te faut un plan qui tient dans ta vraie vie.",
     content: `<ul class="ck">${[
       "La salle t'intimide, tu ne sais pas par où commencer",
       "Tu veux perdre du ventre sans passer ta vie sur le tapis",
@@ -173,7 +173,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
     <div data-reveal style="--i:1">
       <p class="eyebrow">◆ Qui est derrière</p>
       <h2>Qui est <span class="accent">derrière</span></h2>
-      <blockquote>Le plan parfait que tu abandonnes ne vaut rien. Le plan simple que tu tiens change tout.</blockquote>
+      <blockquote>Un plan simple, que tu tiens, ça change tout.</blockquote>
       <p>Moi, c'est Emmanuel. J'ai ${FOUNDER_FACTS.age} ans, je suis né à ${FOUNDER_FACTS.naissance}, en Colombie, je vis à Annecy et je pars bientôt à Paris. Je prépare la ${FOUNDER_FACTS.objectif}. J'ai créé EP Coaching et son appli pour aider les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.</p>
       <div class="badges"><span class="chip">${FOUNDER_FACTS.objectif}</span><span class="chip">Annecy · bientôt Paris</span></div>
       <div class="cta-row" style="margin-top: var(--space-md)"><a class="btn-ghost" href="${LINKS.audit}">Réserver mon audit offert</a>${link("/a-propos/", `Mon histoire ${icon("arrow", "icon icon--xs")}`, path, "text-link")}</div>

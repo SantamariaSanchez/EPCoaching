@@ -117,14 +117,14 @@ export const SCENES_V3: Record<number, React.FC<SceneProps>> = {
   ]),
   4: scene((r) => [
     { at: r("Tu arrives"), v: (t0) => <Liste t0={t0} items={[{ texte: "Tu sais quoi faire", at: r("exactement") }, { texte: "Samedi soir, tes amies", at: r("amies") }, { texte: "Lundi, tu continues", at: r("le lundi") }, { texte: "Tu vois ce qui a changé", at: r("a changé") }]} /> },
-    { at: r("Ce n'est pas un rêve"), v: (t0) => <Gros t0={t0} texte="6 mois" sous="étape par étape" /> },
+    { at: r("C'est ce qu'on construit"), v: (t0) => <Gros t0={t0} texte="6 mois" sous="étape par étape" /> },
   ]),
   5: scene((r) => [
     { at: r("le cardio"), v: (t0) => <Liste t0={t0} signe="num" items={[{ texte: "Le cardio et le ventre", at: r("le cardio") }, { texte: "Perdre du gras sans faim", at: r("sans avoir faim") }, { texte: "La balance qui ment", at: r("la balance") }, { texte: "La semaine où tu craques", at: r("craquent") }]} /> },
   ]),
   6: scene((r) => [
     { at: r("Trois séances"), v: (t0) => <Liste t0={t0} signe="non" items={[{ texte: "Trois séances", at: r("Trois séances"), barre: r("Ça tient") }, { texte: "Zéro sucre", at: r("zéro sucre"), barre: r("Ça tient") + 4 }, { texte: "Plus de soirées", at: r("plus de soirées"), barre: r("Ça tient") + 8 }]} /> },
-    rien(r("Le plan parfait")),
+    rien(r("Un plan simple")),
   ]),
   7: scene((r) => [
     { at: r("Premier pilier"), v: (t0) => <Gros t0={t0} texte="01" sous="la salle, avant le cardio" /> },
@@ -142,7 +142,7 @@ export const SCENES_V3: Record<number, React.FC<SceneProps>> = {
     { at: r("Si tu te pèses"), v: (t0) => <Tendance t0={t0} tendanceAt={r("la tendance")} /> },
   ]),
   10: scene((r) => [
-    { at: r("Quatrième pilier"), v: (t0) => <Gros t0={t0} texte="04" sous="l'écart n'est pas un échec" /> },
+    { at: r("Quatrième pilier"), v: (t0) => <Gros t0={t0} texte="04" sous="l'écart fait partie du plan" /> },
     { at: r("Elles craquent"), v: (t0) => <Cycle t0={t0} labels={[{ texte: "Je craque", at: r("Elles craquent") }, { texte: "Je me punis", at: r("punissent") }, { texte: "Je saute un repas", at: r("sautent") }]} /> },
     { at: r("Un écart"), v: (t0) => <Liste t0={t0} items={[{ texte: "Un écart = un repas", at: r("Un écart") }, { texte: "Le suivant s'adapte", at: r("s'adapte") }, { texte: "Tu continues", at: r("tu continues") }]} /> },
   ]),
