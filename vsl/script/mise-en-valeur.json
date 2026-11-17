@@ -1,7 +1,7 @@
 {
   "_lisez-moi": "Mots clés mis en valeur (accent couleur). Un par phrase au plus. Après modification : npm run timeline.",
   "1": ["Plusieurs fois", "tout s'est arrêté", "tous les jours", "jusqu'au bout", "motivation"],
-  "2": ["Colombie", "Emmanuel", "WNBF Classic 2027", "d'abord sur moi", "aimer leur corps"],
+  "2": ["Colombie", "Emmanuel", "WNBF Classic 2027", "aimer leur corps"],
   "3": ["trois choses", "pas le temps", "vrai emploi du temps", "trop débutante", "au début", "assez régulière", "se construit"],
   "4": ["imagine", "exactement quoi faire", "ce qui a changé", "six mois"],
   "5": ["cardio", "sans avoir faim", "balance", "craquent"],
@@ -13,5 +13,5 @@
   "11": ["dans l'ordre", "les bases", "confiance", "affine", "seule"],
   "12": ["coaching EP", "faits pour toi", "check-in", "n'importe quelle heure", "jamais seule"],
   "13": ["même endroit", "en vidéo", "trente secondes", "quoi faire"],
-  "14": ["audit stratégique", "offert", "toi et moi", "je te le dirai", "plan clair", "ton objectif", "sous cette vidéo"]
+  "14": ["audit stratégique", "offert", "toi et Emmanuel", "on te le dira", "plan clair", "ton objectif", "sous cette vidéo"]
 }

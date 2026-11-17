@@ -10,7 +10,9 @@ import { clamp, ease, pop } from "./core";
 const Zone: React.FC<{ t0: number; children: React.ReactNode }> = ({ t0, children }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const p = pop(f, fps, t0, 8);
+  const p = pop(f, fps, t0, 10);
+  const clip = ease(f, t0, t0 + 10);
+  const d = f - t0;
   return (
     <div
       style={{
@@ -22,8 +24,9 @@ const Zone: React.FC<{ t0: number; children: React.ReactNode }> = ({ t0, childre
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        opacity: Math.min(1, p * 1.5),
-        transform: `translateX(${(1 - p) * 70}px) scale(${0.92 + 0.08 * p})`,
+        // Entrée : découpe diagonale qui s'ouvre, glissé et rotation qui se pose ; puis flottement.
+        clipPath: `polygon(0 ${100 - clip * 140}%, 100% ${140 - clip * 140}%, 100% 100%, 0 100%)`,
+        transform: `translate(${(1 - p) * 90}px, ${Math.sin(d / 28) * 6}px) rotate(${(1 - p) * 4 + Math.sin(d / 45) * 0.5}deg) scale(${0.9 + 0.1 * p})`,
       }}
     >
       {children}
@@ -296,8 +299,8 @@ export const Offre: React.FC<{ t0: number; tuiles: { titre: string; at: number }
               key={i}
               style={{
                 ...carte,
-                height: 150,
-                padding: "0 26px",
+                height: 118,
+                padding: "0 24px",
                 display: "flex",
                 alignItems: "center",
                 gap: 18,

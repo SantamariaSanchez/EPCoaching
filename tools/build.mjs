@@ -503,7 +503,7 @@ for (const a of HELP_ARTICLES) {
     { q: "Qui est Emmanuel Santamaria Sanchéz ?", a: `Un coach sportif de ${F.age} ans, né en ${F.pays} et basé à ${F.ville}. Il a fondé EP Coaching et son appli, et aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.` },
     { q: "Qu'est-ce que EP Coaching ?", a: "Un coaching en ligne de 6 mois en musculation et nutrition, et une appli pour suivre ses séances, ses repas et ses progrès." },
     { q: "Le coaching se fait à Annecy ou en ligne ?", a: "En ligne, partout en France. Le programme, la diète, le check-in de la semaine et les lives passent par l'appli." },
-    { q: "Il fait de la compétition ?", a: `Oui, il prépare la ${F.objectif} en Classic Physique, en fédération naturelle testée. Il applique sur lui ce qu'il enseigne.` },
+    { q: "Il fait de la compétition ?", a: `Oui, il prépare la ${F.objectif} en Classic Physique.` },
     { q: "Comment commencer ?", a: "Par l'audit stratégique : 30 minutes, gratuit, en tête-à-tête. On regarde ta situation, ton objectif et ton emploi du temps, et tu repars avec un plan clair." },
   ];
   const body = [
@@ -511,7 +511,7 @@ for (const a of HELP_ARTICLES) {
     section({
       eyebrow: "Mon histoire",
       title: `De ${F.naissance} à ${F.prochaineVille}`,
-      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Emmanuel, coach sportif et fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Je suis né à ${F.naissance}, une petite ville d'${F.region}, en ${F.pays}. Aujourd'hui j'ai ${F.age} ans, je vis à ${F.ville}, en Haute-Savoie, et je pars bientôt à ${F.prochaineVille}.</p><p>La musculation m'a appris une chose : on ne change pas son corps en un week-end, on le change avec un plan qu'on tient. Je prépare la ${F.objectif}, en fédération naturelle testée. Ma diète, mon entraînement, mon sommeil : j'applique d'abord sur moi tout ce que je transmets.</p><p>J'ai créé EP Coaching pour les débutantes qui ont déjà commencé plusieurs fois, puis arrêté. Un programme, une diète et une roadmap faits pour elles, un check-in chaque semaine, et quelqu'un qui répond à n'importe quelle heure.</p><p>Et j'ai construit l'appli EP Coaching pour que tout tienne au même endroit : la séance du jour, les repas, le bilan du matin. Elle sert aussi aux coachs qui veulent suivre leurs clients.</p><p class="founder-follow">Suis-moi au quotidien :</p>${socialCards()}</div></div>`,
+      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Emmanuel, coach sportif et fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Je suis né à ${F.naissance}, une petite ville d'${F.region}, en ${F.pays}. Aujourd'hui j'ai ${F.age} ans, je vis à ${F.ville}, en Haute-Savoie, et je pars bientôt à ${F.prochaineVille}.</p><p>Je prépare la ${F.objectif}.</p><p>J'ai créé EP Coaching pour les débutantes qui ont déjà commencé plusieurs fois, puis arrêté. Un programme, une diète et une roadmap faits pour elles, un check-in chaque semaine, et quelqu'un qui répond à n'importe quelle heure.</p><p>Et j'ai construit l'appli EP Coaching pour que tout tienne au même endroit : la séance du jour, les repas, le bilan du matin. Elle sert aussi aux coachs qui veulent suivre leurs clients.</p><p class="founder-follow">Suis-moi au quotidien :</p>${socialCards()}</div></div>`,
     }),
     section({
       eyebrow: "En bref",
@@ -523,7 +523,7 @@ for (const a of HELP_ARTICLES) {
         ["Vit à", `${F.ville}, Haute-Savoie, puis ${F.prochaineVille}`],
         ["Métier", "Coach sportif en musculation et nutrition"],
         ["Entreprise", "EP Coaching (coaching en ligne et appli)"],
-        ["Compétition", `${F.objectif}, Classic Physique, naturel testé`],
+        ["Compétition", `${F.objectif}, Classic Physique`],
         ["Langues", "Français, espagnol"],
       ].map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`,
       narrow: true,

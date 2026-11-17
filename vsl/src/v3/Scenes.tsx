@@ -1,11 +1,11 @@
 import React from "react";
-import { AbsoluteFill, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Audio } from "@remotion/media";
 import { SceneProps, sceneParDefaut } from "../lib/props";
 import { FPS, SceneResolue } from "../lib/resolve";
 import { PolicesPretes } from "../motion/Polices";
-import { Chapitre, Fond, Progression } from "./core";
-import { TexteCinetique } from "./Texte";
+import { Chapitre, Defile, Fond, Onde, Progression, pop } from "./core";
+import { TexteCinetique, debutPage, pageActive } from "./Texte";
 import { Bouton, Cycle, Duo, Gros, Liste, Offre, Photo, Route, Semaine, Telephone, Tendance } from "./Visuels";
 
 const NB_SCENES = 14;
@@ -38,21 +38,40 @@ type Plan = { at: number; v: (t0: number) => React.ReactNode | null };
 
 const Moteur: React.FC<{ scene: SceneResolue; plans: (r: R) => Plan[]; sons?: (r: R) => number[] }> = ({ scene, plans, sons }) => {
   const f = useCurrentFrame();
+  const { fps } = useVideoConfig();
   const r = repere(scene);
   const liste = plans(r).sort((a, b) => a.at - b.at);
   const actif = [...liste].reverse().find((p) => f >= p.at);
   const visuel = actif ? actif.v(actif.at) : null;
   const pops = sons ? sons(r) : liste.filter((p) => p.v(p.at) !== null).map((p) => p.at);
+  // Mots clés : onde de choc + coup de lumière dans le fond.
+  const cles = scene.blocs.flatMap((b) => b.mots.filter((m) => m.em).map((m) => Math.round(m.s * FPS) - 2));
+  const dernierCle = [...cles].reverse().find((c) => f >= c);
+  const energie = dernierCle === undefined ? 0 : Math.max(0, 1 - (f - dernierCle) / 18);
+  // Caméra : dérive lente + petit choc à chaque nouvelle page.
+  const pages = scene.pages.map((_, i) => debutPage(scene, i));
+  const pi = pageActive(scene, f);
+  const choc = 1 - pop(f, fps, pages[pi], 9);
+  const cam = `translate(${Math.sin(f / 70) * 10}px, ${Math.cos(f / 85) * 7}px) scale(${1.02 + Math.sin(f / 120) * 0.012 + choc * 0.025}) rotate(${Math.sin(f / 150) * 0.35}deg)`;
   return (
     <AbsoluteFill>
-      <Fond teinte={scene.num} />
+      <Fond teinte={scene.num} energie={energie} />
+      <Defile texte={scene.titre} />
+      <AbsoluteFill style={{ transform: cam }}>
+        {cles.map((c, i) => <Onde key={i} at={c} x={visuel ? 28 : 50} y={50} />)}
+        {visuel}
+        <TexteCinetique scene={scene} zone={visuel ? "gauche" : "plein"} />
+      </AbsoluteFill>
       <Chapitre texte={scene.titre} num={scene.num} />
-      {visuel}
-      <TexteCinetique scene={scene} zone={visuel ? "gauche" : "plein"} />
       <Progression part={(scene.num - 1 + f / scene.dureeFrames) / NB_SCENES} />
       {pops.map((at, i) => (
-        <Sequence key={i} from={Math.max(0, at)} durationInFrames={30} layout="none">
-          <Audio src={staticFile("sfx/pop.mp3")} volume={0.18} />
+        <Sequence key={`p${i}`} from={Math.max(0, at)} durationInFrames={30} layout="none">
+          <Audio src={staticFile("sfx/pop.mp3")} volume={0.16} />
+        </Sequence>
+      ))}
+      {pages.slice(1).map((at, i) => (
+        <Sequence key={`w${i}`} from={Math.max(0, Math.round(at) - 3)} durationInFrames={25} layout="none">
+          <Audio src={staticFile("sfx/whoosh.mp3")} volume={0.07} />
         </Sequence>
       ))}
     </AbsoluteFill>
@@ -84,12 +103,11 @@ export const SCENES_V3: Record<number, React.FC<SceneProps>> = {
     rien(r("Si c'est toi")),
   ]),
   2: scene((r) => [
-    { at: r("Emmanuel"), v: (t0) => <Photo t0={t0} src="img/hero_current.jpg" legende="Emmanuel · né à Girardota" /> },
-    { at: r("Colombie"), v: (t0) => <Gros t0={t0} texte="Colombie" sous="né à Girardota · Annecy" /> },
-    { at: r("Je suis coach"), v: (t0) => <Photo t0={t0} src="img/gym_pose.jpg" incline={2} /> },
-    { at: r("WNBF"), v: (t0) => <Gros t0={t0} texte="WNBF" sous="Classic 2027 · naturel testé" /> },
-    { at: r("d'abord sur moi"), v: (t0) => <Photo t0={t0} src="img/training_deadlift.jpg" incline={3} /> },
-    { at: r("j'accompagne"), v: (t0) => <Liste t0={t0} items={[{ texte: "Débutantes", at: r("débutantes") }, { texte: "Perdre du gras", at: r("perdre du gras") }, { texte: "Aimer leur corps", at: r("aimer") }]} /> },
+    { at: r("Emmanuel"), v: (t0) => <Photo t0={t0} src="img/hero_current.jpg" legende="Emmanuel" /> },
+    { at: r("Colombie"), v: (t0) => <Gros t0={t0} texte="Colombie" sous="né à Girardota · vit à Annecy" /> },
+    { at: r("Il est coach"), v: (t0) => <Photo t0={t0} src="img/gym_pose.jpg" incline={2} /> },
+    { at: r("WNBF"), v: (t0) => <Gros t0={t0} texte="WNBF" sous="Classic 2027" /> },
+    { at: r("il accompagne"), v: (t0) => <Liste t0={t0} items={[{ texte: "Débutantes", at: r("débutantes") }, { texte: "Perdre du gras", at: r("perdre du gras") }, { texte: "Aimer leur corps", at: r("aimer") }]} /> },
   ]),
   3: scene((r) => [
     { at: r("trois choses"), v: (t0) => <Gros t0={t0} texte="3" sous="choses que tu te dis" /> },
@@ -110,13 +128,14 @@ export const SCENES_V3: Record<number, React.FC<SceneProps>> = {
   ]),
   7: scene((r) => [
     { at: r("Premier pilier"), v: (t0) => <Gros t0={t0} texte="01" sous="la salle, avant le cardio" /> },
-    { at: r("Des heures de tapis"), v: (t0) => <Photo t0={t0} src="img/training_pulldown.jpg" /> },
+    { at: r("Des heures de tapis"), v: (t0) => <Telephone t0={t0} src="img/app/entrainement.jpg" label="Ta séance du jour" /> },
     { at: r("fessiers"), v: (t0) => <Liste t0={t0} items={[{ texte: "Des fessiers", at: r("fessiers") }, { texte: "Des épaules", at: r("épaules") }, { texte: "Une silhouette équilibrée", at: r("silhouette") }]} /> },
   ]),
   8: scene((r) => [
     { at: r("Deuxième pilier"), v: (t0) => <Gros t0={t0} texte="02" sous="manger plus, pour perdre plus" /> },
+    { at: r("Tu manges à ta faim"), v: (t0) => <Telephone t0={t0} src="img/app/nutrition.jpg" label="Tes repas, déjà prévus" /> },
     { at: r("trois fois rien"), v: (t0) => <Liste t0={t0} signe="non" items={[{ texte: "Tu as faim", at: r("tu as faim") }, { texte: "Tu es fatiguée", at: r("fatiguée") }, { texte: "Tu craques le soir", at: r("craques") }]} /> },
-    { at: r("On garde"), v: (t0) => <Liste t0={t0} items={[{ texte: "Les repas que tu aimes", at: r("On garde") }, { texte: "Des protéines à chaque repas", at: r("protéines") }, { texte: "Des aliments qui calent", at: r("calent") }, { texte: "Tu manges à ta faim", at: r("à ta faim") }]} /> },
+    { at: r("On garde"), v: (t0) => <Liste t0={t0} items={[{ texte: "Les repas que tu aimes", at: r("On garde") }, { texte: "Des protéines à chaque repas", at: r("protéines") }, { texte: "Des aliments qui calent", at: r("calent") }]} /> },
   ]),
   9: scene((r) => [
     { at: r("Troisième pilier"), v: (t0) => <Gros t0={t0} texte="03" sous="la tendance, pas la balance" /> },

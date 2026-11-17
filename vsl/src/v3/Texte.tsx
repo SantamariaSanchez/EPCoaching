@@ -2,13 +2,15 @@ import React from "react";
 import { useCurrentFrame, useVideoConfig } from "remotion";
 import { C, MONTSERRAT, blancA } from "../lib/brand";
 import { FPS, SceneResolue } from "../lib/resolve";
-import { pop } from "./core";
+import { ease, pop } from "./core";
 
-// Typographie cinétique calée mot à mot sur la voix.
-// Une « page » (groupe de blocs, calculé par npm run timeline) à la fois : coupe franche
-// d'une page à l'autre, chaque mot arrive au moment exact où il est dit.
+// Typographie cinétique calée mot à mot sur la voix (v3.1, 2026-11-17).
+// - Chaque mot sort d'un masque (glisse depuis le bas de sa ligne), comme les titres modernes.
+// - Les pages très courtes passent en « slam » : énormes, centrées, chaque mot claque.
+// - Les mots clés prennent un dégradé rouge-rose et un léger rebond.
+// - Coupe franche d'une page à l'autre, avec un petit zoom d'impact.
 
-const ANTICIPE = 2; // le mot apparaît 2 images avant d'être dit (perçu « en même temps »)
+const ANTICIPE = 2;
 
 export const pageActive = (sc: SceneResolue, f: number) => {
   let idx = 0;
@@ -18,66 +20,72 @@ export const pageActive = (sc: SceneResolue, f: number) => {
   return idx;
 };
 
-export const TexteCinetique: React.FC<{ scene: SceneResolue; zone: "plein" | "gauche"; offset?: number }> = ({ scene, zone, offset = 0 }) => {
-  const frame = useCurrentFrame() + offset;
+export const debutPage = (sc: SceneResolue, i: number) => sc.blocs[sc.pages[i][0]].s * FPS - ANTICIPE;
+
+export const TexteCinetique: React.FC<{ scene: SceneResolue; zone: "plein" | "gauche" }> = ({ scene, zone }) => {
+  const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const pi = pageActive(scene, frame);
-  const page = scene.pages[pi];
-  const blocs = page.map((i) => scene.blocs[i]);
-  const debut = blocs[0].s * FPS - ANTICIPE;
+  const blocs = scene.pages[pi].map((i) => scene.blocs[i]);
+  const debut = debutPage(scene, pi);
+  const mots = blocs.flatMap((b) => b.mots);
   const chars = blocs.reduce((n, b) => n + b.texte.length, 0);
   const plein = zone === "plein";
-  // Taille selon la longueur de la page : gros quand c'est court (impact), lisible quand c'est long.
-  const base = plein ? (chars < 28 ? 132 : chars < 55 ? 104 : chars < 85 ? 84 : 70) : chars < 30 ? 92 : chars < 60 ? 74 : 60;
-  const entree = pop(frame, fps, debut, 6);
+  const slam = plein && chars <= 26;
+  const base = slam
+    ? chars < 12 ? 190 : 150
+    : plein
+      ? chars < 45 ? 112 : chars < 75 ? 90 : 74
+      : chars < 30 ? 92 : chars < 60 ? 74 : 60;
+  const impact = pop(frame, fps, debut, 7);
   return (
     <div
       style={{
         position: "absolute",
         top: 0,
         bottom: 0,
-        left: plein ? 160 : 110,
-        width: plein ? 1600 : 860,
+        left: plein ? 140 : 110,
+        width: plein ? 1640 : 860,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: plein ? "center" : "flex-start",
         textAlign: plein ? "center" : "left",
-        transform: `scale(${1.04 - 0.04 * entree})`,
+        transform: `scale(${1.06 - 0.06 * impact})`,
       }}
     >
-      <div style={{ fontFamily: MONTSERRAT, fontWeight: 900, fontSize: base, lineHeight: 1.08, letterSpacing: -base * 0.03, color: C.blanc }}>
-        {blocs.map((b) => (
-          <span key={b.id}>
-            {b.mots.map((m, k) => {
-              const t = m.s * FPS - ANTICIPE;
-              const p = pop(frame, fps, t, 6);
-              const dit = frame >= t;
-              const surligne = m.em ? pop(frame, fps, t + 2, 7) : 0;
-              return (
-                <span key={k} style={{ display: "inline-block", position: "relative", marginRight: base * 0.24, opacity: dit ? 1 : 0.0, transform: `translateY(${(1 - p) * base * 0.35}px)` }}>
-                  {m.em && (
-                    <span
-                      style={{
-                        position: "absolute",
-                        left: -base * 0.08,
-                        right: -base * 0.08,
-                        top: "12%",
-                        bottom: "6%",
-                        background: C.rouge,
-                        transformOrigin: "left center",
-                        transform: `scaleX(${surligne}) skewX(-8deg)`,
-                        zIndex: 0,
-                      }}
-                    />
-                  )}
-                  <span style={{ position: "relative", zIndex: 1, color: m.em ? C.blanc : dit ? C.blanc : blancA(0.2) }}>{m.t}</span>
-                </span>
-              );
-            })}
-          </span>
-        ))}
+      <div style={{ fontFamily: MONTSERRAT, fontWeight: 900, fontSize: base, lineHeight: 1.04, letterSpacing: -base * 0.035, color: C.blanc }}>
+        {mots.map((m, k) => {
+          const t = m.s * FPS - ANTICIPE;
+          const dit = frame >= t;
+          const p = ease(frame, t, t + (slam ? 7 : 6));
+          const rebond = m.em ? pop(frame, fps, t, 9) : 1;
+          const scaleSlam = slam ? 1.8 - 0.8 * pop(frame, fps, t, 8) : 1;
+          return (
+            <span key={k} style={{ display: "inline-block", overflow: "hidden", verticalAlign: "top", paddingBottom: base * 0.08, marginRight: base * 0.22 }}>
+              <span
+                style={{
+                  display: "inline-block",
+                  opacity: dit ? 1 : 0,
+                  transform: `translateY(${(1 - p) * 105}%) scale(${(m.em ? 1.12 - 0.12 * rebond : 1) * scaleSlam})`,
+                  transformOrigin: "50% 80%",
+                  ...(m.em
+                    ? { background: `linear-gradient(100deg, ${C.rouge} 0%, #FF5A5A 45%, #FDC4C4 100%)`, WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }
+                    : { color: C.blanc }),
+                }}
+              >
+                {m.t}
+              </span>
+            </span>
+          );
+        })}
       </div>
+      {slam && (
+        <div style={{ marginTop: 30, height: 8, width: 220 * ease(frame, debut + 4, debut + 16), borderRadius: 8, background: `linear-gradient(90deg, ${C.rouge}, #FDC4C4)` }} />
+      )}
+      {!slam && blocs.length > 0 && (
+        <div style={{ marginTop: 26, height: 5, width: 120 * ease(frame, debut, debut + 12), borderRadius: 5, background: blancA(0.25) }} />
+      )}
     </div>
   );
 };
