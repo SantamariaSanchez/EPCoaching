@@ -7,8 +7,8 @@ import asyncio, json, os, re, subprocess, sys, tempfile
 import edge_tts
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-VOIX = "fr-FR-RemyMultilingualNeural"
-RYTHME = "+6%"
+VOIX = "fr-FR-VivienneMultilingualNeural"
+RYTHME = "+8%"
 PAUSE = {"vraie": 0.55, "paragraphe": 0.45}
 SR = 24000
 # Ce que la voix doit lire à la place de certains mots (le texte affiché ne change pas).

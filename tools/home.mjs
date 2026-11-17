@@ -79,7 +79,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
     : `<div class="vx-player vx-player--video" id="vsl-video">
         <video class="vx-video" playsinline preload="none" poster="${r(VSL_VIDEO.poster)}" aria-label="Vidéo de présentation EP Coaching (${minutes} minutes)">
           <source src="${r(VSL_VIDEO.src)}" type="video/mp4" />
-          <track kind="subtitles" srclang="fr" label="Français" src="${r(VSL_VIDEO.vtt)}" default />
+          <track kind="subtitles" srclang="fr" label="Français" src="${r(VSL_VIDEO.vtt)}" />
         </video>
         <button type="button" class="vx-start" aria-label="Lire la vidéo de présentation"><span class="vsl-play vx-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="vx-duration">${minutes} min</span></button>
       </div>`;
@@ -172,10 +172,10 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
     <figure class="founder-photo" data-reveal><img src="${r("/assets/images/portrait_physique.jpg")}" alt="Emmanuel, coach sportif à Annecy et fondateur d'EP Coaching" loading="lazy" /><figcaption><strong>Emmanuel Santamaria Sanchéz</strong>${FOUNDER_FACTS.age} ans, né à ${FOUNDER_FACTS.naissance} (Colombie), coach à Annecy</figcaption></figure>
     <div data-reveal style="--i:1">
       <p class="eyebrow">◆ Qui est derrière</p>
-      <h2>Construit par un coach, <span class="accent">testé sur lui-même</span></h2>
+      <h2>Qui est <span class="accent">derrière</span></h2>
       <blockquote>Le plan parfait que tu abandonnes ne vaut rien. Le plan simple que tu tiens change tout.</blockquote>
-      <p>Moi, c'est Emmanuel. J'ai ${FOUNDER_FACTS.age} ans, je suis né à ${FOUNDER_FACTS.naissance}, en Colombie, je vis à Annecy et je pars bientôt à Paris. Je prépare la ${FOUNDER_FACTS.objectif} en fédération naturelle testée, et j'applique d'abord sur moi tout ce que je transmets. J'ai créé EP Coaching et son appli pour aider les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.</p>
-      <div class="badges"><span class="chip">${FOUNDER_FACTS.objectif}</span><span class="chip">Naturel testé</span><span class="chip">Annecy · bientôt Paris</span></div>
+      <p>Moi, c'est Emmanuel. J'ai ${FOUNDER_FACTS.age} ans, je suis né à ${FOUNDER_FACTS.naissance}, en Colombie, je vis à Annecy et je pars bientôt à Paris. Je prépare la ${FOUNDER_FACTS.objectif}. J'ai créé EP Coaching et son appli pour aider les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.</p>
+      <div class="badges"><span class="chip">${FOUNDER_FACTS.objectif}</span><span class="chip">Annecy · bientôt Paris</span></div>
       <div class="cta-row" style="margin-top: var(--space-md)"><a class="btn-ghost" href="${LINKS.audit}">Réserver mon audit offert</a>${link("/a-propos/", `Mon histoire ${icon("arrow", "icon icon--xs")}`, path, "text-link")}</div>
       <p class="founder-follow">Suis-moi au quotidien, conseils et coulisses :</p>
       ${socialCards()}
