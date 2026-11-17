@@ -204,7 +204,7 @@ export const PERSON_JSONLD = {
   nationality: { "@type": "Country", name: F.pays },
   homeLocation: { "@type": "Place", name: `${F.ville}, Haute-Savoie, France`, address: ANNECY },
   worksFor: { "@id": ORG_ID },
-  knowsAbout: ["Musculation", "Nutrition", "Perte de gras", "Coaching sportif en ligne", "Bodybuilding naturel", "Classic Physique", "WNBF"],
+  knowsAbout: ["Musculation", "Nutrition", "Perte de gras", "Coaching sportif en ligne", "Bodybuilding", "Classic Physique"],
   knowsLanguage: ["fr", "es"],
   sameAs: SOCIALS.map((s) => s.url),
 };

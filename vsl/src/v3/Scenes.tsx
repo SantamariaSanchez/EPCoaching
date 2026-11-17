@@ -124,7 +124,6 @@ export const SCENES_V3: Record<number, React.FC<SceneProps>> = {
     { at: r("Emmanuel"), v: (t0) => <Photo t0={t0} src="img/hero_current.jpg" legende="Emmanuel" /> },
     { at: r("Colombie"), v: (t0) => <Gros t0={t0} texte="Colombie" sous="né à Girardota · vit à Annecy" /> },
     { at: r("Il est coach"), v: (t0) => <Photo t0={t0} src="img/gym_pose.jpg" incline={2} /> },
-    { at: r("WNBF"), v: (t0) => <Gros t0={t0} texte="WNBF" sous="Classic 2027" /> },
     { at: r("il accompagne"), v: (t0) => <Liste t0={t0} items={[{ texte: "Débutantes", at: r("débutantes") }, { texte: "Perdre du gras", at: r("perdre du gras") }, { texte: "Aimer leur corps", at: r("aimer") }]} /> },
   ]),
   3: scene((r) => [
