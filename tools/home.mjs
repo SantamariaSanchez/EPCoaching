@@ -96,47 +96,15 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
     <p class="vx-proof">Audit de 30 minutes, gratuit, avec Emmanuel. Dans le pire des cas, tu repars avec un plan clair.</p>
   </section>`;
 
-  const counters = `<div class="counters">
-    <div class="counter" data-reveal style="--i:0"><strong data-count="${guides.length}">${guides.length}</strong><span>guides gratuits</span></div>
-    <div class="counter" data-reveal style="--i:1"><strong data-count="${features.length}">${features.length}</strong><span>rubriques dans l'appli</span></div>
-    <div class="counter" data-reveal style="--i:2"><strong data-count="7">7</strong><span>formats de coaching live</span></div>
-    <div class="counter" data-reveal style="--i:3"><strong data-count="30" data-suffix=" s">30 s</strong><span>pour remplir ton bilan</span></div>
-  </div>`;
-
-  const pains = section({
-    eyebrow: "Le vrai problème",
-    title: `Tu ne manques pas de motivation. <span class="accent">Tu manques de système.</span>`,
-    content: `<div class="pains">${[
-      ["01", "Tu t'entraînes au feeling", "Pas de programme écrit, pas de charges notées. Chaque séance repart de zéro, et tu ne sais jamais si tu progresses vraiment."],
-      ["02", "Tu manges à l'estime", "Tu fais « attention », mais tu ne sais pas ce que tu manges vraiment. Du coup, tu ne sais pas quoi ajuster quand ça bloque."],
-      ["03", "Tu ne vois pas tes progrès", "La balance fait le yoyo, le miroir ne dit rien. Après six semaines sans preuve, presque tout le monde lâche."],
-    ].map(([n, t, d], i) => `<article class="pain spot" data-reveal style="--i:${i}"><span class="pain-num">${n}</span><h3>${t}</h3><p>${d}</p></article>`).join("")}</div>
-    <p class="pain-verdict" data-reveal>Le problème n'est pas toi. C'est l'absence d'un suivi qui te montre, chaque jour, <span class="accent">quoi faire et si ça marche.</span></p>`,
-  });
-
-  const levers = section({
-    eyebrow: "Pourquoi ça marche",
-    title: `Une appli construite sur <span class="accent">4 leviers</span>`,
-    intro: "La valeur d'un accompagnement tient en une équation : plus de résultat et de certitude, moins de délai et d'effort. Chaque écran de l'appli pousse l'un de ces leviers.",
-    content: `<div class="equation" data-reveal aria-label="Valeur égale résultat visé fois certitude d'y arriver, divisé par temps pour y arriver fois effort demandé"><span>Valeur</span><span>=</span><span class="frac"><span>Résultat × Certitude</span><span>Délai × Effort</span></span></div>
-    <div class="levers">${[
-      ["up", "Plus de résultat", "Ton objectif découpé en phases dans ta Road Map, avec un programme et un plan nutrition qui y mènent vraiment."],
-      ["up", "Plus de certitude", "Des preuves chaque semaine : tendance du poids, records, photos et mensurations. Tu vois que ça avance."],
-      ["down", "Moins de délai", "Bilan en 30 secondes, repas prévus validés en un geste, séance déjà prête. Tu n'organises plus, tu exécutes."],
-      ["down", "Moins d'effort", "Rappels, agenda qui se réorganise seul, loupe qui répond. Et un coach humain si tu veux aller plus vite."],
-    ].map(([dir, t, d], i) => `<article class="lever spot tilt" data-reveal style="--i:${i}"><span class="lever-dir ${dir === "down" ? "down" : ""}">${dir === "up" ? "▲ Augmente" : "▼ Diminue"}</span><h3>${t}</h3><p>${d}</p></article>`).join("")}</div>`,
-  });
-
   const STEPS = [
     ["aujourdhui", "07:00", "Tu sais quoi faire.", ["Bilan, repas et séance du jour, dans l'ordre", "Tu coches au fur et à mesure", "Rien d'autre à retenir"], "aujourdhui"],
     ["bilan", "07:05", "Ton bilan en 30 secondes.", ["Poids, nuit, pas, énergie", "Les calories remontent seules", "Un jour oublié se rattrape"], "bilan"],
     ["nutrition", "12:30", "Tes repas sont déjà prévus.", ["Construits à partir de ton plan", "Un repas mangé tel quel : un geste", "Calories et macros calculées pour toi"], "nutrition"],
     ["entrainement", "18:00", "Ta séance, série par série.", ["Programme prêt, matériel indiqué", "La dernière séance à côté pour savoir quoi battre", "Records repérés tout seuls"], "entrainement"],
     ["road-map", "Dimanche", "Tes progrès, enfin visibles.", ["Tendance du poids semaine après semaine", "Ta phase actuelle et la suivante", "Photos et mensurations pour trancher"], "road-map"],
-    ["recherche", "N'importe quand", "Une question ? Tape un mot.", ["« poids », « calories », « séances »", "Le chiffre s'affiche tout de suite", "Côté coach : « leads », « paie »"], "recherche"],
   ];
   const tour = `<section class="section" id="visite">
-    <div class="section-head"><p class="eyebrow">◆ Visite guidée</p><h2>Une journée avec <span class="accent">EP Coaching</span></h2><p class="section-intro">Pas une liste de fonctionnalités : ce que ça change, du réveil au coucher.</p></div>
+    <div class="section-head"><p class="eyebrow">◆ Visite guidée</p><h2>Une journée dans <span class="accent">l'appli</span></h2><p class="section-intro">Ce que ça change, du réveil au coucher. Écrans réels, comptes de démonstration.</p></div>
     <div class="tour">
       <div class="tour-steps">${STEPS.map(([shot, time, title, bullets, slug], i) => {
         const f = feat(slug);
@@ -146,36 +114,59 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
     </div>
   </section>`;
 
-  const paths = section({
-    eyebrow: "Choisis ton chemin",
-    title: `Trois façons <span class="accent">d'avancer</span>`,
-    content: `<div class="paths">
-      <article class="path path--hot spot" data-reveal style="--i:0"><span class="path-tag">Gratuit</span><h3>Te suivre toi-même</h3><ul><li>Programme et séance guidée</li><li>Nutrition construite sur un plan</li><li>Bilan, photos et Road Map</li><li>${guides.length} guides pratiques</li></ul><a class="btn-cta-primary" href="${LINKS.signupMember}">Créer mon compte gratuit</a><div class="path-shot">${phone("bilan", "Écran Bilan", path)}</div></article>
-      <article class="path spot" data-reveal style="--i:1"><span class="path-tag">Accompagnement</span><h3>Coaching physique 1-to-1</h3><ul><li>Un appel gratuit pour faire le point</li><li>Un plan construit pour toi</li><li>Ajusté avec toi chaque semaine</li><li>Messagerie et check-in dans l'appli</li></ul><a class="btn-ghost" href="${LINKS.prequalification}">Réserver mon appel gratuit</a><div class="path-shot">${phone("messages", "Écran Messages avec le coach", path)}</div></article>
-      <article class="path spot" data-reveal style="--i:2"><span class="path-tag">Coachs</span><h3>Faire grandir ton activité</h3><ul><li>Accès gratuit, clients illimités</li><li>Clients, programmes et check-ins</li><li>Studio de contenu et stats réseaux</li><li>Formations et ventes</li><li>Équipe et paie calculée</li></ul><a class="btn-ghost" href="${LINKS.signupCoach}">Espace coach gratuit</a><div class="path-shot">${phone("coach-accueil", "Accueil coach", path)}</div></article>
-    </div>`,
+  // Accueil recentré sur une débutante (2026-11-17) : ce qu'elle vit (page Cible
+  // de Notion), ce qu'on lui a fait croire, la méthode en 6 mois, ce qu'elle reçoit.
+  const pourToi = section({
+    eyebrow: "C'est pour toi si",
+    title: `Tu as déjà commencé. <span class="accent">Plusieurs fois.</span>`,
+    intro: "Et à chaque fois, une semaine chargée a tout arrêté. Le problème n'est pas ta motivation : c'est un plan qui ne tenait pas dans ta vraie vie.",
+    content: `<ul class="ck">${[
+      "La salle t'intimide, tu ne sais pas par où commencer",
+      "Tu veux perdre du ventre sans passer ta vie sur le tapis",
+      "Tu veux des formes, pas devenir massive",
+      "Tu manques de temps, et ta semaine bouge tout le temps",
+      "Un écart, et tu as l'impression d'avoir tout gâché",
+    ].map((x, i) => `<li data-reveal style="--i:${i}">${esc(x)}</li>`).join("")}</ul>`,
+    narrow: true,
   });
 
-  const BENTO = [
-    ["coach-accueil", "Ton poste de pilotage", "Alertes clients, messages non lus, ta journée et tes raccourcis, dès l'ouverture.", "clients"],
-    ["clients", "Qui a besoin de toi", "Fiches complètes et priorités : les clients qui décrochent remontent en premier.", "clients"],
-    ["live", "Tes lives", "1-to-1, audits, ateliers, questions-réponses : planifiés dans l'appli.", "live"],
-    ["stats-reseaux", "Ce qui marche", "Tes chiffres réseaux et les leads apportés par chaque publication.", "stats-reseaux"],
-    ["equipe", "Ton équipe", "Coachs, setters, closers : un espace chacun et la paie calculée.", "equipe"],
-    ["formations", "Ta formation", "Crée-la, donne-la à tes clients ou vends-la avec ton lien.", "formations"],
-    ["mailing", "Tes emails", "Newsletter, annonces, relances, avec une centaine de modèles.", "mailing"],
-  ];
-  const coachs = section({
-    eyebrow: "Pour les coachs",
-    title: `Remplace 6 outils <span class="accent">par une seule appli</span>`,
-    intro: "Un système clair, du premier contenu au client fidèle. Sans jongler entre les onglets.",
-    content: `<div class="compare">
-      <div class="compare-col before" data-reveal><h3>Aujourd'hui</h3><ul>${["Un tableur pour suivre les clients", "WhatsApp pour recevoir les bilans", "Un PDF pour chaque programme", "Une appli de calories à côté", "Un outil d'emailing en plus", "Des notes éparpillées pour le contenu"].map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>
-      <div class="compare-col after" data-reveal style="--i:1"><h3>Avec EP Coaching</h3><ul>${["Fiches clients avec priorités", "Boîte de réception unique", "Programmes et plans nutrition assignés", "Bilans et nutrition qui remontent seuls", "Mailing intégré avec modèles", "Studio créatif et stats réseaux"].map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>
-    </div>
-    <div class="bento" style="margin-top: var(--space-xl)">${BENTO.map(([shot, t, d, slug], i) => `<a class="bento-card spot" href="${r(`/appli/${slug}/`)}" data-reveal style="--i:${i % 3}"><h3>${esc(t)}</h3><p>${esc(d)}</p><span class="card-more bento-link">Découvrir ${icon("arrow", "icon icon--xs")}</span>${phone(shot, t, path)}</a>`).join("")}</div>
-    <div class="cta-row cta-row--center" style="margin-top: var(--space-lg)"><a class="btn-cta-primary btn-cta-primary--lg" href="${LINKS.signupCoach}">Espace coach gratuit</a><a class="btn-ghost" href="${r("/solutions/coachs/")}">Voir la plateforme coach</a></div>`,
+  const mythes = section({
+    eyebrow: "Ce qu'on t'a fait croire",
+    title: `Trois idées <span class="accent">qui te freinent</span>`,
+    content: `<div class="myths">${[
+      ["Il faut des heures de cardio pour perdre du ventre", "La musculation dessine tes formes. Le cardio aide, il ne fait pas tout."],
+      ["La musculation va me rendre trop musclée", "Elle te donne des fessiers, des épaules, une silhouette plus équilibrée."],
+      ["Il faut manger très peu pour maigrir", "Tu manges à ta faim, avec des protéines à chaque repas. C'est ce qui tient."],
+    ].map(([f, v], i) => `<article class="myth spot" data-reveal style="--i:${i}"><p class="myth-f"><s>${esc(f)}</s></p><p class="myth-v">${esc(v)}</p></article>`).join("")}</div>`,
   });
+
+  const methode = section({
+    eyebrow: "La méthode",
+    title: `Six mois, <span class="accent">étape par étape</span>`,
+    intro: "Pas un défi de 30 jours. Un changement qui reste, découpé en étapes que tu vois passer dans ta roadmap.",
+    content: `<ol class="road">${[
+      ["Mois 1", "Les bases", "Tes séances, tes repas, ton rythme. Tout tient dans ta semaine."],
+      ["Mois 2 à 3", "Confiance à la salle", "Tu sais quoi faire, tu charges un peu plus chaque semaine."],
+      ["Mois 4 à 5", "On affine", "Le ventre, les fessiers, la silhouette que tu veux."],
+      ["Mois 6", "Tu sais faire seule", "Tu n'as plus besoin de deviner. Et ça reste."],
+    ].map(([m, t, d], i) => `<li class="road-step" data-reveal style="--i:${i}"><span class="road-m">${esc(m)}</span><h3>${esc(t)}</h3><p>${esc(d)}</p></li>`).join("")}</ol>`,
+  });
+
+  const offre = section({
+    eyebrow: "Le coaching EP",
+    title: `Ce que tu reçois <span class="accent">pendant 6 mois</span>`,
+    content: `<div class="offer" data-reveal><ul class="ck ck--grid">${[
+      "Programme, diète et roadmap faits pour toi",
+      "Un check-in chaque semaine, photos comprises",
+      "Tes exercices corrigés en vidéo",
+      "Un suivi à toute heure",
+      "7 formats de live à réserver",
+      "5 formations, et toute l'appli",
+    ].map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
+      <div class="offer-cta"><p>On commence par un audit de 30 minutes, gratuit, en tête-à-tête. Tu repars avec un plan clair, que tu travailles avec nous ou non.</p><div class="cta-row"><a class="btn-cta-primary btn-cta-primary--lg" href="${LINKS.audit}">Réserver mon audit offert</a></div></div></div>`,
+  });
+
+  const coachLine = `<section class="section section--slim"><p class="coach-line" data-reveal>Tu es coach ? L'appli suit aussi tes clients. ${link("/solutions/coachs/", `Découvrir l'espace coach ${icon("arrow", "icon icon--xs")}`, path, "text-link")}</p></section>`;
 
   const founder = `<section class="section"><div class="founder">
     <figure class="founder-photo" data-reveal><img src="${r("/assets/images/portrait_physique.jpg")}" alt="Emmanuel, coach sportif à Annecy et fondateur d'EP Coaching" loading="lazy" /><figcaption><strong>Emmanuel Santamaria Sanchéz</strong>${FOUNDER_FACTS.age} ans, né à ${FOUNDER_FACTS.naissance} (Colombie), coach à Annecy</figcaption></figure>
@@ -191,19 +182,7 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
     </div>
   </div></section>`;
 
-  const guarantees = section({
-    eyebrow: "Zéro risque",
-    title: `Tu n'as <span class="accent">rien à perdre</span>`,
-    content: `<div class="guarantees">${[
-      ["Gratuit", "Sans carte bancaire, sans engagement. Tu commences aujourd'hui."],
-      ["Tes données te suivent", "Export de toutes tes données en un clic, quand tu veux."],
-      ["Tu pars quand tu veux", "Suppression du compte en un clic, sans demander à personne."],
-      ["Hébergé en Europe", "Base de données dans l'Union européenne, accès cloisonnés."],
-      ["Un humain répond", "Une vraie personne à l'assistance, sous 48 heures ouvrées."],
-    ].map(([t, d], i) => `<div class="guarantee" data-reveal style="--i:${i}"><strong>${icon("shield", "icon icon--xs")} ${esc(t)}</strong><span>${esc(d)}</span></div>`).join("")}</div>`,
-  });
-
-  const faqQs = ["Qu'est-ce qu'EP Coaching ?", "Est-ce que l'appli est gratuite ?", "Faut-il peser tous ses aliments ?", "Que peut faire un coach dans EP Coaching ?", "Mes données sont-elles privées ?", "Faut-il télécharger l'appli sur l'App Store ou Google Play ?"];
+  const faqQs = ["Qu'est-ce qu'EP Coaching ?", "Est-ce que l'appli est gratuite ?", "Faut-il peser tous ses aliments ?", "Mes données sont-elles privées ?", "Faut-il télécharger l'appli sur l'App Store ou Google Play ?"];
   const faq = faqAll.filter((f) => faqQs.includes(f.q));
 
   const finalCta = `<section class="cta-band"><div class="cta-band-inner">
@@ -216,17 +195,13 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
   const body = [
     hero,
     vsl,
-    logoMarquee(svgs),
-    counters,
-    pains,
-    levers,
+    pourToi,
+    mythes,
+    methode,
+    offre,
     tour,
-    paths,
-    coachs,
-    `<section class="section" id="guide-gratuit">${quizBlock(guides, path)}</section>`,
     founder,
-    guarantees,
-    section({ eyebrow: "Actus", title: "Ce qui vient de sortir", content: `<div class="grid grid--3">${news.slice(0, 3).map((n) => newsCard(n, path)).join("")}</div><p class="center">${link("/actus/", "Toutes les actus", path, "btn-ghost")}</p>` }),
+    coachLine,
     section({ eyebrow: "FAQ", title: "Questions fréquentes", content: faqList(faq) + `<p class="center">${link("/faq/", "Toutes les questions", path, "btn-ghost")}</p>`, narrow: true }),
     finalCta,
     `<div class="sticky-cta" aria-hidden="false"><span>Audit 30 min, offert</span><a class="btn-cta-primary" href="${LINKS.audit}">Réserver</a></div>`,
