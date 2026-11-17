@@ -4,8 +4,8 @@ import { Audio } from "@remotion/media";
 import { SceneProps, sceneParDefaut } from "../lib/props";
 import { FPS, SceneResolue } from "../lib/resolve";
 import { PolicesPretes } from "../motion/Polices";
-import { Chapitre, Defile, Fond, Onde, Progression, pop } from "./core";
-import { TexteCinetique, debutPage, pageActive } from "./Texte";
+import { Fond, Onde, Progression, pop } from "./core";
+import { MotsCles, debutPage, pageActive } from "./Texte";
 import { Bouton, Cycle, Duo, Gros, Liste, Offre, Photo, Route, Semaine, Telephone, Tendance } from "./Visuels";
 
 const NB_SCENES = 14;
@@ -56,13 +56,11 @@ const Moteur: React.FC<{ scene: SceneResolue; plans: (r: R) => Plan[]; sons?: (r
   return (
     <AbsoluteFill>
       <Fond teinte={scene.num} energie={energie} />
-      <Defile texte={scene.titre} />
       <AbsoluteFill style={{ transform: cam }}>
-        {cles.map((c, i) => <Onde key={i} at={c} x={visuel ? 28 : 50} y={50} />)}
+        {visuel ? null : cles.map((c, i) => <Onde key={i} at={c} x={50} y={50} />)}
         {visuel}
-        <TexteCinetique scene={scene} zone={visuel ? "gauche" : "plein"} />
+        {visuel ? null : <MotsCles scene={scene} />}
       </AbsoluteFill>
-      <Chapitre texte={scene.titre} num={scene.num} />
       <Progression part={(scene.num - 1 + f / scene.dureeFrames) / NB_SCENES} />
       {pops.map((at, i) => (
         <Sequence key={`p${i}`} from={Math.max(0, at)} durationInFrames={30} layout="none">
@@ -99,7 +97,7 @@ const rien = (at: number): Plan => ({ at, v: () => null });
 
 export const SCENES_V3: Record<number, React.FC<SceneProps>> = {
   1: scene((r) => [
-    { at: r("commencé"), v: (t0) => <Cycle t0={t0} labels={[{ texte: "Je commence", at: r("commencé") }, { texte: "J'arrête", at: r("arrêté") }, { texte: "J'y repense", at: r("y penses") }]} /> },
+    { at: r("Des séances"), v: (t0) => <Cycle t0={t0} labels={[{ texte: "Je commence", at: r("commencé") }, { texte: "J'arrête", at: r("arrêté") }, { texte: "J'y repense", at: r("y penses") }]} /> },
     rien(r("Si c'est toi")),
   ]),
   2: scene((r) => [
