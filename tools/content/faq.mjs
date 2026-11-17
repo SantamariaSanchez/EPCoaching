@@ -37,7 +37,7 @@ export const FAQ_GROUPS = [
       { q: "Comment être accompagné par un coach ?", a: "Si un coach t'a envoyé un lien d'invitation, crée ton compte avec ce lien. Sinon, parcours l'annuaire des coachs, ou réserve un appel pour l'accompagnement physique de Santamaria Sanchéz." },
       { q: "Comment se passe l'accompagnement physique 1-to-1 ?", a: "On commence par un appel gratuit pour faire le point sur ta situation. Si l'accompagnement est adapté, ton coach construit ton plan (entraînement, nutrition, objectifs), puis l'ajuste en continu avec toi." },
       { q: "Qu'est-ce qu'un check-in hebdomadaire ?", a: "Une fois par semaine, ton bilan de la semaine part à ton coach, qui te répond directement dans l'appli pour ajuster la suite." },
-      { q: "Je prépare une compétition, EP Coaching peut m'aider ?", a: "Oui : poses de ta catégorie, guide de posing, compte à rebours et suivi précis. Emmanuel prépare lui-même la WNBF Classic 2027." },
+      { q: "Je prépare une compétition, EP Coaching peut m'aider ?", a: "Oui : poses de ta catégorie, guide de posing, compte à rebours et suivi précis." },
       { q: "Les coachs d'EP Coaching sont-ils de vraies personnes ?", a: "Oui. L'accompagnement est assuré par des coachs humains, qui lisent tes bilans et te répondent." },
     ],
   },

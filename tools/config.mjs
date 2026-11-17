@@ -47,7 +47,6 @@ export const FOUNDER_FACTS = {
   pays: "Colombie",
   ville: "Annecy",
   prochaineVille: "Paris",
-  objectif: "WNBF Classic 2027",
   // Toutes les façons dont on le cherche sur Google.
   noms: ["Emmanuel Santamaria Sanchéz", "Emmanuel Santamaria Sanchez", "Emmanuel Santamaria", "Santamaria Sanchez", "Santamaria Sanchéz", "Emmanuel Peccoux", "Peccoux Emmanuel", "Manu Peccoux"],
 };
@@ -153,8 +152,8 @@ export const VSL_YOUTUBE_ID = "";
 // Utilisée tant que VSL_YOUTUBE_ID est vide ; un identifiant YouTube reprend la main.
 // `minutes` : durée affichée sur le lecteur et dans l'intro de la section.
 export const VSL_VIDEO = {
-  src: "/assets/video/vsl-ep-coaching-v35.mp4",
+  src: "/assets/video/vsl-ep-coaching-v40.mp4",
   vtt: "/assets/video/vsl-ep-coaching.vtt",
-  poster: "/assets/video/vsl-poster-v35.jpg",
+  poster: "/assets/video/vsl-poster-v40.jpg",
   minutes: 4,
 };

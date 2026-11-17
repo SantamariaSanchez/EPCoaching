@@ -196,7 +196,7 @@ export const PERSON_JSONLD = {
   givenName: "Emmanuel",
   familyName: "Santamaria Sanchéz",
   alternateName: F.noms.filter((n) => n !== FOUNDER),
-  description: `${FOUNDER}, ${F.age} ans, coach sportif en musculation et nutrition né à ${F.naissance} (${F.pays}), basé à ${F.ville} et bientôt à ${F.prochaineVille}. Fondateur d'EP Coaching et de l'appli EP Coaching. Il aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois, et prépare la ${F.objectif}.`,
+  description: `${FOUNDER}, ${F.age} ans, coach sportif en musculation et nutrition né à ${F.naissance} (${F.pays}), basé à ${F.ville} et bientôt à ${F.prochaineVille}. Fondateur d'EP Coaching et de l'appli EP Coaching. Il aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.`,
   jobTitle: "Coach sportif en musculation et nutrition, fondateur d'EP Coaching",
   url: BASE + "a-propos/",
   image: BASE + "assets/images/portrait_physique.jpg",

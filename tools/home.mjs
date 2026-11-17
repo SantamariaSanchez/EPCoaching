@@ -163,8 +163,8 @@ export function buildHome({ path, guides, features, news, faqAll, svgs, newsCard
     <figure class="founder-photo" data-reveal><img src="${r("/assets/images/portrait_physique.jpg")}" alt="Emmanuel, coach sportif à Annecy et fondateur d'EP Coaching" loading="lazy" /><figcaption><strong>Emmanuel Santamaria Sanchéz</strong>${FOUNDER_FACTS.age} ans, né à ${FOUNDER_FACTS.naissance} (Colombie), coach à Annecy</figcaption></figure>
     <div data-reveal style="--i:1">
       <h2>Qui est <span class="accent">derrière</span></h2>
-      <p>Moi, c'est Emmanuel. ${FOUNDER_FACTS.age} ans, né en Colombie, coach à Annecy. Je prépare la ${FOUNDER_FACTS.objectif}.</p>
-      <div class="badges"><span class="chip">${FOUNDER_FACTS.objectif}</span><span class="chip">Annecy · bientôt Paris</span></div>
+      <p>Moi, c'est Emmanuel. ${FOUNDER_FACTS.age} ans, né en Colombie, coach à Annecy.</p>
+      <div class="badges"><span class="chip">Annecy · bientôt Paris</span></div>
       <div class="cta-row" style="margin-top: var(--space-md)"><a class="btn-ghost" href="${LINKS.audit}">Réserver mon audit offert</a>${link("/a-propos/", `Mon histoire ${icon("arrow", "icon icon--xs")}`, path, "text-link")}</div>
       ${socialCards()}
     </div>
