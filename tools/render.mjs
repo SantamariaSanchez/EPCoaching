@@ -135,7 +135,7 @@ export function footerHtml(path) {
         <p class="footer-tagline">L'appli et le coaching pour progresser, que tu t'entraînes ou que tu coaches.</p>
         <div class="footer-follow"><p class="footer-follow-label">Suis ${esc(FOUNDER)}</p>${socialIconsRow("social-icons social-icons--lg")}</div>
         <div class="footer-newsletter">
-          <p class="footer-newsletter-label"><strong>Le mail de 10h.</strong> Chaque matin, une seule chose concrète à appliquer le jour même pour ton physique. Deux minutes de lecture, désinscription en un clic.</p>
+          <p class="footer-newsletter-label"><strong>Le mail de 10h.</strong> Une chose à appliquer chaque matin.</p>
           <form id="newsletter-form" class="newsletter-form" novalidate>
             <label for="newsletter-email" class="sr-only">Ton email</label>
             <input type="text" name="website" class="newsletter-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />

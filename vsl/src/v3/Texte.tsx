@@ -89,3 +89,52 @@ export const TexteCinetique: React.FC<{ scene: SceneResolue; zone: "plein" | "ga
     </div>
   );
 };
+
+// v3.2 (2026-11-17, retour d'Emmanuel : « trop verbeux », « double sous-titre ») :
+// on n'écrit plus la narration. Seuls les mots clés de la page (mise-en-valeur.json)
+// apparaissent, en grand, au moment exact où ils sont dits. Pas de mot clé : rien.
+export const MotsCles: React.FC<{ scene: SceneResolue }> = ({ scene }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const pi = pageActive(scene, frame);
+  const mots = scene.pages[pi].flatMap((i) => scene.blocs[i].mots);
+  // Regroupe les mots clés consécutifs en expressions (« perdre du gras »).
+  const groupes: (typeof mots)[] = [];
+  mots.forEach((m, k) => {
+    if (!m.em) return;
+    if (k > 0 && mots[k - 1].em && groupes.length) groupes[groupes.length - 1].push(m);
+    else groupes.push([m]);
+  });
+  if (!groupes.length) return null;
+  const longueur = groupes.reduce((n, g) => n + g.map((m) => m.t).join(" ").length, 0);
+  const base = longueur < 10 ? 210 : longueur < 18 ? 170 : longueur < 28 ? 130 : 104;
+  return (
+    <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: base * 0.12, padding: "0 140px", textAlign: "center" }}>
+      {groupes.map((g, gi) => {
+        const t = g[0].s * FPS - ANTICIPE;
+        if (frame < t) return null;
+        const p = pop(frame, fps, t, 8);
+        return (
+          <div key={gi} style={{ overflow: "hidden", paddingBottom: base * 0.08 }}>
+            <div
+              style={{
+                fontFamily: MONTSERRAT,
+                fontWeight: 900,
+                fontSize: base,
+                lineHeight: 1,
+                letterSpacing: -base * 0.04,
+                transform: `translateY(${(1 - ease(frame, t, t + 7)) * 100}%) scale(${1.25 - 0.25 * p})`,
+                background: gi % 2 === 0 ? `linear-gradient(100deg, ${C.blanc} 0%, #FDC4C4 100%)` : `linear-gradient(100deg, ${C.rouge} 0%, #FF5A5A 50%, #FDC4C4 100%)`,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+              }}
+            >
+              {g.map((m) => m.t).join(" ")}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};

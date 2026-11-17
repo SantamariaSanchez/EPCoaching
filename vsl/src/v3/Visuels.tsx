@@ -17,16 +17,16 @@ const Zone: React.FC<{ t0: number; children: React.ReactNode }> = ({ t0, childre
     <div
       style={{
         position: "absolute",
-        left: 1010,
-        top: 140,
-        width: 820,
-        height: 800,
+        left: 460,
+        top: 90,
+        width: 1000,
+        height: 900,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         // Entrée : découpe diagonale qui s'ouvre, glissé et rotation qui se pose ; puis flottement.
         clipPath: `polygon(0 ${100 - clip * 140}%, 100% ${140 - clip * 140}%, 100% 100%, 0 100%)`,
-        transform: `translate(${(1 - p) * 90}px, ${Math.sin(d / 28) * 6}px) rotate(${(1 - p) * 4 + Math.sin(d / 45) * 0.5}deg) scale(${0.9 + 0.1 * p})`,
+        transform: `translate(0px, ${(1 - p) * 60 + Math.sin(d / 28) * 6}px) rotate(${(1 - p) * 3 + Math.sin(d / 45) * 0.4}deg) scale(${(0.9 + 0.1 * p) * 1.15})`,
       }}
     >
       {children}
