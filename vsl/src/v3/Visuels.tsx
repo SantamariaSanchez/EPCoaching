@@ -17,9 +17,9 @@ const Zone: React.FC<{ t0: number; children: React.ReactNode }> = ({ t0, childre
     <div
       style={{
         position: "absolute",
-        left: 460,
+        left: 310,
         top: 90,
-        width: 1000,
+        width: 1300,
         height: 900,
         display: "flex",
         alignItems: "center",
@@ -41,14 +41,20 @@ const carte: React.CSSProperties = {
   boxShadow: "0 30px 80px rgba(0,0,0,0.55)",
 };
 
-const txt = (size: number, weight = 800, color: string = C.blanc): React.CSSProperties => ({
+// v3.3 : le texte des visuels est agrandi de 30 % (en dessous de 60 px), pour rester
+// lisible quand la vidéo est regardée sur un téléphone (1920 px affichés sur ~390 px).
+const LISIBLE = 1.3;
+const txt = (size0: number, weight = 800, color: string = C.blanc): React.CSSProperties => {
+  const size = size0 < 60 ? Math.round(size0 * LISIBLE) : size0;
+  return {
   fontFamily: MONTSERRAT,
   fontWeight: weight,
   fontSize: size,
   color,
   letterSpacing: -size * 0.02,
   lineHeight: 1.15,
-});
+  };
+};
 
 /** Photo d'Emmanuel ou d'ambiance, cadre incliné, léger zoom continu. */
 export const Photo: React.FC<{ t0: number; src: string; legende?: string; incline?: number }> = ({ t0, src, legende, incline = -3 }) => {
@@ -90,7 +96,7 @@ export const Liste: React.FC<{ t0: number; items: { texte: string; at: number; b
   const { fps } = useVideoConfig();
   return (
     <Zone t0={t0}>
-      <div style={{ display: "flex", flexDirection: "column", gap: 22, width: 760 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 24, width: 1000 }}>
         {items.map((it, i) => {
           const p = pop(f, fps, it.at, 7);
           const b = it.barre !== undefined ? ease(f, it.barre, it.barre + 8) : 0;
@@ -128,7 +134,7 @@ export const Liste: React.FC<{ t0: number; items: { texte: string; at: number; b
 export const Cycle: React.FC<{ t0: number; labels: { texte: string; at: number }[] }> = ({ t0, labels }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const R = 250;
+  const R = 290;
   const rot = (f - t0) * 1.4;
   return (
     <Zone t0={t0}>
@@ -144,9 +150,9 @@ export const Cycle: React.FC<{ t0: number; labels: { texte: string; at: number }
               key={i}
               style={{
                 position: "absolute",
-                left: 380 + Math.cos(a) * R - 160,
+                left: 380 + Math.cos(a) * R - 210,
                 top: 380 + Math.sin(a) * R - 48,
-                width: 320,
+                width: 420,
                 ...carte,
                 background: f >= l.at ? C.rouge : "#1a0606",
                 padding: "20px 10px",
@@ -290,7 +296,7 @@ export const Offre: React.FC<{ t0: number; tuiles: { titre: string; at: number }
   const { fps } = useVideoConfig();
   return (
     <Zone t0={t0}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, width: 800 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, width: 1080 }}>
         {tuiles.map((t, i) => {
           const p = pop(f, fps, t.at, 7);
           const on = f >= t.at;

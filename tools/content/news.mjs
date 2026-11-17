@@ -232,7 +232,7 @@ export const NEWS = [
     title: "Masterclass business et suivi de la publicité",
     summary: "Des tutoriels pas à pas avec un résultat concret à produire, et un outil pour piloter tes campagnes publicitaires.",
     body: [
-      "Les masterclass sont des tutoriels complets, de A à Z, sur un outil ou un système business : à la fin, tu as un résultat réel produit, pas seulement une lecture.",
+      "Les masterclass sont des tutoriels complets, de A à Z, sur un outil ou un système business : à la fin, tu as un résultat concret.",
       "Le suivi publicitaire te permet de reporter les chiffres de tes campagnes (Google, Meta, TikTok) : l'appli calcule le coût par lead, le taux de clic et le retour sur dépense publicitaire.",
     ],
     related: ["/appli/pilotage/"],

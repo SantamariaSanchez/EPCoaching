@@ -153,8 +153,8 @@ export const VSL_YOUTUBE_ID = "";
 // Utilisée tant que VSL_YOUTUBE_ID est vide ; un identifiant YouTube reprend la main.
 // `minutes` : durée affichée sur le lecteur et dans l'intro de la section.
 export const VSL_VIDEO = {
-  src: "/assets/video/vsl-ep-coaching-v32.mp4",
+  src: "/assets/video/vsl-ep-coaching-v34.mp4",
   vtt: "/assets/video/vsl-ep-coaching.vtt",
-  poster: "/assets/video/vsl-poster-v32.jpg",
+  poster: "/assets/video/vsl-poster-v34.jpg",
   minutes: 4,
 };
