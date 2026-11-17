@@ -177,14 +177,23 @@ const halo = couche((L, R, n) => {
 });
 
 // Intensités par scène : [nappe, basse, arpège, caisse, charleston, halo].
+// Un niveau par couche (pad, basse, arpège, kick, hat, halo) et par scène de la VSL v3 (14 scènes) :
+// tension à l'accroche, montée sur les piliers, respiration au paradigme, énergie au coaching et à l'appel.
 const NIVEAUX = {
   1: [0.8, 0.55, 0.0, 0.0, 0.0, 0.0],
-  2: [0.75, 0.7, 0.55, 0.0, 0.0, 0.0],
-  3: [0.65, 0.85, 0.7, 0.7, 0.4, 0.0],
-  4: [0.7, 0.9, 0.8, 0.85, 0.6, 0.6],
-  5: [0.85, 0.6, 0.55, 0.25, 0.0, 0.3],
-  6: [0.7, 0.85, 0.7, 0.8, 0.5, 0.45],
-  7: [0.9, 0.7, 0.45, 0.35, 0.2, 0.7],
+  2: [0.75, 0.7, 0.55, 0.0, 0.0, 0.2],
+  3: [0.7, 0.75, 0.6, 0.45, 0.2, 0.2],
+  4: [0.85, 0.6, 0.6, 0.3, 0.0, 0.6],
+  5: [0.7, 0.85, 0.7, 0.7, 0.4, 0.3],
+  6: [0.85, 0.55, 0.3, 0.0, 0.0, 0.5],
+  7: [0.65, 0.85, 0.7, 0.75, 0.45, 0.2],
+  8: [0.65, 0.85, 0.75, 0.8, 0.5, 0.2],
+  9: [0.65, 0.9, 0.75, 0.85, 0.55, 0.25],
+  10: [0.7, 0.9, 0.8, 0.85, 0.6, 0.3],
+  11: [0.75, 0.85, 0.8, 0.8, 0.5, 0.5],
+  12: [0.7, 0.9, 0.8, 0.85, 0.6, 0.6],
+  13: [0.7, 0.85, 0.7, 0.75, 0.5, 0.5],
+  14: [0.9, 0.7, 0.5, 0.4, 0.2, 0.7],
 };
 const couches = [pad, basse, arpege, kick, hat, halo];
 const debutsS = debuts.map((d) => d / FPS);
@@ -192,8 +201,8 @@ const niveau = (t, k) => {
   // Fondu de 2 s autour de chaque changement de scène.
   let idx = 0;
   for (let i = 0; i < debutsS.length; i++) if (t >= debutsS[i]) idx = i;
-  const cur = NIVEAUX[idx + 1][k];
-  const prev = idx > 0 ? NIVEAUX[idx][k] : cur;
+  const cur = (NIVEAUX[idx + 1] ?? NIVEAUX[14])[k];
+  const prev = idx > 0 ? (NIVEAUX[idx] ?? NIVEAUX[14])[k] : cur;
   const r = Math.min(1, (t - debutsS[idx]) / 2);
   return prev + (cur - prev) * r;
 };

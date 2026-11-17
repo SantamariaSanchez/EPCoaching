@@ -5,6 +5,9 @@
    page) et avant main.js.
    ═══════════════════════════════════════════════════════════════════════ */
 
+// Garde-fou : si un CDN (GSAP, ScrollTrigger, Lenis) ne charge pas (réseau
+// faible, bloqueur), on garde le défilement natif au lieu de casser la page.
+if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined" && typeof Lenis !== "undefined") {
 gsap.registerPlugin(ScrollTrigger);
 
 // Quality floor posé au prompt 6/15, pour toute la phase animation à
@@ -59,3 +62,4 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0);
 
 window.lenis = lenis;
+}

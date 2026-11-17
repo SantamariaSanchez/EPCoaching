@@ -97,7 +97,7 @@ html.js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
   background: color-mix(in srgb, var(--rouge-tres-fonce) 70%, transparent);
   font-size: 0.8rem; font-weight: 600;
 }
-.pill b { padding: 0.15rem 0.55rem; border-radius: 999px; background: var(--rouge-principal); font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.pill b { padding: 0.15rem 0.55rem; border-radius: 999px; background: #D41B1B; font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase; }
 .pill:hover { border-color: var(--rouge-principal); }
 
 /* Halo animé derrière le hero */

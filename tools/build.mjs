@@ -7,10 +7,10 @@
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { BASE, APP, LINKS, BUILD_DATE, SOCIALS, FOUNDER } from "./config.mjs";
+import { BASE, APP, LINKS, BUILD_DATE, SOCIALS, FOUNDER, FOUNDER_FACTS } from "./config.mjs";
 import {
   esc, resolve, link, icon, pageHtml, hero, section, cardGrid, steps, faqList, faqJsonLd, ctaBand,
-  headerHtml, footerHtml, canonical, ORG_JSONLD, phone, logoMarquee, socialCards,
+  headerHtml, footerHtml, canonical, ORG_JSONLD, PERSON_JSONLD, phone, logoMarquee, socialCards,
 } from "./render.mjs";
 import { buildHome, quizBlock } from "./home.mjs";
 import { readdirSync } from "node:fs";
@@ -267,7 +267,7 @@ const SOLUTIONS = [
     shot: "coach-accueil",
     features: ["clients", "live", "studio", "stats-reseaux", "formations", "pilotage", "mailing", "equipe"],
     faq: ["Que peut faire un coach dans EP Coaching ?", "Mes clients doivent-ils payer l'appli ?", "Comment inviter mes clients ?", "Les autres coachs peuvent-ils voir mes clients ?", "Je débute comme coach, c'est pour moi ?"],
-    extra: { title: `Tu veux être <span class="accent">accompagné</span> sur ton business ?`, text: "En plus de l'appli, Santamaria Sanchéz accompagne en 1-to-1 les coachs qui veulent structurer et faire grandir leur activité.", link: { label: "Découvrir l'accompagnement business", href: "/business/" } },
+
   },
   {
     slug: "equipes",
@@ -494,55 +494,79 @@ for (const a of HELP_ARTICLES) {
 // ── Pages institutionnelles ──────────────────────────────────────────────
 {
   const path = "/a-propos/";
+  const F = FOUNDER_FACTS;
+  // Page « personnalité publique » (2026-11-16) : qui est Emmanuel, en faits nets et citables.
+  // Cible des recherches : Emmanuel Santamaria Sanchéz, Emmanuel Peccoux, EP Coaching, coach Annecy.
+  // Questions que les gens posent vraiment (pas de bourrage de noms : les variantes du nom
+  // vivent dans le JSON-LD, invisibles pour le lecteur).
+  const QUI = [
+    { q: "Qui est Emmanuel Santamaria Sanchéz ?", a: `Un coach sportif de ${F.age} ans, né en ${F.pays} et basé à ${F.ville}. Il a fondé EP Coaching et son appli, et aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.` },
+    { q: "Qu'est-ce que EP Coaching ?", a: "Un coaching en ligne de 6 mois en musculation et nutrition, et une appli pour suivre ses séances, ses repas et ses progrès." },
+    { q: "Le coaching se fait à Annecy ou en ligne ?", a: "En ligne, partout en France. Le programme, la diète, le check-in de la semaine et les lives passent par l'appli." },
+    { q: "Il fait de la compétition ?", a: `Oui, il prépare la ${F.objectif} en Classic Physique, en fédération naturelle testée. Il applique sur lui ce qu'il enseigne.` },
+    { q: "Comment commencer ?", a: "Par l'audit stratégique : 30 minutes, gratuit, en tête-à-tête. On regarde ta situation, ton objectif et ton emploi du temps, et tu repars avec un plan clair." },
+  ];
   const body = [
-    hero({ eyebrow: "À propos", title: `On veut que tu ailles <span class="accent">plus vite</span> que seul`, lead: "EP Coaching est né d'une conviction simple : les gens motivés méritent des outils et un accompagnement à la hauteur de leur motivation.", path }),
+    hero({ eyebrow: `${F.age} ans · né en Colombie · Annecy, bientôt Paris`, title: `Emmanuel Santamaria Sanchéz, <span class="accent">coach sportif</span>`, lead: `Je suis né à ${F.naissance}, en ${F.pays}. Je vis à ${F.ville}, bientôt à ${F.prochaineVille}. J'ai créé EP Coaching et son appli pour aider les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.`, path, ctas: [{ label: "Réserver mon audit offert", href: "LINK:audit" }] }),
     section({
-      eyebrow: "Le fondateur",
-      title: "Emmanuel Santamaria Sanchéz",
-      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Emmanuel Santamaria Sanchéz, fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Fondateur d'EP Coaching, coach sportif basé à Annecy (Haute-Savoie). J'accompagne des personnes qui veulent progresser en musculation, et des coachs qui veulent structurer leur activité.</p><p>Je suis athlète naturel, objectif Heroes Cup WNBF France en Classic Physique. Je m'applique à moi-même ce que je transmets. Ce que je sais, je l'ai appris en le faisant, et je continue à l'apprendre.</p><p>Mon approche tient en une chose : je prends les gens motivés, et je fais en sorte qu'ils aillent plus vite que s'ils étaient seuls.</p><p class="founder-follow">Suis-moi au quotidien, conseils et coulisses :</p>${socialCards()}</div></div>`,
+      eyebrow: "Mon histoire",
+      title: `De ${F.naissance} à ${F.prochaineVille}`,
+      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Emmanuel, coach sportif et fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Je suis né à ${F.naissance}, une petite ville d'${F.region}, en ${F.pays}. Aujourd'hui j'ai ${F.age} ans, je vis à ${F.ville}, en Haute-Savoie, et je pars bientôt à ${F.prochaineVille}.</p><p>La musculation m'a appris une chose : on ne change pas son corps en un week-end, on le change avec un plan qu'on tient. Je prépare la ${F.objectif}, en fédération naturelle testée. Ma diète, mon entraînement, mon sommeil : j'applique d'abord sur moi tout ce que je transmets.</p><p>J'ai créé EP Coaching pour les débutantes qui ont déjà commencé plusieurs fois, puis arrêté. Un programme, une diète et une roadmap faits pour elles, un check-in chaque semaine, et quelqu'un qui répond à n'importe quelle heure.</p><p>Et j'ai construit l'appli EP Coaching pour que tout tienne au même endroit : la séance du jour, les repas, le bilan du matin. Elle sert aussi aux coachs qui veulent suivre leurs clients.</p><p class="founder-follow">Suis-moi au quotidien :</p>${socialCards()}</div></div>`,
     }),
     section({
-      eyebrow: "Ce qu'on construit",
-      title: `Quatre fronts, <span class="accent">une seule appli</span>`,
+      eyebrow: "En bref",
+      title: "Les faits",
+      content: `<dl class="facts">${[
+        ["Nom", FOUNDER],
+        ["Âge", `${F.age} ans`],
+        ["Né à", `${F.naissance}, ${F.region}, ${F.pays}`],
+        ["Vit à", `${F.ville}, Haute-Savoie, puis ${F.prochaineVille}`],
+        ["Métier", "Coach sportif en musculation et nutrition"],
+        ["Entreprise", "EP Coaching (coaching en ligne et appli)"],
+        ["Compétition", `${F.objectif}, Classic Physique, naturel testé`],
+        ["Langues", "Français, espagnol"],
+      ].map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`,
+      narrow: true,
+    }),
+    section({
+      eyebrow: "Ce que je fais",
+      title: `Une entreprise, <span class="accent">deux outils</span>`,
       content: cardGrid(
         [
-          { icon: "heart", title: "Ton propre suivi", text: "Entraînement, nutrition, bilan et progression, avec des outils de coach." },
-          { icon: "users", title: "La qualité du coaching", text: "Des coachs qui voient les bonnes données au bon moment, et qui répondent." },
-          { icon: "sparkles", title: "Le contenu", text: "Aider chaque coach à produire et mesurer le contenu qui fait venir ses clients." },
-          { icon: "briefcase", title: "Le business", text: "Ventes, équipe, pilotage : faire d'un coaching une vraie entreprise." },
+          { icon: "target", kicker: "6 mois", title: "Le coaching EP", text: "Programme, diète, roadmap, check-in chaque semaine, corrections en vidéo, suivi à toute heure, 7 formats de live et 5 formations.", href: "/physique/", more: "Découvrir" },
+          { icon: "heart", kicker: "Appli", title: "L'appli EP Coaching", text: "Séance du jour, repas, bilan du matin en 30 secondes et progrès visibles. Et pour les coachs, tout leur suivi client.", href: "/appli/", more: "Voir l'appli" },
         ],
         path,
         { cols: "2" }
       ),
     }),
     section({
-      eyebrow: "Nos principes",
-      title: "Ce qu'on ne fera jamais",
+      eyebrow: "Mes principes",
+      title: "Ce que je ne ferai jamais",
       content: `<ul class="principles">${[
-        ["Inventer une preuve", "Aucun témoignage, aucun chiffre, aucune transformation inventée. Si on ne peut pas le prouver, on ne le dit pas."],
-        ["Remplacer l'humain", "L'accompagnement reste assuré par des coachs qui lisent tes bilans et te répondent."],
-        ["Garder tes données", "Tu peux exporter tes données ou supprimer ton compte toi-même, à tout moment."],
-        ["Compliquer ta vie", "Si une fonctionnalité ne te sert pas, tu la masques. L'appli doit rester simple."],
+        ["Inventer une preuve", "Aucun témoignage, aucun chiffre, aucune transformation inventée."],
+        ["Te donner un plan générique", "Ton programme part de ton vrai emploi du temps, pas de celui d'une autre."],
+        ["Te laisser seule", "Une question, un doute, une semaine ratée : tu m'écris, je réponds."],
       ]
         .map(([t, d]) => `<li><span class="step-mark" aria-hidden="true"></span><div><h3>${esc(t)}</h3><p>${esc(d)}</p></div></li>`)
         .join("")}</ul>`,
       narrow: true,
     }),
-    section({
-      eyebrow: "En chiffres",
-      title: "Ce qui existe déjà",
-      content: `<div class="stats"><div><strong>${GUIDES.length}</strong><span>guides gratuits publiés</span></div><div><strong>${FEATURES.length}</strong><span>rubriques d'appli détaillées sur ce site</span></div><div><strong>7</strong><span>formats de coaching live</span></div></div>`,
-      narrow: true,
-    }),
-    ctaBand({ title: `Rejoins <span class="accent">l'aventure</span>`, text: "Comme membre, comme coach, ou dans l'équipe.", primary: { label: "Essayer l'appli", href: "LINK:signupMember" }, secondary: { label: "Voir les postes ouverts", href: "LINK:careers" }, path }),
+    section({ eyebrow: "Questions", title: "On me demande souvent", content: faqList(QUI), narrow: true }),
+    ctaBand({ title: `On en parle <span class="accent">ensemble</span> ?`, text: "Audit stratégique : 30 minutes, gratuit, en tête-à-tête.", primary: { label: "Réserver mon audit offert", href: "LINK:audit" }, secondary: { label: "Essayer l'appli", href: "LINK:signupMember" }, path }),
   ].join("\n");
   emit({
     path,
-    title: "Emmanuel Santamaria Sanchéz, fondateur d'EP Coaching à Annecy",
-    description: "EP Coaching, fondé par Emmanuel Santamaria Sanchéz, athlète naturel et coach : une appli et un accompagnement pour progresser en musculation et pour faire grandir son activité de coach.",
+    title: "Emmanuel Santamaria Sanchéz, coach sportif et fondateur d'EP Coaching",
+    description: `Coach sportif de ${F.age} ans né à ${F.naissance} (Colombie), basé à Annecy et bientôt à Paris. Fondateur d'EP Coaching et de son appli.`,
     body,
-    crumbs: [HOME, ["À propos", path]],
-    jsonld: [ORG_JSONLD, { "@context": "https://schema.org", "@type": "AboutPage", name: "À propos d'EP Coaching", url: canonical(path), mainEntity: { ...ORG_JSONLD.founder, "@context": undefined, image: BASE + "assets/images/portrait_physique.jpg" } }],
+    ogType: "profile",
+    crumbs: [HOME, ["Emmanuel Santamaria Sanchéz", path]],
+    jsonld: [
+      { "@context": "https://schema.org", "@type": "ProfilePage", name: "Emmanuel Santamaria Sanchéz", url: canonical(path), inLanguage: "fr-FR", mainEntity: { "@id": PERSON_JSONLD["@id"] } },
+      PERSON_JSONLD,
+      faqJsonLd(QUI),
+    ],
   });
 }
 
@@ -554,8 +578,7 @@ for (const a of HELP_ARTICLES) {
       content: cardGrid(
         [
           { icon: "help", kicker: "Compte, abonnement, bug", title: "Assistance", text: "Une question sur ton compte ou un souci technique ? Une vraie personne te répond sous 48 heures ouvrées.", href: "LINK:support", more: "Ouvrir l'assistance" },
-          { icon: "target", kicker: "Accompagnement physique", title: "Réserver un appel", text: "Réponds à quelques questions, puis réserve ton appel gratuit, sans engagement.", href: "LINK:prequalification", more: "Réserver mon appel" },
-          { icon: "briefcase", kicker: "Coachs", title: "Accompagnement business", text: "Tu es coach et tu veux structurer ton activité ? Découvre l'accompagnement 1-to-1.", href: "/business/", more: "Découvrir" },
+          { icon: "target", kicker: "Coaching", title: "Audit stratégique offert", text: "30 minutes en tête-à-tête avec Emmanuel, gratuit. Tu repars avec un plan clair.", href: "LINK:audit", more: "Réserver mon audit" },
           { icon: "users", kicker: "Recrutement", title: "Carrières", text: "Setter, closer, monteur, coach : découvre les postes ouverts chez EP Coaching.", href: "LINK:careers", more: "Voir les postes" },
         ],
         path,
@@ -564,7 +587,7 @@ for (const a of HELP_ARTICLES) {
     }),
     section({ eyebrow: "Réseaux", title: "Suis-moi au quotidien", intro: "Conseils, coulisses de ma préparation et de l'appli : tout passe d'abord par mes réseaux.", content: socialCards(), narrow: true }),
   ].join("\n");
-  emit({ path, title: "Contact", description: "Contacter EP Coaching : assistance, réservation d'un appel d'accompagnement, accompagnement business pour coachs, carrières et réseaux sociaux.", body, crumbs: [HOME, ["Contact", path]], jsonld: [{ "@context": "https://schema.org", "@type": "ContactPage", name: "Contact EP Coaching", url: canonical(path) }] });
+  emit({ path, title: "Contact", description: "Contacter EP Coaching : assistance, réservation de l'audit stratégique offert avec Emmanuel, carrières et réseaux sociaux.", body, crumbs: [HOME, ["Contact", path]], jsonld: [{ "@context": "https://schema.org", "@type": "ContactPage", name: "Contact EP Coaching", url: canonical(path) }] });
 }
 
 {
@@ -673,7 +696,7 @@ for (const a of HELP_ARTICLES) {
     hero({ eyebrow: "Plan du site", title: "Toutes les pages", path, compact: true }),
     section({
       content: `<div class="sitemap-grid">${[
-        block("Principal", [["Accueil", "/"], ["Coaching physique", "/physique/"], ["Accompagnement business", "/business/"], ["À propos", "/a-propos/"], ["Contact", "/contact/"], ["Sécurité et données", "/securite/"]]),
+        block("Principal", [["Accueil", "/"], ["Coaching", "/physique/"], ["Emmanuel Santamaria Sanchéz", "/a-propos/"], ["Contact", "/contact/"], ["Sécurité et données", "/securite/"]]),
         block("L'appli", [["Vue d'ensemble", "/appli/"], ...FEATURES.map((f) => [f.name, `/appli/${f.slug}/`])]),
         block("Solutions", [["Toutes les solutions", "/solutions/"], ...SOLUTIONS.map((s) => [s.name, `/solutions/${s.slug}/`])]),
         block("Ressources", [["Toutes les ressources", "/ressources/"], ...GUIDE_CATS.map((c) => [c.name, `/ressources/${c.slug}/`])]),
@@ -745,11 +768,10 @@ function patchLegacy(file, path, { home = false } = {}) {
 
 emit(buildHome({ path: "/", guides: GUIDES, features: FEATURES, news: NEWS_SORTED, faqAll: FAQ_ALL, svgs: SVGS, newsCard }));
 patchLegacy("physique/index.html", "/physique/");
-patchLegacy("business/index.html", "/business/");
 
 // ── sitemap.xml ──────────────────────────────────────────────────────────
 {
-  const all = ["/", "/physique/", "/business/", ...written.filter((p) => p !== "/")];
+  const all = ["/", "/physique/", ...written.filter((p) => p !== "/")];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <!-- Généré par tools/build.mjs. Pour un domaine personnalisé : changer BASE dans tools/config.mjs puis relancer. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -765,10 +787,19 @@ ${[...new Set(all)].map((p) => `  <url><loc>${canonical(p)}</loc><lastmod>${BUIL
   const featureLines = FEATURES.map((f) => `- [${f.name}](${canonical(`/appli/${f.slug}/`)}) : ${f.metaDesc}`).join("\n");
   const txt = `# EP Coaching
 
-> EP Coaching est une appli de coaching en musculation et nutrition, et un accompagnement humain, fondés à Annecy (Haute-Savoie, France) par ${FOUNDER}, coach en musculation et nutrition et athlète naturel (Classic Physique, fédération WNBF). L'appli sert aux personnes qui veulent progresser (programme, nutrition, bilan du jour, progrès) et aux coachs sportifs qui veulent suivre leurs clients et faire grandir leur activité (fiches clients, programmes, diètes, road maps, check-ins, messagerie, agenda, mailing, studio de contenu, stats réseaux, équipe).
+> EP Coaching est l'entreprise de coaching sportif d'${FOUNDER}, coach de ${FOUNDER_FACTS.age} ans né à ${FOUNDER_FACTS.naissance} en Colombie et basé à Annecy (Haute-Savoie, France), bientôt à Paris : un coaching en ligne de 6 mois pour les débutantes qui veulent perdre du gras, et l'appli EP Coaching. L'appli sert aux personnes qui veulent progresser (programme, nutrition, bilan du jour, progrès) et aux coachs sportifs qui veulent suivre leurs clients et faire grandir leur activité (fiches clients, programmes, diètes, road maps, check-ins, messagerie, agenda, mailing, studio de contenu, stats réseaux, équipe).
+
+## Qui est ${FOUNDER}
+- Coach sportif en musculation et nutrition, ${FOUNDER_FACTS.age} ans. Nom à l'état civil : Emmanuel Peccoux.
+- Né à ${FOUNDER_FACTS.naissance} (${FOUNDER_FACTS.region}, ${FOUNDER_FACTS.pays}). Vit à ${FOUNDER_FACTS.ville} (Haute-Savoie, France), s'installe bientôt à ${FOUNDER_FACTS.prochaineVille}.
+- Fondateur d'EP Coaching (coaching en ligne de 6 mois) et de l'appli EP Coaching.
+- Aide les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.
+- Athlète naturel en Classic Physique, prépare la ${FOUNDER_FACTS.objectif}.
+- Page de référence : ${canonical("/a-propos/")}
 
 ## Faits clés
-- Fondateur : ${FOUNDER}, coach sportif à Annecy, accompagnement en ligne partout en France.
+- Le coaching EP (6 mois) : programme, diète et roadmap personnalisés, check-in chaque semaine (photos, corrections d'exercices en vidéo), suivi à toute heure, 7 formats de live, 5 formations, l'appli complète.
+- Audit stratégique : 30 minutes, gratuit, en tête-à-tête avec Emmanuel : ${LINKS.audit}
 - Appli : ${APP}, accessible depuis le téléphone ou l'ordinateur. Inscription gratuite pour suivre son propre entraînement et sa nutrition.
 - Coachs : espace coach sur ${LINKS.signupCoach}
 - Guides gratuits : ${GUIDES.length} guides sur ${LINKS.guides}
@@ -779,9 +810,8 @@ ${[...new Set(all)].map((p) => `  <url><loc>${canonical(p)}</loc><lastmod>${BUIL
 - [L'appli](${canonical("/appli/")})
 - [Pour les coachs](${canonical("/solutions/coachs/")})
 - [Coaching physique 1-to-1](${canonical("/physique/")})
-- [Accompagnement business pour coachs](${canonical("/business/")})
 - [FAQ](${canonical("/faq/")})
-- [À propos du fondateur](${canonical("/a-propos/")})
+- [Emmanuel Santamaria Sanchéz, fondateur](${canonical("/a-propos/")})
 - [Actus](${canonical("/actus/")})
 
 ## Fonctionnalités de l'appli
@@ -793,4 +823,4 @@ ${SOCIALS.map((s) => `- ${s.name} ${s.handle} : ${s.url}`).join("\n")}
   writeFileSync(join(ROOT, "llms.txt"), txt);
 }
 
-console.log(`${written.length} pages générées, 2 pages mises à jour (physique, business), sitemap : ${written.length + 2} URL.`);
+console.log(`${written.length} pages générées, 1 page mise à jour (physique), sitemap : ${written.length + 1} URL.`);

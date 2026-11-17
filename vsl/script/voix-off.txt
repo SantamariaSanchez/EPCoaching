@@ -1,117 +1,74 @@
-# Script voix off de la VSL EP Coaching, copie mot pour mot de la page Notion
-# « VSL EP Coaching (site) : script voix off ».
+# Script voix off de la VSL EP Coaching (v3, 5 minutes, débutantes de 16 à 25 ans).
+# Structure (méthode Mason Ndiaye, VSL indirecte pour une audience froide) :
+# accroche, présentation, objections traitées à l'avance, projection, curiosité,
+# paradigme, trois piliers, offre, appel à l'action avec double scénario.
 #
-# Règles de lecture (identiques à Notion) :
+# Règles de lecture :
 #   « / »  = petite pause (environ 0,35 s)
 #   « // » = vraie pause (environ 1 s)
 #   ligne vide = nouveau paragraphe (une respiration)
-#   [[À VALIDER : ...]] = note pour Emmanuel, jamais lue ni affichée
 #
 # Format : « = Scène N | Titre affiché | début-fin visés »
-# Après toute modification : npm run timeline (régénère src/timeline.ts).
+# Après toute modification : npm run timeline, puis python3 scripts/voix-edge.py.
 
-= Scène 1 | Ouverture | 0:00-0:35
+= Scène 1 | Accroche | 0:00-0:25
 
-Tu t'entraînes. / Tu fais attention à ce que tu manges. / Et pourtant, quand tu te regardes dans le miroir, // rien ne bouge vraiment.
+Tu as déjà commencé. / Plusieurs fois. / Des séances à la maison, / une alimentation plus propre, / et puis une semaine chargée, / et tout s'est arrêté. // Depuis, / tu as envie de reprendre. / Tu y penses presque tous les jours. / Et tu ne comprends pas pourquoi tu ne le fais pas. // Si c'est toi, / regarde cette vidéo jusqu'au bout. / Parce que le problème, / ce n'est pas ta motivation.
 
-Ou alors tu es coach. / Tu connais ton métier par cœur. / Mais ton agenda, lui, il reste vide.
+= Scène 2 | Qui je suis | 0:25-0:45
 
-Si tu te reconnais dans l'un de ces deux cas, / tu es exactement sur la bonne vidéo. // Et reste bien jusqu'au bout, / parce que ce que je vais te montrer, / la plupart des gens ne le voient jamais.
+Moi, c'est Emmanuel. / J'ai dix-sept ans, / je suis né en Colombie, / à Girardota, / et je vis à Annecy. / Je suis coach, / et je prépare la WNBF Classic 2027, / une compétition en fédération naturelle testée. // Ce que je vais te montrer, / je l'applique d'abord sur moi, / tous les jours. / Et aujourd'hui, / j'accompagne des débutantes / qui veulent perdre du gras / et enfin aimer leur corps.
 
-= Scène 2 | Qui je suis | 0:35-1:30
+= Scène 3 | Ce que tu te dis | 0:45-1:30
 
-Alors avant ça, je vais me présenter. / Moi c'est Santamaria. / Je suis coach en bodybuilding natural, / et je prépare la Heroes Cup en Classic Physique, en fédération naturelle testée.
+Avant d'aller plus loin, / laisse-moi deviner trois choses que tu es peut-être en train de te dire.
 
-[[À VALIDER : ton vrai parcours]] J'ai commencé la muscu comme tout le monde. / Des programmes trouvés sur internet, / des diètes copiées, / des mois sans vraiment savoir si j'avançais. // Et un jour, j'ai décidé de tout mesurer, / de tout structurer, / et de ne plus rien laisser au hasard.
+Un. / Je n'ai pas le temps. // Je sais. / Les cours, / le boulot, / tes amies. / C'est justement pour ça qu'on part de ton vrai emploi du temps, / pas de celui d'une autre.
 
-Ça veut dire une chose très simple : / tout ce que je vais te dire, / je l'applique d'abord sur moi. / Ma diète, mon training, mon sommeil, mon agenda. / Tous les jours.
+Deux. / Je suis trop débutante pour être coachée. // C'est l'inverse. / Le moment où tu as le plus besoin d'aide, / c'est au début. / Quand tu ne sais pas encore quoi faire à la salle, / et que tout le monde a l'air de savoir.
 
-Et à force de coacher, / je me suis rendu compte d'un truc. // Le problème des gens, / c'est pas un manque d'infos. / Des infos, il y en a partout. / Gratuitement. / Tout le temps.
+Trois. / Je ne suis pas assez régulière. // Personne ne l'est au départ. / La régularité, / ça ne se trouve pas. / Ça se construit, / avec un plan qui tient même quand ta semaine déborde.
 
-Le vrai problème, / c'est ce qui se passe entre l'info / et le résultat.
+= Scène 4 | Imagine | 1:30-2:00
 
-Entre le moment où tu sais quoi faire, / et le moment où tu le fais vraiment, / tous les jours, / pendant des mois. // C'est là que presque tout le monde lâche. / Et c'est là que moi, / je travaille.
+Maintenant, / imagine. // Tu arrives à la salle, / et tu sais exactement quoi faire. / Tu manges avec tes amies le samedi soir, / et le lundi, / tu continues comme si de rien n'était. / Tu te regardes dans le miroir, / et pour une fois, / tu remarques ce qui a changé, / pas ce qui te gêne. // Ce n'est pas un rêve. / C'est ce qu'on construit, / étape par étape, / en six mois.
 
-= Scène 3 | Le vrai problème | 1:30-3:40
+= Scène 5 | Dans cette vidéo | 2:00-2:20
 
-Laisse-moi te poser une question. // Combien de programmes tu as commencés cette année ? / Combien de diètes ? / Combien de fois tu t'es dit : « cette fois, c'est la bonne » ?
+Dans cette vidéo, / je vais te montrer pourquoi le cardio n'est pas la meilleure façon de perdre du ventre. / Comment perdre du gras sans avoir faim toute la journée. / Pourquoi la balance te ment presque tous les matins. / Et l'erreur que font presque toutes les débutantes / la semaine où elles craquent.
 
-Je vais être très clair là-dessus. / Tu ne manques pas de motivation. / Tu manques de priorités. / Et surtout, tu manques de suivi.
+= Scène 6 | Le vrai problème | 2:20-2:45
 
-Je m'explique. / Il y a trois raisons pour lesquelles les gens n'avancent pas, / et c'est toujours les mêmes.
+Mais d'abord, / il faut que tu comprennes une chose. // Tu ne manques pas de volonté. / Tu suis des plans faits pour quelqu'un d'autre. / Trois séances, / zéro sucre, / plus de soirées. / Ça tient une semaine. // Le plan parfait que tu abandonnes / ne vaut rien. / Le plan simple que tu tiens / change tout.
 
-Premier point. / Le plan n'est pas fait pour toi. / Tu as pris le programme d'un autre, / la diète d'un autre, / avec les horaires d'un autre. / Et au bout de trois semaines, / tu lâches. / C'est normal. // Le meilleur plan, c'est celui que tu peux suivre.
+= Scène 7 | Pilier un | 2:45-3:10
 
-Deuxième point. / Tu ne mesures rien. / Ton poids, ton sommeil, tes charges, tes repas. / Sans données, / tu avances au feeling, / et au feeling, / on se raconte des histoires.
+Premier pilier. / La salle, / avant le cardio. // Des heures de tapis ne dessinent pas tes formes. / La musculation, si. / Et non, / elle ne va pas te rendre trop massive. / Elle va te donner des fessiers, / des épaules, / une silhouette plus équilibrée. / On ne perd pas le gras à un seul endroit. / Mais on peut choisir ce qu'on construit.
 
-Je prends un exemple très simple. / Un gars de 80 kilos qui veut sécher. / Il mange « plutôt bien ». / Sauf que le week-end, / un repas de famille, / deux verres, / un dessert. // Sur le papier, il est en déficit. / En vrai, / sur la semaine, / il est à sa maintenance. / Et il se dit que son métabolisme est cassé. // C'est pas son métabolisme. / C'est qu'il ne mesure rien.
+= Scène 8 | Pilier deux | 3:10-3:35
 
-Et le dernier point, / c'est celui que personne n'applique. / Personne n'ajuste. // Ton corps change, / ta semaine change, / ta vie change. / Si ton plan, lui, ne bouge jamais, / il finit forcément par ne plus marcher.
+Deuxième pilier. / Manger plus, / pour perdre plus. // Si tu manges trois fois rien, / tu as faim, / tu es fatiguée, / et tu craques le soir. / À chaque fois. / On garde les repas que tu aimes déjà. / On ajoute des protéines à chaque repas, / et des aliments qui calent. / Tu manges à ta faim, / et le gras part quand même. / Doucement, / mais pour de bon.
 
-Et tu sais ce qui est intéressant ? / C'est exactement le même problème chez les coachs, / avec un autre visage.
+= Scène 9 | Pilier trois | 3:10-3:35
 
-Tu peux être le meilleur coach de ta ville / et ne pas en vivre. / Parce que tes clients ne te voient pas. / Parce que tu passes tes soirées sur des tableaux, des messages, des fichiers. / Parce que tu n'as pas de système.
+Troisième pilier. / La tendance, / pas la balance. // Un kilo de plus après un resto, / c'est de l'eau. / Pas du gras. / Si tu te pèses tous les matins, / tu vas croire que tout est fichu au moins une fois par semaine. / Ce qui compte, / c'est la tendance sur plusieurs semaines, / tes photos, / et comment tes vêtements tombent.
 
-Que tu sois pratiquant ou coach, / la solution est la même : / un vrai suivi, / et un système qui fait le travail pour toi.
+= Scène 10 | Pilier quatre | 3:35-4:00
 
-= Scène 4 | Le système | 3:40-6:30
+Quatrième pilier. / L'écart n'est pas un échec. // Presque toutes les débutantes font la même erreur. / Elles craquent, / elles se punissent, / elles sautent un repas, / et elles craquent encore plus fort. // Un écart, / c'est un repas. / Le suivant s'adapte, / et tu continues. / Rien n'est gâché.
 
-C'est pour ça que j'ai construit EP Coaching.
+= Scène 11 | Six mois | 4:00-4:25
 
-Au départ, / c'était mon outil à moi. / Celui que j'utilise tous les jours pour ma propre prépa. / Et aujourd'hui, / c'est le cœur de tout ce qu'on fait.
+Et tout ça, / on le fait dans l'ordre. // Le premier mois, / on pose les bases. / Tes séances, / tes repas, / ton rythme. / Ensuite, / tu prends confiance à la salle, / et tu charges un peu plus chaque semaine. / Puis on affine. / Le ventre, / les fessiers, / la silhouette que tu veux. // Et au bout de six mois, / tu sais faire seule. / Tu n'as plus besoin de deviner.
 
-Regarde bien.
+= Scène 12 | Le coaching | 4:00-4:35
 
-Le matin, tu ouvres l'appli. / Tu sais ce que tu manges, / au gramme près. / Tu sais quand est ta séance, / et ce que tu vas y faire. / Ton agenda te prévient à la bonne heure. // Tu n'as rien à réfléchir. / Tu exécutes.
+C'est exactement ce qu'on fait ensemble dans le coaching EP. / Pendant six mois. // Un programme, / une diète / et une roadmap faits pour toi. / Chaque semaine, / un check-in. / On regarde tes photos, / on corrige tes exercices en vidéo, / et on ajuste. // Tu peux m'écrire à n'importe quelle heure. / Tu as sept formats de live, / cinq formations, / et toute l'appli pour suivre tes séances et tes repas. / Tu n'es jamais seule avec tes questions.
 
-Ta diète n'est pas un PDF qui dort dans tes fichiers. / Elle vit. / Un petit écart, une banane en plus, / ça ne change rien. / Tu sautes un repas ? / Le suivant s'adapte, / sans toucher à ce que tu as déjà mangé. / Ton plan de base, lui, ne bouge jamais.
+= Scène 13 | L'appli | 4:35-4:50
 
-Ta séance, tu la notes dans ton carnet d'entraînement. / Tes charges, tes reps, tes records. / Tu vois tout de suite si tu progresses, / ou si tu stagnes.
+Et tout est au même endroit, / dans l'appli. / Ta séance du jour, / avec les exercices en vidéo. / Tes repas. / Ton bilan du matin, / en trente secondes. / Tu ouvres, / tu sais quoi faire.
 
-Chaque matin, / ton bilan prend trente secondes. / Poids, sommeil, ressenti. / Et chaque semaine, / tu as ton check-in : / photos, mensurations, tendances. / Pas des chiffres en vrac. / Une phrase claire qui te dit où tu en es, / et quoi faire.
+= Scène 14 | À toi | 4:50-5:10
 
-Et le soir, / quand tu n'arrives pas à décrocher, / tu as des sons pour t'endormir, / des exercices de respiration, / une méditation guidée. / Parce que la récup, / c'est la moitié de tes résultats.
-
-Ta liste de courses se fait à partir de ta diète. / Ta road map te montre où tu vas, / phase par phase. / Et tu n'es jamais seul : / il y a la communauté, / les lives, / et les messages avec ton coach.
-
-Et pour les coachs, / c'est le même système, / de l'autre côté de l'écran.
-
-Tes clients, leurs bilans, leurs messages, / au même endroit. / Ceux qui ont besoin de toi remontent tout seuls. / Ton agenda, tes lives, ton équipe, / tes stats de contenu, / tes leads. / Et un studio qui t'aide à écrire tes vidéos, / pour que les gens te voient enfin.
-
-Ce n'est pas de la magie. // C'est juste appliquer des principes très simples, / tous les jours, / sans avoir à y penser.
-
-= Scène 5 | Lequel c'est toi ? | 6:30-8:30
-
-Maintenant, / il y a deux cas. / Et je veux que tu te poses la question honnêtement : / lequel c'est toi ?
-
-Premier cas. / Tu veux transformer ton physique. / Perdre du gras, / prendre du muscle, / ou préparer une compétition. // Là, je t'accompagne moi-même. / On construit ton plan ensemble, / ta diète, ton training, ta road map. / Tu as l'appli pour l'exécuter tous les jours, / et moi derrière pour ajuster chaque semaine. / Tu n'es plus jamais seul face à une stagnation.
-
-Deuxième cas. / Tu es coach. / Tu as les connaissances, / mais pas le temps de tout gérer. // Avec l'appli coach comme système, / du premier contenu jusqu'au client suivi.
-
-Et je vais être transparent avec toi. / C'est pas pour tout le monde.
-
-Si tu cherches une méthode miracle, / un résultat en dix jours sans effort, / c'est pas ici. // Par contre, si tu es prêt à faire ta part, / tous les jours, / avec un plan qui est vraiment le tien, / alors on peut faire de grandes choses ensemble.
-
-Et si tu hésites encore, / pose-toi une seule question. // Dans six mois, / si tu continues exactement comme maintenant, / tu seras où ? // Si la réponse ne te plaît pas, / alors il est temps de changer quelque chose. / Pas tout. / Juste la façon dont tu es suivi.
-
-= Scène 6 | L'appel | 8:30-9:30
-
-Alors voilà ce que je te propose.
-
-Juste sous cette vidéo, / tu as deux boutons. / Un pour le physique, / un pour les coachs. / Tu choisis le tien.
-
-Il est offert, / et sans engagement. / On regarde ta situation ensemble, / où tu en es, / ce qui bloque, / et ce qu'il faudrait faire. // Dans le pire des cas, / tu repars avec un plan clair, / gratuitement.
-
-Concrètement, / ça dure une trentaine de minutes. / Tu me racontes ton objectif, / ta semaine, / ce que tu as déjà essayé. / Moi, je te dis franchement / ce que je ferais à ta place. / Et si je pense que je ne peux pas t'aider, / je te le dirai aussi.
-
-Et si on voit qu'on peut travailler ensemble, / je t'expliquerai exactement comment.
-
-= Scène 7 | En résumé | 9:30-10:00
-
-Donc si je devais récapituler cette vidéo. / Tu ne manques pas d'infos. / Tu manques de priorités, / de suivi, / et d'un système.
-
-Le système, il existe. / Le premier appel, je te l'offre. // Il te reste juste une chose à faire.
-
-Choisis ton bouton, / juste en dessous.
-
-Je te dis à très vite.
+Si tu te reconnais dans ce que je viens de dire, / réserve ton audit stratégique. / Il est offert, / il dure trente minutes, / et on le fait ensemble, / toi et moi. / On regarde ta situation, / ton objectif, / ton emploi du temps. / Et si le coaching n'est pas fait pour toi, / je te le dirai. // Dans le pire des cas, / tu repars avec un plan clair. / Dans le meilleur des cas, / on travaille ensemble pendant six mois, / et tu atteins enfin ton objectif. // Le lien est juste sous cette vidéo. / À tout de suite.

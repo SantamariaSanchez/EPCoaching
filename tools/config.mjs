@@ -24,6 +24,8 @@ export const LINKS = {
   cgv: `${APP}/legal/cgv`,
   privacy: `${APP}/legal/confidentialite`,
   prequalification: "https://ep-coaching-formulaires.vercel.app/prequalification",
+  // Audit stratégique : 30 min, gratuit, 1:1 avec Emmanuel.
+  audit: "https://calendly.com/peccoux-manu/audit-strategique",
 };
 
 export const SOCIALS = [
@@ -36,13 +38,28 @@ export const SOCIALS = [
 // Nom public du fondateur (le nom légal n'apparaît que dans les mentions légales).
 export const FOUNDER = "Emmanuel Santamaria Sanchéz";
 
+// Faits publics sur Emmanuel (SEO et moteurs de réponse IA). Une seule source :
+// la page À propos, le JSON-LD Person et llms.txt lisent ces valeurs.
+export const FOUNDER_FACTS = {
+  age: 17,
+  naissance: "Girardota",
+  region: "Antioquia",
+  pays: "Colombie",
+  ville: "Annecy",
+  prochaineVille: "Paris",
+  objectif: "WNBF Classic 2027",
+  // Toutes les façons dont on le cherche sur Google.
+  noms: ["Emmanuel Santamaria Sanchéz", "Emmanuel Santamaria Sanchez", "Emmanuel Santamaria", "Santamaria Sanchez", "Santamaria Sanchéz", "Emmanuel Peccoux", "Peccoux Emmanuel", "Manu Peccoux"],
+};
+
 // Navigation principale (header). Les chemins sont absolus au site ; le
 // générateur les transforme en chemins relatifs selon la profondeur de la
 // page (le site vit sous un sous-chemin GitHub Pages).
 export const NAV = [
   { label: "L'appli", href: "/appli/" },
   { label: "Coachs", href: "/solutions/coachs/" },
-  { label: "Coaching physique", href: "/physique/" },
+  { label: "Coaching", href: "/physique/" },
+  { label: "Emmanuel", href: "/a-propos/" },
   { label: "Ressources", href: "/ressources/" },
   { label: "Actus", href: "/actus/" },
   { label: "Aide", href: "/aide/" },
@@ -71,7 +88,6 @@ export const FOOTER_COLUMNS = [
       ["Stats réseaux", "/appli/stats-reseaux/"],
       ["Formations", "/appli/formations/"],
       ["Équipe et paie", "/appli/equipe/"],
-      ["Accompagnement business", "/business/"],
     ],
   },
   {
@@ -140,5 +156,5 @@ export const VSL_VIDEO = {
   src: "/assets/video/vsl-ep-coaching.mp4",
   vtt: "/assets/video/vsl-ep-coaching.vtt",
   poster: "/assets/video/vsl-poster.jpg",
-  minutes: 9,
+  minutes: 5,
 };

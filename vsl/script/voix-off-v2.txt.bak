@@ -1,0 +1,49 @@
+# Script voix off de la VSL EP Coaching, copie mot pour mot de la page Notion
+# « VSL EP Coaching (site) : script voix off ».
+#
+# Règles de lecture (identiques à Notion) :
+#   « / »  = petite pause (environ 0,35 s)
+#   « // » = vraie pause (environ 1 s)
+#   ligne vide = nouveau paragraphe (une respiration)
+#   [[À VALIDER : ...]] = note pour Emmanuel, jamais lue ni affichée
+#
+# Format : « = Scène N | Titre affiché | début-fin visés »
+# Après toute modification : npm run timeline (régénère src/timeline.ts).
+
+= Scène 1 | Ouverture | 0:00-0:25
+
+Tu veux perdre du gras. / Tu fais des efforts. / Et pourtant, / au premier resto, / au premier week-end, / tu as l'impression d'avoir tout gâché. // Et tu culpabilises.
+
+Si tu as entre dix-huit et vingt-cinq ans, / que tu débutes ou que tu stagnes, / cette vidéo est pour toi. // Reste jusqu'au bout, / parce que le problème, / ce n'est pas toi.
+
+= Scène 2 | Qui je suis | 0:25-0:45
+
+Moi, c'est Santamaria. / Coach, / et je prépare la WNBF Classic 2027, / en fédération naturelle testée. // Tout ce que je vais te montrer, / je l'applique d'abord sur moi. / Ma diète, / mon training, / mon sommeil. / Tous les jours.
+
+= Scène 3 | Les trois pièges | 0:45-1:45
+
+Des infos, / il y en a partout. / Le vrai sujet, / c'est la façon dont tu les appliques. // Et il y a trois pièges qui reviennent tout le temps.
+
+Premier piège. / Un plan qui n'est pas fait pour toi. / Le programme d'un autre, / la diète d'un autre. / Au bout de trois semaines, / tu lâches.
+
+Deuxième piège. / La balance tous les matins. / Un kilo de plus après une pizza, / et tu crois que tout est fichu. / Alors que c'est de l'eau. // Ce qui compte, / c'est la moyenne sur deux semaines.
+
+Troisième piège. / La culpabilité. / Tu fais un écart, / tu te punis, / tu sautes un repas, / et tu craques encore plus fort. // Le plan parfait que tu abandonnes / ne vaut rien. / Le plan simple que tu tiens / change tout.
+
+= Scène 4 | Le système | 1:45-2:30
+
+C'est pour ça que j'ai construit EP Coaching. // Une appli, / avec un vrai coach derrière.
+
+Ton programme et ta nutrition / sont construits sur ta situation. / Ton emploi du temps, / ta salle, / ce que tu aimes manger.
+
+Chaque matin, / ton bilan prend trente secondes. / Poids, / sommeil, / ressenti.
+
+Tu sautes un repas ? / Le suivant s'adapte. / Rien n'est gâché. // Et quand ça coince, / ton coach ajuste avec toi.
+
+= Scène 5 | À toi de jouer | 2:30-3:00
+
+Alors voilà ce que je te propose. // Juste sous cette vidéo, / tu peux créer ton compte gratuitement, / sans carte bancaire. / Et tester le programme, / la nutrition, / et le bilan du matin.
+
+Et si tu veux que je t'accompagne moi-même, / réserve ton audit stratégique. / Il est offert. / On regarde ta situation ensemble, / et tu repars avec un plan clair.
+
+Pas de culpabilité. / Juste un plan que tu tiens. // À tout de suite.

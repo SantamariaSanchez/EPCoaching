@@ -12,9 +12,9 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const MOTS_PAR_SECONDE = 2.3;
 const PAUSE = { petite: 0.35, vraie: 1.0, paragraphe: 0.6, phrase: 0.3, aucune: 0.12 };
 // Temps avant la première parole de la scène (carton de chapitre) et après la dernière.
-const LEAD = { 1: 0.5 };
-const LEAD_DEFAUT = 1.8;
-const QUEUE = 1.1;
+const LEAD = { 1: 0.3 };
+const LEAD_DEFAUT = 0.35;
+const QUEUE = 0.5;
 // Une page de texte à l'écran : 4 blocs au plus, environ 120 caractères au plus.
 const PAGE_BLOCS = 4;
 const PAGE_CARACTERES = 120;
