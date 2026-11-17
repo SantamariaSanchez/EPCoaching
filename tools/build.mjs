@@ -504,17 +504,15 @@ for (const a of HELP_ARTICLES) {
     { q: "Qu'est-ce que EP Coaching ?", a: "Un coaching en ligne de 6 mois en musculation et nutrition, et une appli pour suivre ses séances, ses repas et ses progrès." },
     { q: "Le coaching se fait à Annecy ou en ligne ?", a: "En ligne, partout en France. Le programme, la diète, le check-in de la semaine et les lives passent par l'appli." },
     { q: "Il fait de la compétition ?", a: `Oui, il prépare la ${F.objectif} en Classic Physique.` },
-    { q: "Comment commencer ?", a: "Par l'audit stratégique : 30 minutes, gratuit, en tête-à-tête. On regarde ta situation, ton objectif et ton emploi du temps, et tu repars avec un plan clair." },
+    { q: "Comment commencer ?", a: "Par un audit de 30 minutes, offert, avec Emmanuel." },
   ];
   const body = [
-    hero({ eyebrow: `${F.age} ans · né en Colombie · Annecy, bientôt Paris`, title: `Emmanuel Santamaria Sanchéz, <span class="accent">coach sportif</span>`, lead: `Je suis né à ${F.naissance}, en ${F.pays}. Je vis à ${F.ville}, bientôt à ${F.prochaineVille}. J'ai créé EP Coaching et son appli pour aider les débutantes à perdre du gras et à atteindre leurs objectifs en 6 mois.`, path, ctas: [{ label: "Réserver mon audit offert", href: "LINK:audit" }] }),
+    hero({ eyebrow: `${F.age} ans · né en Colombie · Annecy, bientôt Paris`, title: `Emmanuel Santamaria Sanchéz, <span class="accent">coach sportif</span>`, lead: `J'aide les débutantes à perdre du gras en 6 mois.`, path, ctas: [{ label: "Réserver mon audit offert", href: "LINK:audit" }] }),
     section({
-      eyebrow: "Mon histoire",
       title: `De ${F.naissance} à ${F.prochaineVille}`,
-      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Emmanuel, coach sportif et fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Je suis né à ${F.naissance}, une petite ville d'${F.region}, en ${F.pays}. Aujourd'hui j'ai ${F.age} ans, je vis à ${F.ville}, en Haute-Savoie, et je pars bientôt à ${F.prochaineVille}.</p><p>Je prépare la ${F.objectif}.</p><p>J'ai créé EP Coaching pour les débutantes qui ont déjà commencé plusieurs fois, puis arrêté. Un programme, une diète et une roadmap faits pour elles, un check-in chaque semaine, et quelqu'un qui répond à n'importe quelle heure.</p><p>Et j'ai construit l'appli EP Coaching pour que tout tienne au même endroit : la séance du jour, les repas, le bilan du matin. Elle sert aussi aux coachs qui veulent suivre leurs clients.</p><p class="founder-follow">Suis-moi au quotidien :</p>${socialCards()}</div></div>`,
+      content: `<div class="split-about"><img src="${resolve("/assets/images/portrait_physique.jpg", path)}" alt="Emmanuel, coach sportif et fondateur d'EP Coaching" width="480" height="600" loading="lazy" class="about-photo" /><div class="prose"><p>Je suis né à ${F.naissance}, en ${F.pays}. J'ai ${F.age} ans, je vis à ${F.ville} et je pars bientôt à ${F.prochaineVille}.</p><p>Je prépare la ${F.objectif}. J'ai créé EP Coaching et son appli.</p>${socialCards()}</div></div>`,
     }),
     section({
-      eyebrow: "En bref",
       title: "Les faits",
       content: `<dl class="facts">${[
         ["Nom", FOUNDER],
@@ -528,32 +526,8 @@ for (const a of HELP_ARTICLES) {
       ].map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`,
       narrow: true,
     }),
-    section({
-      eyebrow: "Ce que je fais",
-      title: `Une entreprise, <span class="accent">deux outils</span>`,
-      content: cardGrid(
-        [
-          { icon: "target", kicker: "6 mois", title: "Le coaching EP", text: "Programme, diète, roadmap, check-in chaque semaine, corrections en vidéo, suivi à toute heure, 7 formats de live et 5 formations.", href: "/physique/", more: "Découvrir" },
-          { icon: "heart", kicker: "Appli", title: "L'appli EP Coaching", text: "Séance du jour, repas, bilan du matin en 30 secondes et progrès visibles. Et pour les coachs, tout leur suivi client.", href: "/appli/", more: "Voir l'appli" },
-        ],
-        path,
-        { cols: "2" }
-      ),
-    }),
-    section({
-      eyebrow: "Mes principes",
-      title: "Ce que je ne ferai jamais",
-      content: `<ul class="principles">${[
-        ["Inventer une preuve", "Aucun témoignage, aucun chiffre, aucune transformation inventée."],
-        ["Te donner un plan générique", "Ton programme part de ton vrai emploi du temps, pas de celui d'une autre."],
-        ["Te laisser seule", "Une question, un doute, une semaine ratée : tu m'écris, je réponds."],
-      ]
-        .map(([t, d]) => `<li><span class="step-mark" aria-hidden="true"></span><div><h3>${esc(t)}</h3><p>${esc(d)}</p></div></li>`)
-        .join("")}</ul>`,
-      narrow: true,
-    }),
-    section({ eyebrow: "Questions", title: "On me demande souvent", content: faqList(QUI), narrow: true }),
-    ctaBand({ title: `On en parle <span class="accent">ensemble</span> ?`, text: "Audit stratégique : 30 minutes, gratuit, en tête-à-tête.", primary: { label: "Réserver mon audit offert", href: "LINK:audit" }, secondary: { label: "Essayer l'appli", href: "LINK:signupMember" }, path }),
+    section({ title: "Questions fréquentes", content: faqList(QUI), narrow: true }),
+    ctaBand({ title: `On en parle <span class="accent">ensemble</span> ?`, text: "Audit de 30 minutes, offert.", primary: { label: "Réserver mon audit offert", href: "LINK:audit" }, secondary: { label: "Essayer l'appli", href: "LINK:signupMember" }, path }),
   ].join("\n");
   emit({
     path,

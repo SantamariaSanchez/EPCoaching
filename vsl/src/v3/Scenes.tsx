@@ -110,7 +110,7 @@ export const SCENES_V3: Record<number, React.FC<SceneProps>> = {
   3: scene((r) => [
     { at: r("trois choses"), v: (t0) => <Gros t0={t0} texte="3" sous="choses que tu te dis" /> },
     { at: r("Un"), v: (t0) => <Semaine t0={t0} at={r("vrai emploi du temps")} /> },
-    { at: r("Deux"), v: (t0) => <Liste t0={t0} signe="num" items={[{ texte: "Quoi faire à la salle", at: r("quoi faire") }, { texte: "Combien de séries", at: r("quoi faire") + 6 }, { texte: "Quand augmenter", at: r("quoi faire") + 12 }]} /> },
+    { at: r("Deux"), v: (t0) => <Liste t0={t0} signe="num" items={[{ texte: "Trop débutante ?", at: r("trop débutante") }, { texte: "C'est au début", at: r("au début") }, { texte: "Quoi faire à la salle", at: r("quoi faire") }]} /> },
     { at: r("Trois"), v: (t0) => <Liste t0={t0} items={[{ texte: "Un plan simple", at: r("un plan") }, { texte: "Qui tient", at: r("qui tient") }, { texte: "Même quand ça déborde", at: r("déborde") }]} /> },
   ]),
   4: scene((r) => [
@@ -122,7 +122,7 @@ export const SCENES_V3: Record<number, React.FC<SceneProps>> = {
   ]),
   6: scene((r) => [
     { at: r("Trois séances"), v: (t0) => <Liste t0={t0} signe="non" items={[{ texte: "Trois séances", at: r("Trois séances"), barre: r("Ça tient") }, { texte: "Zéro sucre", at: r("zéro sucre"), barre: r("Ça tient") + 4 }, { texte: "Plus de soirées", at: r("plus de soirées"), barre: r("Ça tient") + 8 }]} /> },
-    rien(r("Un plan simple")),
+    rien(r("Il te faut un plan")),
   ]),
   7: scene((r) => [
     { at: r("Premier pilier"), v: (t0) => <Gros t0={t0} texte="01" sous="la salle, avant le cardio" /> },
