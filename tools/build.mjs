@@ -44,7 +44,6 @@ function fxHero({ eyebrow, title, lead, ctas, path, shot, alt }) {
   const buttons = ctas.map((c, i) => `<a href="${esc(resolve(c.href, path))}" class="${i === 0 ? "btn-cta-primary" : "btn-ghost"}">${esc(c.label)}</a>`).join("");
   return `<section class="fx-hero">
     <div class="hx-copy">
-      <p class="eyebrow">◆ ${esc(eyebrow)}</p>
       <h1>${title}</h1>
       <p class="page-lead">${lead}</p>
       <div class="cta-row">${buttons}</div>
@@ -173,9 +172,8 @@ for (const f of FEATURES) {
     `<section class="hx">
       <div class="hx-aura" aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="hx-copy">
-        <p class="eyebrow">◆ L'appli EP Coaching</p>
         <h1>Tout ton suivi. Tout ton coaching. <span class="accent">Une seule appli.</span></h1>
-        <p class="page-lead">Entraînement, nutrition, bilan, progression, agenda, notes : pour te suivre toi-même. Clients, contenu, formations, ventes, équipe : pour faire grandir ton activité de coach.</p>
+        <p class="page-lead">Ta séance, tes repas, ton bilan et tes progrès, au même endroit. Et pour les coachs, tout leur suivi client.</p>
         <div class="cta-row"><a class="btn-cta-primary btn-cta-primary--lg" href="${LINKS.signupMember}">Essayer gratuitement</a><a class="btn-ghost" href="${resolve("/solutions/coachs/", path)}">Je suis coach</a></div>
         <p class="hx-proof"><span>${icon("shield")} Gratuit, sans carte bancaire</span><span>${icon("map")} Données hébergées en Europe</span></p>
       </div>
@@ -420,7 +418,6 @@ for (const a of HELP_ARTICLES) {
   const related = [...new Set([...(a.related || []), ...siblings.map((s) => s.slug)])].slice(0, 5);
   const body = `<article class="article">
       <div class="article-head">
-        <p class="eyebrow">◆ ${esc(cat.title)}</p>
         <h1>${esc(a.title)}</h1>
         <p class="page-lead">${esc(a.intro)}</p>
       </div>
@@ -600,7 +597,7 @@ for (const a of HELP_ARTICLES) {
 {
   const path = "/legal/mentions-legales/";
   const body = `<article class="article article--legal">
-    <div class="article-head"><p class="eyebrow">◆ Légal</p><h1>Mentions légales</h1><p class="page-lead">Informations sur l'éditeur et l'hébergeur de ce site.</p></div>
+    <div class="article-head"><h1>Mentions légales</h1><p class="page-lead">Informations sur l'éditeur et l'hébergeur de ce site.</p></div>
     <div class="prose">
       <h2>Éditeur du site</h2>
       <p>EP Coaching, activité exercée par Emmanuel Peccoux, entrepreneur individuel.<br />SIRET : 104 838 172 00013<br />Adresse : 8 Rue de la Jonchère, 74600 Annecy, France.<br />Contact : ${link("LINK:support", "page Assistance", path, "text-link")}.</p>
@@ -622,7 +619,7 @@ for (const a of HELP_ARTICLES) {
 {
   const path = "/legal/cookies/";
   const body = `<article class="article article--legal">
-    <div class="article-head"><p class="eyebrow">◆ Légal</p><h1>Cookies</h1><p class="page-lead">Ce site ne te suit pas. Voici exactement ce qu'il charge.</p></div>
+    <div class="article-head"><h1>Cookies</h1><p class="page-lead">Ce site ne te suit pas. Voici exactement ce qu'il charge.</p></div>
     <div class="prose">
       <h2>Aucun cookie de mesure d'audience ni de publicité</h2>
       <p>Ce site vitrine ne dépose aucun cookie de mesure d'audience, de publicité ou de réseau social. Il n'utilise aucun outil de statistiques.</p>
