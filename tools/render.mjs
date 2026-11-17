@@ -303,7 +303,7 @@ export function hero({ eyebrow, title, lead, ctas = [], path, compact = false })
     .join("");
   return `<section class="page-hero${compact ? " page-hero--compact" : ""}">
     <div class="hx-aura" aria-hidden="true"><i></i><i></i></div>
-    ${eyebrow ? `<p class="eyebrow">◆ ${esc(eyebrow)}</p>` : ""}
+    ${"" /* étiquette au-dessus du titre supprimée (2026-11-17) : le titre parle seul */}
     <h1>${title}</h1>
     ${lead ? `<p class="page-lead">${lead}</p>` : ""}
     ${buttons ? `<div class="cta-row">${buttons}</div>` : ""}
@@ -312,7 +312,7 @@ export function hero({ eyebrow, title, lead, ctas = [], path, compact = false })
 
 export function section({ id, eyebrow, title, intro, content, narrow = false, cls = "" }) {
   return `<section class="section${narrow ? " section--narrow" : ""}${cls ? " " + cls : ""}"${id ? ` id="${id}"` : ""}>
-    ${eyebrow || title ? `<div class="section-head">${eyebrow ? `<p class="eyebrow">◆ ${esc(eyebrow)}</p>` : ""}${title ? `<h2>${title}</h2>` : ""}${intro ? `<p class="section-intro">${intro}</p>` : ""}</div>` : ""}
+    ${title ? `<div class="section-head">${title ? `<h2>${title}</h2>` : ""}${intro ? `<p class="section-intro">${intro}</p>` : ""}</div>` : ""}
     ${content}
   </section>`;
 }
@@ -320,7 +320,7 @@ export function section({ id, eyebrow, title, intro, content, narrow = false, cl
 export function cardGrid(cards, path, { cols = "" } = {}) {
   return `<div class="grid${cols ? " grid--" + cols : ""}">${cards
     .map((c, i) => {
-      const inner = `${c.icon ? icon(c.icon) : ""}${c.kicker ? `<span class="card-kicker">${esc(c.kicker)}</span>` : ""}<h3>${esc(c.title)}</h3>${c.text ? `<p>${c.text}</p>` : ""}${c.href ? `<span class="card-more">${esc(c.more || "En savoir plus")} ${icon("arrow", "icon icon--xs")}</span>` : ""}`;
+      const inner = `${c.icon ? icon(c.icon) : ""}<h3>${esc(c.title)}</h3>${c.text ? `<p>${c.text}</p>` : ""}${c.href ? `<span class="card-more">${esc(c.more || "En savoir plus")} ${icon("arrow", "icon icon--xs")}</span>` : ""}`;
       return c.href
         ? `<a class="card link-card spot tilt" data-reveal style="--i:${i % 4}" href="${esc(resolve(c.href, path))}"${/^https?:/.test(c.href) ? ' target="_blank" rel="noopener noreferrer"' : ""}>${inner}</a>`
         : `<div class="card spot" data-reveal style="--i:${i % 4}">${inner}</div>`;

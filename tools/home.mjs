@@ -22,7 +22,6 @@ export function quizBlock(guides, path, { title = `Quel est ton objectif <span c
   }).join("");
   return `<div class="quiz" data-quiz data-endpoint="${APP}/api/public/lead" data-app="${APP}" data-reveal>
       <div class="quiz-head">
-        <p class="eyebrow">◆ Guide gratuit</p>
         <h2>${title}</h2>
         <p>Choisis, on t'envoie le guide qui répond exactement à ça. Gratuit, 5 minutes de lecture.</p>
       </div>
